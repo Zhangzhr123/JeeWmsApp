@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hjm="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <RelativeLayout
+        style="@style/AppTitlebarStyleRed"
+        android:background="@color/blue2F92E7"
+        >
+
+        <ImageButton
+            android:id="@+id/btn_titlebar_left"
+            style="@style/TitlebarButtonStyle"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone"
+            android:src="@drawable/back_red" />
+
+        <Button
+            android:id="@+id/btn_titlebar_right"
+            style="@style/TitlebarButtonStyle"
+            android:layout_alignParentRight="true"
+            android:text="退出"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TitlebarTextStyle"
+            android:layout_centerInParent="true"
+            android:text="WMS系统"
+            />
+
+    </RelativeLayout>
+
+    <!--<GridView
+        android:id="@+id/gv_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:layout_marginTop="10dp"
+        >
+    </GridView>-->
+    <com.hjm.bottomtabbar.BottomTabBar
+        android:id="@+id/bottom_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        hjm:tab_bar_background="#FFFFFF"
+        hjm:tab_divider_background="@color/colorPrimary"
+        hjm:tab_divider_height="5dp"
+        hjm:tab_font_size="6sp"
+        hjm:tab_img_font_padding="0dp"
+        hjm:tab_img_height="30dp"
+        hjm:tab_img_width="30dp"
+        hjm:tab_isshow_divider="true"
+        hjm:tab_padding_bottom="5dp"
+        hjm:tab_padding_top="8dp"
+        hjm:tab_selected_color="#000000"
+        hjm:tab_unselected_color="@color/colorPrimary"
+        >
+    </com.hjm.bottomtabbar.BottomTabBar>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

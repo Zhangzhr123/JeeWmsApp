@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ItemPickCardViewStyle"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp"
+    >
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/huozhu" />
+
+            <TextView
+                android:id="@+id/tv_zhongWenQch"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/yichutuopan" />
+
+            <TextView
+                android:id="@+id/tv_yichutuopan"
+                style="@style/ItemPickdetailRightDisableStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/yichuchuwei" />
+
+            <EditText
+                android:id="@+id/tv_yichuchuwei"
+                style="@style/ItemPickdetailRightEnableStyle"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/ItemPickdetailStyle"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/xiajiacunwei" />
+
+            <TextView style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/yirutuopan" />
+
+            <EditText
+                android:id="@+id/tv_yirutuopan"
+                style="@style/ItemPickdetailRightEnableStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/yiruchuwei" />
+
+            <EditText
+                android:id="@+id/tv_yiruchuwei"
+                style="@style/ItemPickdetailRightEnableStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/shuliang1" />
+
+            <EditText
+                android:id="@+id/tv_shuliang1"
+                style="@style/ItemPickdetailRightEnableStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/shuliang2" />
+
+            <TextView
+                android:id="@+id/tv_shuliang2"
+                style="@style/ItemPickdetailRightDisableStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/yuanchuwei" />
+
+            <TextView
+                android:id="@+id/tv_yuanchuwei"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/mubiaochuwei" />
+
+            <TextView
+                android:id="@+id/tv_mubiaochuwei"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/pinming" />
+
+            <TextView
+                android:id="@+id/tv_pinming"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/ItemPickSaveBtnStyle" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</android.support.v7.widget.CardView>

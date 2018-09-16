@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:id="@+id/ll_hold"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_x1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/paddingLeft15"
+            android:text="@string/wuliaohao"
+            android:textColor="@color/black666666"
+            android:textSize="@dimen/text_min_size"
+            app:layout_widthPercent="25%w" />
+
+
+
+        <TextView
+            android:id="@+id/tv_x2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:src="@color/app_bg"
+            android:text="@string/jiaojieshuliang"
+            android:textColor="@color/black666666"
+            android:textSize="@dimen/text_min_size"
+            app:layout_widthPercent="25%w" />
+
+
+
+        <TextView
+            android:id="@+id/tv_x3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/text_min_size"
+            android:text="@string/daishangjiashuliang"
+            android:textColor="@color/black666666"
+            app:layout_widthPercent="25%w" />
+
+
+        <TextView
+            android:id="@+id/tv_x4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_min_size"
+            android:gravity="center"
+            android:text="@string/heji"
+            android:textColor="@color/black666666"
+            app:layout_widthPercent="25%w" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/ll_hold2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv2_x1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/paddingLeft15"
+            android:text="@string/wuliaohao"
+            android:textColor="@color/black666666"
+            android:textSize="@dimen/text_min_size"
+            app:layout_widthPercent="50%w" />
+
+
+
+        <TextView
+            android:id="@+id/tv2_x2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:src="@color/app_bg"
+            android:text="@string/jiaojieshuliang"
+            android:textColor="@color/black666666"
+            android:textSize="@dimen/text_min_size"
+            app:layout_widthPercent="50%w" />
+
+
+
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</LinearLayout>
