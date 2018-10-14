@@ -74,6 +74,7 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_GO) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+
                     return true;
                 }
                 return false;
