@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -80,6 +81,8 @@ public class GroundingActivity extends BaseActivity implements OnDismissCallback
             }
         });
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
@@ -125,6 +128,8 @@ public class GroundingActivity extends BaseActivity implements OnDismissCallback
                 GroundingListVm vm = GsonUtils.parseJSON(response, GroundingListVm.class);
                 mAdapter.setGroundingGoodsList(vm.getObj());
                 mAdapter.notifyDataSetChanged();
+                LoadingUtil.hideLoading();
+
             }
         });
     }

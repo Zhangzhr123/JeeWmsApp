@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -80,6 +81,8 @@ public class GoodsInfoActivity extends BaseActivity implements OnDismissCallback
             }
         });
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
@@ -124,6 +127,8 @@ public class GoodsInfoActivity extends BaseActivity implements OnDismissCallback
                 GoodsInfoListVm vm = GsonUtils.parseJSON(response, GoodsInfoListVm.class);
                 mAdapter.setGoodsInfoList(vm.getObj());
                 mAdapter.notifyDataSetChanged();
+                LoadingUtil.hideLoading();
+
             }
         });
     }

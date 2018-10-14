@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -81,6 +82,8 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
             }
         });
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
@@ -128,6 +131,8 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
                 Logutil.print("vm=="+vm.getObj().size());
                 mAdapter.seInventoryList(vm.getObj());
                 mAdapter.notifyDataSetChanged();
+                LoadingUtil.hideLoading();
+
             }
         });
     }

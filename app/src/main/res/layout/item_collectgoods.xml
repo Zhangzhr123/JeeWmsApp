@@ -105,6 +105,23 @@
 
                 />
         </LinearLayout>
+
+        //cez
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/shangjiacunwei" />
+
+            <EditText
+                android:id="@+id/tv_shangjiachuwei"
+                style="@style/ItemPickdetailRightEnableStyle"
+
+                />
+        </LinearLayout>
+
+        //cez
+
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView

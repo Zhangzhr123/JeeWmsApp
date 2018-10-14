@@ -17,6 +17,7 @@ import com.jeewms.www.wms.bean.vm.PickingSaveVm;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.ui.adapter.DemoAdapter;
 import com.jeewms.www.wms.util.GsonUtils;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.jeewms.www.wms.util.Logutil;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
 import com.jeewms.www.wms.util.ToastUtil;
@@ -98,6 +99,7 @@ public class DemoDetailActivity extends BaseBackActivity {
         mBtnRight.setVisibility(View.VISIBLE);
         initAdapter();
         getData();
+        LoadingUtil.showLoading(this);
 
     }
 
@@ -131,6 +133,8 @@ public class DemoDetailActivity extends BaseBackActivity {
                 if (vm != null) {
                     adapter.setList(vm.getObj());
                     adapter.notifyDataSetChanged();
+                    LoadingUtil.hideLoading();
+
                 }
             }
         });

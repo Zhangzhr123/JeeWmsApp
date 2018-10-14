@@ -82,9 +82,17 @@ public class CollectGoodsItemView {
         holder.tvTihi.setText(vm.getMpDanCeng() + "*" + vm.getMpCengGao());
         int shulian = Integer.valueOf(vm.getMpDanCeng()) * Integer.valueOf(vm.getMpCengGao());
         if (StringUtil.isEmpty(vm.getShulian()))
-            holder.tvShouhuoshuliang.setText(shulian + "");
+            holder.tvShouhuoshuliang.setText("");
         else {
-            holder.tvShouhuoshuliang.setText(vm.getShulian());
+            try{
+                int shul = Integer.parseInt(vm.getShulian());
+                if(shul <= shulian){
+                    holder.tvShouhuoshuliang.setText(vm.getShulian());
+                }else{
+                    holder.tvShouhuoshuliang.setText(Integer.toString(shulian));
+                }
+            }catch (Exception e){
+            }
         }
         holder.tvShengchanriqi.setText(vm.getPreprodate());
         holder.tvShouhuowendu.setText(vm.getRecDeg());
@@ -183,7 +191,7 @@ public class CollectGoodsItemView {
         map.put("proData",holder.tvShengchanriqi.getText().toString());//生产日期
         map.put("tinId",holder.tvTinId2.getText().toString());
         map.put("goodsUnit",vm.getShlDanWei());
-
+        map.put("binId",holder.tv_shangjiachuwei.getText().toString());
         JSONObject jsonObject = new JSONObject(map);
         Map<String, String> params = new HashMap<>();
         params.put("wmInQmIstr", jsonObject.toString());//上传实体json
@@ -227,6 +235,9 @@ public class CollectGoodsItemView {
         EditText tvShouhuowendu;
         @BindView(R.id.tv_tinId2)
         EditText tvTinId2;
+        @BindView(R.id.tv_shangjiachuwei)
+        EditText tv_shangjiachuwei;
+
         @BindView(R.id.tv_kucunleixing)
         EditText tvKucunleixing;
         @BindView(R.id.tv_shpMingCheng)

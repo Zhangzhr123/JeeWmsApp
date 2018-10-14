@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -79,6 +80,8 @@ public class StockQueryActivity extends BaseActivity implements OnDismissCallbac
             }
         });
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
@@ -123,6 +126,8 @@ public class StockQueryActivity extends BaseActivity implements OnDismissCallbac
                 StockQueryListVm vm = GsonUtils.parseJSON(response, StockQueryListVm.class);
                 mAdapter.setStockQueryList(vm.getObj());
                 mAdapter.notifyDataSetChanged();
+                LoadingUtil.hideLoading();
+
             }
         });
     }

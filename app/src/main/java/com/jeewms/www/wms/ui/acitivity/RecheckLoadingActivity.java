@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.util.LoadingUtil;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
@@ -68,6 +69,8 @@ public class RecheckLoadingActivity extends BaseActivity implements OnDismissCal
         setTitle("装车复核");
         addAdapter();
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
@@ -118,6 +121,8 @@ public class RecheckLoadingActivity extends BaseActivity implements OnDismissCal
                     }
                     mAdapter.setRecheckLoadingList(vm.getObj());
                     mAdapter.notifyDataSetChanged();
+                    LoadingUtil.hideLoading();
+
                 }
             }
         });

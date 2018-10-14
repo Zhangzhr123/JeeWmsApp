@@ -80,6 +80,8 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
             }
         });
         getDate("","");
+        LoadingUtil.showLoading(this);
+
     }
 
     @Override
