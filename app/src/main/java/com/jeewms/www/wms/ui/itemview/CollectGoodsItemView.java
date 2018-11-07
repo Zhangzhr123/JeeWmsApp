@@ -99,9 +99,9 @@ public class CollectGoodsItemView {
         if (vm.getTvTinId2() != null) ;
         holder.tvTinId2.setText(vm.getTvTinId2());
         if (StringUtil.isEmpty(vm.getType()))
-            holder.tvKucunleixing.setText("良品");
+            holder.tvKucunleixing.setText("");
         else {
-            holder.tvKucunleixing.setText(vm.getType());
+            holder.tvKucunleixing.setText(vm.getShpTiaoMa());
         }
         holder.tvShpMingCheng.setText(vm.getShpMingCheng());
         holder.tvYuqishuliang.setText(vm.getGoodsCount());
@@ -195,6 +195,7 @@ public class CollectGoodsItemView {
         JSONObject jsonObject = new JSONObject(map);
         Map<String, String> params = new HashMap<>();
         params.put("wmInQmIstr", jsonObject.toString());//上传实体json
+
         LoadingUtil.showLoading(mContext);
         Logutil.print("url=="+Constance.getWmInQmIControllerURL());
         HTTPUtils.post(mContext, Constance.getWmInQmIControllerURL(), params, new VolleyListener() {
