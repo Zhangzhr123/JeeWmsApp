@@ -73,7 +73,7 @@ public class PickingItemView {
         holder.tvZhongWenQch.setText(vm.getZhongWenQch());
         //界面edittext输入丢失问题
         holder.tvTinId2.setTag(position);
-        perStr=vm.getTinId2()==null?"":vm.getTinId2();
+        perStr=vm.getTinId2()==null?"":vm.getTinId();
         holder.tvTinId2.setText(perStr);
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

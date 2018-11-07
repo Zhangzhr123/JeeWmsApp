@@ -45,9 +45,9 @@
 
             <EditText
                 android:id="@+id/tv_tinId2"
-                style="@style/ItemPickdetailRightEnableStyle"
-                android:inputType="number"
-                android:digits="1234567890-/"
+                style="@style/ItemPickdetailRightEnableStyle"/>
+                <!--android:inputType="number"-->
+                <!--android:digits="1234567890-/"-->
                 />
         </LinearLayout>
 

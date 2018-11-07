@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
@@ -68,7 +71,12 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
         super.initView();
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-        mBtnLeft.setVisibility(View.VISIBLE);
+
+
+
+
+
+                mBtnLeft.setVisibility(View.VISIBLE);
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -79,6 +87,23 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
                 return false;
             }
         });
+
+//        etSearch.setOnKeyListener(new View.OnKeyListener() {
+//                                      @Override
+//                                      public boolean onKey(View v, int i, KeyEvent keyEvent) {
+//
+//                                          if (i == KeyEvent.KEYCODE_ENTER) {
+//
+//
+//
+//                                              //执行清空动作 2018/09/29
+//                                              getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+//
+//                                              return true;
+//                                          }
+//                                          return false;
+//                                      }
+//                                  });
         setTitle("拣货下架");
         addAdapter();
         getDate("","");
@@ -108,6 +133,8 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
     protected int getContentResId() {
         return R.layout.activity_picking;
     }
+
+
 
     private void getDate(String searchKey,String searchKey2) {
         Map<String, String> params = new HashMap<>();
@@ -149,6 +176,7 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
 
     @OnClick({R.id.et_search, R.id.btn_search})
     public void onViewClicked(View view) {
