@@ -95,7 +95,7 @@ public class CollectGoodsItemView {
             }
         }
         holder.tvShengchanriqi.setText(vm.getPreprodate());
-        holder.tvShouhuowendu.setText(vm.getRecDeg());
+//        holder.tvShouhuowendu.setText(vm.getRecDeg());
         if (vm.getTvTinId2() != null) ;
         holder.tvTinId2.setText(vm.getTvTinId2());
         if (StringUtil.isEmpty(vm.getType()))
@@ -126,15 +126,15 @@ public class CollectGoodsItemView {
                 }
             }
         });
-        holder.tvShouhuowendu.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(!b&&ptr3.equals(holder.tvShouhuowendu.getText().toString())) {
-                    ptr3=holder.tvShouhuowendu.getText().toString();
-                    saveVm(position, holder);
-                }
-            }
-        });
+//        holder.tvShouhuowendu.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                if(!b&&ptr3.equals(holder.tvShouhuowendu.getText().toString())) {
+//                    ptr3=holder.tvShouhuowendu.getText().toString();
+//                    saveVm(position, holder);
+//                }
+//            }
+//        });
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -168,13 +168,16 @@ public class CollectGoodsItemView {
     }
 
     private void saveVm(int position, ViewHolder holder) {
+//        listenter.saveVm(position, holder.tvShouhuoshuliang.getText().toString(), holder.tvShengchanriqi.getText().toString(),
+//                holder.tvShouhuowendu.getText().toString(), holder.tvTinId2.getText().toString(), holder.tvKucunleixing.getText().toString());
         listenter.saveVm(position, holder.tvShouhuoshuliang.getText().toString(), holder.tvShengchanriqi.getText().toString(),
-                holder.tvShouhuowendu.getText().toString(), holder.tvTinId2.getText().toString(), holder.tvKucunleixing.getText().toString());
+                  holder.tvTinId2.getText().toString(), holder.tvKucunleixing.getText().toString());
+
     }
 
     public interface PickingDetailListent {
         public void save(int position);
-        public void saveVm(int position, String shuliang, String riqi, String wendu, String tinid2, String leixin);
+        public void saveVm(int position, String shuliang, String riqi,  String tinid2, String leixin);
     }
 
     private void save(final int position, CollectGoodsVm vm, ViewHolder holder) {
@@ -232,8 +235,8 @@ public class CollectGoodsItemView {
         EditText tvShouhuoshuliang;
         @BindView(R.id.tv_shengchanriqi)
         EditText tvShengchanriqi;
-        @BindView(R.id.tv_shouhuowendu)
-        EditText tvShouhuowendu;
+//        @BindView(R.id.tv_shouhuowendu)
+//        EditText tvShouhuowendu;
         @BindView(R.id.tv_tinId2)
         EditText tvTinId2;
         @BindView(R.id.tv_shangjiachuwei)

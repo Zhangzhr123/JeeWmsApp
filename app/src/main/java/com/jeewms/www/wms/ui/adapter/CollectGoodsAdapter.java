@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
 import com.jeewms.www.wms.bean.vm.CollectGoodsVm;
 import com.jeewms.www.wms.ui.itemview.CollectGoodsItemView;
+import com.jeewms.www.wms.ui.itemview.CollectGoodsItemView.PickingDetailListent;
 import com.jeewms.www.wms.util.LoadingUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -60,7 +61,7 @@ public class CollectGoodsAdapter extends BaseAdapter{
         }
         itemView.setCollectGoodsList(obj);
         itemView.bind(obj.get(i),i);
-        itemView.setListenter(new CollectGoodsItemView.PickingDetailListent() {
+        itemView.setListenter(new PickingDetailListent() {
             @Override
             public void save(final int position) {
                 LoadingUtil.hideLoading();
@@ -74,11 +75,11 @@ public class CollectGoodsAdapter extends BaseAdapter{
             }
 
             @Override
-            public void saveVm(int position, String shuliang, String riqi, String wendu, String tinid2, String type) {
+            public void saveVm(int position, String shuliang, String riqi,   String tinid2, String type) {
                 obj.get(position).setTvTinId2(tinid2);
                 obj.get(position).setShulian(shuliang);
                 obj.get(position).setPreprodate(riqi);
-                obj.get(position).setCfWenCeng(wendu);
+//                obj.get(position).setCfWenCeng(wendu);
                 obj.get(position).setType(type);
             }
         });
