@@ -61,6 +61,8 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
     Button btnSearch;
     @BindView(R.id.et_search2)
     AutoCompleteTextView etSearch2;
+    @BindView(R.id.et_search3)
+    AutoCompleteTextView etSearch3;
     public static void show(Context context) {
         Intent intent = new Intent(context, PickingDetailActivity.class);
         context.startActivity(intent);
@@ -72,6 +74,49 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
 
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
+                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                    et_search2.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        etSearch2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
+                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
+                    et_search3.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        etSearch3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
+                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
+                    et_search3.setText("");
+                    et_search3.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
 
 
@@ -81,7 +126,7 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_ACTION_GO){
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
                     return true;
                 }
                 return false;
@@ -106,7 +151,7 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 //                                  });
         setTitle("拣货下架");
         addAdapter();
-        getDate("","");
+        getDate("","","");
         LoadingUtil.showLoading(this);
     }
 
@@ -118,7 +163,7 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(MessageEvent msg) {
-        getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+        getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
     }
     private void addAdapter() {
         mAdapter = new GoogleCardsAdapter(this);
@@ -131,17 +176,19 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
     @Override
     protected int getContentResId() {
-        return R.layout.activity_picking;
+        return R.layout.activity_pickingnew;
     }
 
 
 
-    private void getDate(String searchKey,String searchKey2) {
+    private void getDate(String searchKey,String searchKey2,String searchKey3) {
         Map<String, String> params = new HashMap<>();
         String url=Constance.getGiNoticeURL()+ "/search?username="+ SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME);
         url+="&searchstr="+searchKey;
 
         url += "&searchstr2=" + searchKey2;
+        url += "&searchstr3=" + searchKey3;
+
         Logutil.print("url"+url);
 
         HTTPUtils.get(this,url, new VolleyListener() {
@@ -184,7 +231,7 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
             case R.id.et_search:
                 break;
             case R.id.btn_search:
-                getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
                 break;
         }
     }

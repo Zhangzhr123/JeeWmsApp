@@ -60,6 +60,7 @@
     <string name="fuheshuliang">复核数量：</string>
     <string name="search1">请扫描单号或储位</string>
     <string name="search2">请扫描商品条码</string>
+    <string name="search3">请扫描储位</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="jiaojiedan">交接单</string>
     <string name="fangweima">防伪码</string>
