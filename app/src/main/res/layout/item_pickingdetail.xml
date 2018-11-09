@@ -35,7 +35,20 @@
                 android:id="@+id/tv_omNoticeId"
                 style="@style/ItemPickdetailRightDisableStyle" />
         </LinearLayout>
+        <LinearLayout style="@style/ItemPickdetailStyle">
 
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/xiajiacunwei"
+                />
+
+            <EditText
+                android:id="@+id/tv_binId2"
+                style="@style/ItemPickdetailRightEnableStyle"/>
+            <!--android:inputType="number"-->
+            <!--android:digits="1234567890-/"-->
+            />
+        </LinearLayout>
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView

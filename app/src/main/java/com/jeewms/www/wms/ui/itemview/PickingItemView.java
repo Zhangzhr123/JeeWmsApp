@@ -75,6 +75,9 @@ public class PickingItemView {
         holder.tvTinId2.setTag(position);
         perStr=vm.getTinId2()==null?"":vm.getTinId();
         holder.tvTinId2.setText(perStr);
+
+        holder.tvBinId2.setTag(position);
+        holder.tvBinId2.setText(vm.getBinId());
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -87,22 +90,42 @@ public class PickingItemView {
         holder.tvTinId2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入托盘号"))
-                save(position,holder.tvTinId2.getText().toString(),vm);
+                if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入")&&CheckUtil.checkText(mContext,holder.tvBinId2,"请输入"))
+                save(position,holder.tvTinId2.getText().toString(),holder.tvBinId2.getText().toString(),vm);
                 return false;
             }
         });
+
+        holder.tvBinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b&&!perStr.equals(holder.tvBinId2.getText().toString())) {
+                    perStr=holder.tvBinId2.getText().toString();
+                    mListent.setBinId2(position,holder.tvBinId2.getText().toString());
+                }
+            }
+        });
+        holder.tvBinId2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入")&&CheckUtil.checkText(mContext,holder.tvBinId2,"请输入"))
+                    save(position,holder.tvBinId2.getText().toString(),holder.tvBinId2.getText().toString(),vm);
+                return false;
+            }
+        });
+
+
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mListent!=null){
-                    if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入托盘号"))
-                    save(position,holder.tvTinId2.getText().toString(),vm);
+                    if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入")&&CheckUtil.checkText(mContext,holder.tvBinId2,"请输入"))
+                    save(position,holder.tvTinId2.getText().toString(),holder.tvBinId2.getText().toString(),vm);
                 }
             }
         });
     }
-    private void save(final int position, String tinId2, PickingDetailVm vm){
+    private void save(final int position, String tinId2, String binId2,PickingDetailVm vm){
         Map<String,String> map=new HashMap<>();
         map.put("id", UUIDUtil.getUUID32());
         map.put("createBy", SharedPreferencesUtil.getInstance(mContext).getKeyValue(Constance.SHAREP.LOGINNAME));
@@ -113,7 +136,7 @@ public class PickingItemView {
         map.put("orderIdI",vm.getId());//原始单据行项目
         map.put("goodsUnit",vm.getBaseUnit());//单位
         map.put("goodsProData",vm.getGoodsProData());//生产日期
-        map.put("kuWeiBianMa",vm.getBinId());//库位编码
+        map.put("kuWeiBianMa",binId2);//库位编码
 
 
 
@@ -151,6 +174,7 @@ public class PickingItemView {
     public interface PickingDetailListent {
         public void save(int position);
         public void setTinId2(int position,String value);
+        public void setBinId2(int position,String value);
     }
 
     static class ViewHolder {
@@ -158,6 +182,8 @@ public class PickingItemView {
         TextView tvZhongWenQch;
         @BindView(R.id.tv_omNoticeId)
         TextView tvOmNoticeId;
+        @BindView(R.id.tv_binId2)
+        EditText tvBinId2;
         @BindView(R.id.tv_tinId2)
         EditText tvTinId2;
         @BindView(R.id.tv_baseGoodscount)
