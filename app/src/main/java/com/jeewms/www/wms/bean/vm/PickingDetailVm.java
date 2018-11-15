@@ -29,6 +29,15 @@ public class PickingDetailVm {
     private String zhxUnit;
     private String omBeiZhu;//备注
     private String tinId2;
+    private String BinId2;
+
+    public String getBinId2() {
+        return BinId2;
+    }
+
+    public void setBinId2(String binId2) {
+        BinId2 = binId2;
+    }
 
     public String getTinId2() {
         return tinId2;

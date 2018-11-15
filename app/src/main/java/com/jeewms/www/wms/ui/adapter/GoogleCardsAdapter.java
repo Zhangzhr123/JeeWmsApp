@@ -80,6 +80,7 @@ public class GoogleCardsAdapter extends BaseAdapter{
 
             @Override
             public void setBinId2(int position, String value) {
+                mPickingList.get(position).setBinId2(value);
 
             }
         });
