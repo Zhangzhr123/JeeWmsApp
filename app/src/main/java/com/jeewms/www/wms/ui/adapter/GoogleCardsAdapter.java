@@ -77,6 +77,11 @@ public class GoogleCardsAdapter extends BaseAdapter{
             public void setTinId2(int position, String value) {
                 mPickingList.get(position).setTinId2(value);
             }
+
+            @Override
+            public void setBinId2(int position, String value) {
+
+            }
         });
         return view;
     }
