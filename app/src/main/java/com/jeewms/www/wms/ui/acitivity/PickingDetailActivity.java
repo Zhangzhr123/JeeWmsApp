@@ -80,8 +80,23 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
+                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
+                    et_search3.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+        etSearch3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
                     final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-                    et_search2.requestFocus();
+                     et_search2.requestFocus();
                     return true;
                 }
                 return false;
@@ -94,29 +109,11 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
-                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
-                    et_search3.requestFocus();
                     return true;
                 }
                 return false;
             }
         });
-        etSearch3.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int i, KeyEvent keyEvent) {
-
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
-                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
-                    et_search3.setText("");
-                    et_search3.requestFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
 
 
 

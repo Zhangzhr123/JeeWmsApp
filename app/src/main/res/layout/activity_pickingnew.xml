@@ -47,7 +47,12 @@
             android:imeOptions="actionGo"
             android:hint="@string/search3"
             />
-     
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sousuo"
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
 
