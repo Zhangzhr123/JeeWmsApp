@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,6 +72,36 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
         mBtnLeft.setVisibility(View.VISIBLE);
         setTitle("盘点");
         addAdapter();
+
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                    et_search2.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        etSearch2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

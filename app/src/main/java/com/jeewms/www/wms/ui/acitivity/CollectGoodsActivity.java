@@ -71,7 +71,7 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
         setTitle("收货");
         addAdapter();
 
-                etSearch.setOnKeyListener(new View.OnKeyListener() {
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
                                       @Override
                                       public boolean onKey(View v, int i, KeyEvent keyEvent) {
 
