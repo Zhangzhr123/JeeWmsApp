@@ -79,7 +79,7 @@
     </style>
     <!--拣货下架左部风格-->
     <style name="ItemPickdetailLeftStyle">
-        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">@dimen/item_text_size</item>
         <item name="android:textColor">@color/black666666</item>
