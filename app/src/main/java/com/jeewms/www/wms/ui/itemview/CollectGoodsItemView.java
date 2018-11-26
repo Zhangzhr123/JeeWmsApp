@@ -80,11 +80,12 @@ public class CollectGoodsItemView {
         holder.tvZhongWenQch.setText(vm.getZhongWenQch());
         holder.tvShouhuotongzhi.setText(vm.getNoticeId());
         holder.tvTihi.setText(vm.getMpDanCeng() + "*" + vm.getMpCengGao());
-        int shulian = Integer.valueOf(vm.getMpDanCeng()) * Integer.valueOf(vm.getMpCengGao());
         if (StringUtil.isEmpty(vm.getGrCount()))
             holder.tvShouhuoshuliang.setText("");
         else {
             try{
+                int shulian = Integer.valueOf(vm.getMpDanCeng()) * Integer.valueOf(vm.getMpCengGao());
+
                 int shul = Integer.parseInt(vm.getGrCount());
                 if(shul <= shulian){
                     holder.tvShouhuoshuliang.setText(vm.getGrCount());

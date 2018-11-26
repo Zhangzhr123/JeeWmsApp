@@ -95,8 +95,8 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
-                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-                     et_search2.requestFocus();
+//                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+//                     et_search2.requestFocus();
                     return true;
                 }
                 return false;
