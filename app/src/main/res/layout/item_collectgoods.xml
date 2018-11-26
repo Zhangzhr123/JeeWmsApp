@@ -106,7 +106,7 @@
                 />
         </LinearLayout>
 
-        //cez
+        <!--cez-->
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
@@ -119,19 +119,21 @@
 
                 />
         </LinearLayout>
+        <!--cez-->
 
-        //cez
+        <!--<LinearLayout style="@style/ItemPickdetailStyle">-->
+            <!--<TextView-->
+                <!--style="@style/ItemPickdetailLeftStyle"-->
+                <!--android:text="@string/kucunleixing" />-->
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+            <!--<EditText-->
+                <!--android:id="@+id/tv_kucunleixing"-->
+                <!--style="@style/ItemPickdetailRightEnableStyle" />-->
+        <!--</LinearLayout>-->
 
-            <TextView
-                style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/kucunleixing" />
 
-            <EditText
-                android:id="@+id/tv_kucunleixing"
-                style="@style/ItemPickdetailRightEnableStyle" />
-        </LinearLayout>
+
+
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
