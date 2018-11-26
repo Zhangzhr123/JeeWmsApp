@@ -48,16 +48,16 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/ItemPickdetailStyle"
-            android:visibility="gone">
+        <!--<LinearLayout-->
+            <!--style="@style/ItemPickdetailStyle"-->
+            <!--android:visibility="gone">-->
 
-            <TextView
-                style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/xiajiacunwei" />
+            <!--<TextView-->
+                <!--style="@style/ItemPickdetailLeftStyle"-->
+                <!--android:text="@string/xiajiacunwei" />-->
 
-            <TextView style="@style/ItemPickdetailRightStyle" />
-        </LinearLayout>
+            <!--<TextView style="@style/ItemPickdetailRightStyle" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout style="@style/ItemPickdetailStyle">
 

@@ -119,33 +119,17 @@ public class PickingDetailActivity extends BaseActivity implements OnDismissCall
 
 
                 mBtnLeft.setVisibility(View.VISIBLE);
-        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_GO){
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
+//        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if(actionId == EditorInfo.IME_ACTION_GO){
+//                    getDate(etSearch.getText().toString(),etSearch2.getText().toString(),etSearch3.getText().toString());
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
-//        etSearch.setOnKeyListener(new View.OnKeyListener() {
-//                                      @Override
-//                                      public boolean onKey(View v, int i, KeyEvent keyEvent) {
-//
-//                                          if (i == KeyEvent.KEYCODE_ENTER) {
-//
-//
-//
-//                                              //执行清空动作 2018/09/29
-//                                              getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-//
-//                                              return true;
-//                                          }
-//                                          return false;
-//                                      }
-//                                  });
         setTitle("拣货下架");
         addAdapter();
         getDate("","","");

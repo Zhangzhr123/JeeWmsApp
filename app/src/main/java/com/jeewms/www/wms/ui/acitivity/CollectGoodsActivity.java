@@ -68,8 +68,7 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
         EventBus.getDefault().register(this);
         mBtnLeft.setVisibility(View.VISIBLE);
 
-        setTitle("收货");
-        addAdapter();
+
 
         etSearch.setOnKeyListener(new View.OnKeyListener() {
                                       @Override
@@ -97,18 +96,20 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
                 return false;
             }
         });
-        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-                    et_search2.requestFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_GO) {
+//                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+//                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+//                    et_search2.requestFocus();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+        setTitle("收货");
+        addAdapter();
         getDate("","");
         LoadingUtil.showLoading(this);
 
