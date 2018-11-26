@@ -17,6 +17,7 @@ import com.jeewms.www.wms.util.CheckUtil;
 import com.jeewms.www.wms.util.GsonUtils;
 import com.jeewms.www.wms.util.LoadingUtil;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
+import com.jeewms.www.wms.util.StringUtil;
 import com.jeewms.www.wms.util.ToastUtil;
 import com.jeewms.www.wms.util.UUIDUtil;
 import com.jeewms.www.wms.volley.HTTPUtils;
@@ -82,10 +83,13 @@ public class PickingItemView {
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(!b&&!perStr.equals(holder.tvTinId2.getText().toString())) {
-                    perStr=holder.tvTinId2.getText().toString();
-                    mListent.setTinId2(position,holder.tvTinId2.getText().toString());
+                if(!StringUtil.isEmpty(perStr)){
+                    if(!b&&!perStr.equals(holder.tvTinId2.getText().toString())) {
+                        perStr=holder.tvTinId2.getText().toString();
+                        mListent.setTinId2(position,holder.tvTinId2.getText().toString());
+                    }
                 }
+
             }
         });
         holder.tvTinId2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -100,9 +104,11 @@ public class PickingItemView {
         holder.tvBinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(!b&&!perStr.equals(holder.tvBinId2.getText().toString())) {
-                    perStr=holder.tvBinId2.getText().toString();
-                    mListent.setBinId2(position,holder.tvBinId2.getText().toString());
+                if(!StringUtil.isEmpty(perStr)) {
+                    if (!b && !perStr.equals(holder.tvBinId2.getText().toString())) {
+                        perStr = holder.tvBinId2.getText().toString();
+                        mListent.setBinId2(position, holder.tvBinId2.getText().toString());
+                    }
                 }
             }
         });
