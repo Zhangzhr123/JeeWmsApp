@@ -75,12 +75,12 @@ public class CollectGoodsAdapter extends BaseAdapter{
             }
 
             @Override
-            public void saveVm(int position, String shuliang, String riqi,   String tinid2, String type) {
+            public void saveVm(int position, String shuliang, String riqi,   String tinid2) {
                 obj.get(position).setTvTinId2(tinid2);
                 obj.get(position).setShulian(shuliang);
                 obj.get(position).setPreprodate(riqi);
 //                obj.get(position).setCfWenCeng(wendu);
-                obj.get(position).setType(type);
+//                obj.get(position).setType(type);
             }
         });
         return view;
