@@ -87,8 +87,8 @@ public class GoogleCardsAdapter extends BaseAdapter{
         return view;
     }
     public void remove(int position){
-//        mPickingList.remove(position);
-//        notifyDataSetChanged();
+        mPickingList.remove(position);
+        notifyDataSetChanged();
         EventBus.getDefault().post(new MessageEvent(""));
     }
 

@@ -79,7 +79,7 @@ public class PickingItemView {
         holder.tvTinId2.setText(perStr);
 
         holder.tvBinId2.setTag(position);
-        holder.tvBinId2.setText(vm.getBinId());
+//        holder.tvBinId2.setText(vm.getBinId());   //储位必须扫描
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
