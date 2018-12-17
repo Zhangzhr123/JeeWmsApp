@@ -64,12 +64,18 @@ public class PickingItemView {
     public void bindView(final PickingDetailVm vm, final int position) {
         final int mPosition=position;
         holder.tvOmNoticeId.setText(vm.getOmNoticeId());
-        holder.tvBaseGoodscount.setText(vm.getBaseGoodscount());
+        String zxgoodscount = "";
+        try{
+            zxgoodscount = Double.toString( Double.parseDouble(vm.getBaseGoodscount()) / Double.parseDouble(vm.getChlShl()));
+        }catch (Exception e){
+
+        }
+        holder.tvBaseGoodscount.setText(vm.getBaseGoodscount()+" 二级："+zxgoodscount);
         holder.tvBinId.setText(vm.getBinId());
         holder.tvShpMingCheng.setText(vm.getShpMingCheng());
         holder.tvTinId.setText(vm.getTinId());
         holder.tvGoodsProData.setText(vm.getGoodsProData());
-        holder.tvShlDanWei.setText(vm.getShlDanWei());
+        holder.tvShlDanWei.setText(vm.getShlDanWei()+" 二级："+vm.getZhxUnit());
         holder.tvOmBeiZhu.setText(vm.getOmBeiZhu());
         holder.tvZhongWenQch.setText(vm.getZhongWenQch());
         //界面edittext输入丢失问题
