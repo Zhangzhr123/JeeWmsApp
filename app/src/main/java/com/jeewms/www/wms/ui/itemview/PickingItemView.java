@@ -71,11 +71,18 @@ public class PickingItemView {
 
         }
         holder.tvBaseGoodscount.setText(vm.getBaseGoodscount()+" 二级："+zxgoodscount);
+        holder.tvShlDanWei.setText(vm.getShlDanWei()+" 二级："+vm.getZhxUnit());
+        try{
+           if(Double.doubleToLongBits(Double.parseDouble(vm.getChlShl())) == Double.doubleToLongBits(1.00)){
+                holder.tvBaseGoodscount.setText(vm.getBaseGoodscount());
+                holder.tvShlDanWei.setText(vm.getShlDanWei());
+            }
+            }catch (Exception e){
+        }
         holder.tvBinId.setText(vm.getBinId());
         holder.tvShpMingCheng.setText(vm.getShpMingCheng());
         holder.tvTinId.setText(vm.getTinId());
         holder.tvGoodsProData.setText(vm.getGoodsProData());
-        holder.tvShlDanWei.setText(vm.getShlDanWei()+" 二级："+vm.getZhxUnit());
         holder.tvOmBeiZhu.setText(vm.getOmBeiZhu());
         holder.tvZhongWenQch.setText(vm.getZhongWenQch());
         //界面edittext输入丢失问题

@@ -65,8 +65,28 @@ public class RecheckLoadingItemView {
 
         holder.tvKehu.setText(vm.getCusName());
         holder.tvShpMingCheng.setText(vm.getGoodsName());
+
+
         holder.tvTinId.setText(vm.getGoodsQua());
         holder.tvShlDanWei.setText(vm.getShlDanWei());
+
+        String zxgoodscount = "";
+        try{
+            zxgoodscount = Double.toString( Double.parseDouble(vm.getGoodsQua()) / Double.parseDouble(vm.getChlShl()));
+        }catch (Exception e){
+
+        }
+        holder.tvTinId.setText(vm.getGoodsQua()+" 二级："+zxgoodscount);
+        holder.tvShlDanWei.setText(vm.getShlDanWei()+" 二级："+vm.getZhxUnit());
+        try{
+            if(Double.doubleToLongBits(Double.parseDouble(vm.getChlShl())) == Double.doubleToLongBits(1.00)){
+                holder.tvTinId.setText(vm.getGoodsQua());
+                holder.tvShlDanWei.setText(vm.getShlDanWei());
+            }
+        }catch (Exception e){
+        }
+
+
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
