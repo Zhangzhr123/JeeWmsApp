@@ -14,7 +14,7 @@
         android:padding="10dp"
         >
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailSgotyle">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -150,7 +150,7 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle"  android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -160,7 +160,7 @@
                 android:id="@+id/tv_shangpinbianma"
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle"  android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
