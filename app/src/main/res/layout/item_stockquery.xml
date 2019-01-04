@@ -88,8 +88,8 @@
 
 
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
-
+        <LinearLayout style="@style/ItemPickdetailStyle"
+            android:visibility="gone">
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
                 android:text="@string/kehu" />

@@ -29,7 +29,7 @@
             android:id="@+id/tv_title"
             style="@style/TitlebarTextStyle"
             android:layout_centerInParent="true"
-            android:text="WMS系统"
+            android:text="灵鹿谷WMS系统"
             />
 
     </RelativeLayout>

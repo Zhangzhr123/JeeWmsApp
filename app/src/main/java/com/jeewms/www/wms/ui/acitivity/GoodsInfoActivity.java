@@ -138,7 +138,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnDismissCallback
 
     @Override
     protected int getContentResId() {
-        return R.layout.activity_picking;
+        return R.layout.activity_picking_goods;
     }
 
     private void getDate(String searchKey,String searchKey2) {
