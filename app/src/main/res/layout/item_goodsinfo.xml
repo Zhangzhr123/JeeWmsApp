@@ -97,6 +97,19 @@
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/tiji" />
+
+            <EditText
+                android:id="@+id/tv_tiji"
+                style="@style/ItemPickdetailRightEnableStyle"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
                 android:text="@string/zhongliang" />
 
             <EditText

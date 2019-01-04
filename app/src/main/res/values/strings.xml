@@ -34,6 +34,7 @@
     <string name="chang">长：</string>
     <string name="kuang">宽：</string>
     <string name="gao">高：</string>
+    <string name="tiji">体积：</string>
     <string name="zhongliang">重量：</string>
     <string name="dancengshuliang">单层数量：</string>
     <string name="cenggao">层高：</string>
