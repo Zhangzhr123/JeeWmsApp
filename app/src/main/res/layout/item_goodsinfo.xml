@@ -14,7 +14,7 @@
         android:padding="10dp"
         >
 
-        <LinearLayout style="@style/ItemPickdetailSgotyle">
+        <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"

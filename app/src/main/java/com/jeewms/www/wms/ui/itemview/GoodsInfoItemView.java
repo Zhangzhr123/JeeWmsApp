@@ -72,8 +72,8 @@ public class GoodsInfoItemView {
         holder.tvCenggao.setText(vm.getMpCengGao());
         holder.tvBaozhiqi.setText(vm.getBzhiQi());
 
-//        holder.tvShangpinbianma.setText(vm.getShpBianMa());
-//        holder.tvKehubianma.setText(vm.getSuoShuKeHu());
+        holder.tvShangpinbianma.setText(vm.getShpBianMa());
+        holder.tvKehubianma.setText(vm.getSuoShuKeHu());
         holder.tvDanwei.setText(vm.getShlDanWei());
         holder.tvTiaoma.setText(vm.getShpTiaoMa());
         holder.tvTiaoma.setOnFocusChangeListener(new View.OnFocusChangeListener() {
