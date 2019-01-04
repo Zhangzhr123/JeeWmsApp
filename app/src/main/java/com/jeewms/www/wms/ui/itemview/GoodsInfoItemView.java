@@ -61,8 +61,8 @@ public class GoodsInfoItemView {
     }
 
     public void bind(final GoodsInfoVm vm, final int position) {
-        holder.tvZhongWenQch.setText(vm.getShpBianMa()+"-"+vm.getSuoShuKeHu());
-        holder.tvPinming.setText(vm.getShpMingCheng());
+        holder.tvZhongWenQch.setText(vm.getSuoShuKeHu());
+        holder.tvPinming.setText(vm.getShpBianMa()+"-"+vm.getShpMingCheng());
 
         holder.tvChang.setText(vm.getChZhXiang());
         holder.tvKuang.setText(vm.getKuZhXiang());
