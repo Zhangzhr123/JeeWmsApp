@@ -40,6 +40,17 @@
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
+                android:text="@string/tiaoma" />
+
+            <TextView
+                android:id="@+id/tv_tiaoma"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/ItemPickdetailStyle">
+
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
                 android:text="@string/chang" />
 
             <EditText

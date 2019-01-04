@@ -62,7 +62,7 @@ public class GoodsInfoAdaper extends BaseAdapter {
                 remove(position);
             }
             @Override
-            public void saveVm(int position, String ChZhXiang, String KuZhXiang, String GaoZhXiang, String ZhlKg, String MpDanCeng, String MpCengGao, String BzhiQi) {
+            public void saveVm(int position, String ChZhXiang, String KuZhXiang, String GaoZhXiang, String ZhlKg, String MpDanCeng, String MpCengGao, String BzhiQi, String shptiaoma) {
                 obj.get(position).setChZhXiang(ChZhXiang);
                 obj.get(position).setKuZhXiang(KuZhXiang);
                 obj.get(position).setGaoZhXiang(GaoZhXiang);
@@ -70,6 +70,7 @@ public class GoodsInfoAdaper extends BaseAdapter {
                 obj.get(position).setMpDanCeng(MpDanCeng);
                 obj.get(position).setMpCengGao(MpCengGao);
                 obj.get(position).setBzhiQi(BzhiQi);
+                obj.get(position).setShpTiaoMa(shptiaoma);
             }
         });
         return view;

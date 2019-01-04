@@ -75,6 +75,16 @@ public class GoodsInfoItemView {
         holder.tvShangpinbianma.setText(vm.getShpBianMa());
         holder.tvKehubianma.setText(vm.getSuoShuKeHu());
         holder.tvDanwei.setText(vm.getShlDanWei());
+        holder.tvTiaoma.setText(vm.getShpTiaoMa());
+        holder.tvTiaoma.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && !ptr8.equals(holder.tvTiaoma.getText().toString())) {
+                    ptr8 = holder.tvTiaoma.getText().toString();
+                    saveVm(position, holder);
+                }
+            }
+        });
         holder.tvChang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -149,12 +159,12 @@ public class GoodsInfoItemView {
     public void saveVm(int position, ViewHolder holder) {
         listent.saveVm(position,holder.tvChang.getText().toString(),holder.tvKuang.getText().toString(),holder.tvGao.getText().toString(),
                 holder.tvZhongliang.getText().toString(),holder.tvDancengshuliang.getText().toString(),holder.tvCenggao.getText().toString(),
-                holder.tvBaozhiqi.getText().toString());
+                holder.tvBaozhiqi.getText().toString(),holder.tvTiaoma.getText().toString());
     }
 
     public interface GoodsInfoListent {
         public void save(int position);
-        public void saveVm(int position, String ChZhXiang, String KuZhXiang, String GaoZhXiang, String ZhlKg, String MpDanCeng, String MpCengGao, String BzhiQi);
+        public void saveVm(int position, String ChZhXiang, String KuZhXiang, String GaoZhXiang, String ZhlKg, String MpDanCeng, String MpCengGao, String BzhiQi,String shptiaoma);
     }
 
     private void save(final int position, GoodsInfoVm vm, ViewHolder holder) {
@@ -168,7 +178,7 @@ public class GoodsInfoItemView {
         map.put("chZhXiang", holder.tvChang.getText().toString());
         map.put("kuZhXiang", holder.tvKuang.getText().toString());
         map.put("gaoZhXiang",holder.tvGao.getText().toString());
-
+        map.put("shpTiaoMa",holder.tvTiaoma.getText().toString());
         JSONObject jsonObject = new JSONObject(map);
         Map<String, String> params = new HashMap<>();
         params.put("mdGoodsstr", jsonObject.toString());//上传实体json
@@ -219,6 +229,8 @@ public class GoodsInfoItemView {
         TextView tvKehubianma;
         @BindView(R.id.tv_danwei)
         TextView tvDanwei;
+        @BindView(R.id.tv_tiaoma)
+        TextView tvTiaoma;
         @BindView(R.id.btn_save)
         Button btnSave;
 
