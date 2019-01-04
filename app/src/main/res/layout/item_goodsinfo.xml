@@ -44,7 +44,7 @@
 
             <EditText
                 android:id="@+id/tv_tiaoma"
-                style="@style/ItemPickdetailRightStyle" />
+                style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
         <LinearLayout style="@style/ItemPickdetailStyle">
