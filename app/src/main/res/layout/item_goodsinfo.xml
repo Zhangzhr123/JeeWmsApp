@@ -42,7 +42,7 @@
                 style="@style/ItemPickdetailLeftStyle"
                 android:text="@string/tiaoma" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_tiaoma"
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>

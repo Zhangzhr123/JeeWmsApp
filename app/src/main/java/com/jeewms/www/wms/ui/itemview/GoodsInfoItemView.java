@@ -230,7 +230,7 @@ public class GoodsInfoItemView {
         @BindView(R.id.tv_danwei)
         TextView tvDanwei;
         @BindView(R.id.tv_tiaoma)
-        TextView tvTiaoma;
+        EditText tvTiaoma;
         @BindView(R.id.btn_save)
         Button btnSave;
 
