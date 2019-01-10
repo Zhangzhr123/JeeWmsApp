@@ -43,7 +43,7 @@ public class PickingItemView {
     PickingDetailListent mListent;
     Map<Integer, String> mMapContent;
     String perStr;
-
+    String perStrbin;
 
     public void setListent(PickingDetailListent listent) {
         mListent = listent;
@@ -90,9 +90,10 @@ public class PickingItemView {
 //        perStr=vm.getTinId2()==null?"":vm.getTinId();
         perStr=vm.getTinId();
         holder.tvTinId2.setText(perStr);
-
+        perStrbin = vm.getBinId();
         holder.tvBinId2.setTag(position);
-//        holder.tvBinId2.setText(vm.getBinId());   //储位必须扫描
+        holder.tvBinId2.setText(vm.getBinId());   //储位必须扫描
+
         holder.tvTinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -117,9 +118,9 @@ public class PickingItemView {
         holder.tvBinId2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(!StringUtil.isEmpty(perStr)) {
-                    if (!b && !perStr.equals(holder.tvBinId2.getText().toString())) {
-                        perStr = holder.tvBinId2.getText().toString();
+                if(!StringUtil.isEmpty(perStrbin)) {
+                    if (!b && !perStrbin.equals(holder.tvBinId2.getText().toString())) {
+                        perStrbin = holder.tvBinId2.getText().toString();
                         mListent.setBinId2(position, holder.tvBinId2.getText().toString());
                     }
                 }
@@ -129,7 +130,7 @@ public class PickingItemView {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(CheckUtil.checkText(mContext,holder.tvTinId2,"请输入")&&CheckUtil.checkText(mContext,holder.tvBinId2,"请输入"))
-                    save(position,holder.tvBinId2.getText().toString(),holder.tvBinId2.getText().toString(),vm);
+                    save(position,holder.tvTinId2.getText().toString(),holder.tvBinId2.getText().toString(),vm);
                 return false;
             }
         });
