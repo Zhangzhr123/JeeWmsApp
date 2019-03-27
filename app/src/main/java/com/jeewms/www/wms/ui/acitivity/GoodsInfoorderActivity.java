@@ -69,7 +69,7 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         mBtnLeft.setVisibility(View.VISIBLE);
-        setTitle("商品属性");
+        setTitle("商品下单");
         addAdapter();
 
 

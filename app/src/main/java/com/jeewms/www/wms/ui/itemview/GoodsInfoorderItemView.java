@@ -52,7 +52,7 @@ public class GoodsInfoorderItemView {
 
     public GoodsInfoorderItemView(Context context) {
         mContext = context;
-        mView = LayoutInflater.from(context).inflate(R.layout.item_goodsinfo, null);
+        mView = LayoutInflater.from(context).inflate(R.layout.item_goodsinfoorder, null);
         holder = new ViewHolder(mView);
     }
 
@@ -64,9 +64,9 @@ public class GoodsInfoorderItemView {
         holder.tvZhongWenQch.setText(vm.getSuoShuKeHu());
         holder.tvPinming.setText(vm.getShpBianMa()+"-"+vm.getShpMingCheng());
 
-        holder.tvChang.setText(vm.getChZhXiang());
-        holder.tvKuang.setText(vm.getKuZhXiang());
-        holder.tvGao.setText(vm.getGaoZhXiang());
+//        holder.tvChang.setText(vm.getChZhXiang());
+//        holder.tvKuang.setText(vm.getKuZhXiang());
+//        holder.tvGao.setText(vm.getGaoZhXiang());
         holder.tvZhongliang.setText(vm.getZhlKg());
         holder.tvDancengshuliang.setText(vm.getMpDanCeng());
         holder.tvCenggao.setText(vm.getMpCengGao());
