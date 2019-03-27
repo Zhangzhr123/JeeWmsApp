@@ -10,6 +10,7 @@ import com.jeewms.www.wms.bean.bean.HomeBtnBean;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.ui.acitivity.CollectGoodsActivity;
 import com.jeewms.www.wms.ui.acitivity.GoodsInfoActivity;
+import com.jeewms.www.wms.ui.acitivity.GoodsInfoorderActivity;
 import com.jeewms.www.wms.ui.acitivity.GroundingActivity;
 import com.jeewms.www.wms.ui.acitivity.InventoryActivity;
 import com.jeewms.www.wms.ui.acitivity.PickingDetailActivity;
@@ -78,7 +79,7 @@ public class HomeGridItemView {
         }else if(Constance.btnNameList[7].equals(btnName)){
             StockQueryActivity.show(mActivity);
         }else if(Constance.btnNameList[8].equals(btnName)){
-
+            GoodsInfoorderActivity.show(mActivity);
         }else if(Constance.btnNameList[9].equals(btnName)){
 
         }else if(Constance.btnNameList[10].equals(btnName)){

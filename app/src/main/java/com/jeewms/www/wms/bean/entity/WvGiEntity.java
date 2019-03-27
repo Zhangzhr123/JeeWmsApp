@@ -52,7 +52,11 @@ public class WvGiEntity  {
 	/**状态*/
 
 	private String downSta;
-	
+
+
+
+
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -261,4 +265,7 @@ public class WvGiEntity  {
 	public void setDownSta(String downSta){
 		this.downSta = downSta;
 	}
+
+
+
 }

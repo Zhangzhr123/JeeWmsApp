@@ -30,7 +30,8 @@ public class PickingDetailVm {
     private String omBeiZhu;//备注
     private String tinId2;
     private String BinId2;
-
+    private String pickNotice;
+    private String shpGuiGe;
     public String getBinId2() {
         return BinId2;
     }
@@ -221,5 +222,13 @@ public class PickingDetailVm {
 
     public void setOmBeiZhu(String omBeiZhu) {
         this.omBeiZhu = omBeiZhu;
+    }
+
+    public String getShpGuiGe() {
+        return shpGuiGe;
+    }
+
+    public void setShpGuiGe(String shpGuiGe) {
+        this.shpGuiGe = shpGuiGe;
     }
 }

@@ -11,13 +11,13 @@ public class Constance {
 
     //测试站
 //    public static String COMMON_URL = "http://192.168.0.107:8080/wms";
-    public static String COMMON_URL = "http://www.jeewms.cn/wmstest";
+    public static String COMMON_URL = "http://120.78.150.43/wmstest";
 
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "更多"};
+    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "下单"};
 
     public static void setBaseUrl(String baseUrl) {
         if (!StringUtil.isEmpty(baseUrl)) {
@@ -51,6 +51,8 @@ public class Constance {
     public static final String wmToDownGoodsControllerc = "/rest/wmToDownGoodsController/change";
     //商品信息保存
     public static final String mdGoodsControllerc = "/rest/mdGoodsController/change";
+    //商品下单
+    public static final String mdGoodsControllercorder = "/rest/mdGoodsController/order";
     //移储保存
     public static final String wmToMoveGoodsControllerc = "/rest/wmToMoveGoodsController/change";
     //镭射清单
@@ -94,6 +96,7 @@ public class Constance {
         return COMMON_URL + GoodsController;
     }
 
+
     public static String getStockControllerURL() {
         return COMMON_URL + StockController;
     }
@@ -120,6 +123,9 @@ public class Constance {
 
     public static String getmdGoodsControllercURL() {
         return COMMON_URL + mdGoodsControllerc;
+    }
+    public static String getmdGoodsControllerorderURL() {
+        return COMMON_URL + mdGoodsControllercorder;
     }
 
     public static String getwmToMoveGoodsControllercURL() {
