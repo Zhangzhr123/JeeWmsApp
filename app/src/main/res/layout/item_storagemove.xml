@@ -86,7 +86,7 @@
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/shuliang1" />
+                android:text="移动数量" />
 
             <EditText
                 android:id="@+id/tv_shuliang1"
@@ -97,7 +97,7 @@
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/shuliang2" />
+                android:text="现有数量" />
 
             <TextView
                 android:id="@+id/tv_shuliang2"

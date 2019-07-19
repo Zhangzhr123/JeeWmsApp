@@ -141,11 +141,12 @@ public class StorageMoveItemView {
         map.put("id", vm.getId());
         map.put("updateBy", SharedPreferencesUtil.getInstance(mContext).getKeyValue(Constance.SHAREP.LOGINNAME));
         map.put("goodsQua",vm.getGoodsQua());
+        map.put("baseGoodscount",vm.getGoodsQua());
 
-        map.put("tinFrom",holder.tvYichuchuwei.getText().toString());
+        map.put("tinFrom",holder.tvYichutuopan.getText().toString());
         map.put("tinId",holder.tvYirutuopan.getText().toString());
-        map.put("binFrom",holder.tvYiruchuwei.getText().toString());
-        map.put("binTo",holder.tvShuliang1.getText().toString());
+        map.put("binFrom",holder.tvYichuchuwei.getText().toString());
+        map.put("binTo",holder.tvYiruchuwei.getText().toString());
 
         map.put("moveSta","已完成");
         JSONObject jsonObject = new JSONObject(map);
