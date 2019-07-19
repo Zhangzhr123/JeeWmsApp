@@ -77,6 +77,7 @@ public class StorageMoveItemView {
         holder.tvYuanchuwei.setText(vm.getBinFrom());
         holder.tvMubiaochuwei.setText(vm.getBinTo());
         holder.tvPinming.setText(vm.getGoodsName());
+        holder.tvToCusName.setText(vm.getToCusName());
         holder.tvYichuchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -194,6 +195,8 @@ public class StorageMoveItemView {
         TextView tvMubiaochuwei;
         @BindView(R.id.tv_pinming)
         TextView tvPinming;
+        @BindView(R.id.tv_toCusName)
+        TextView tvToCusName;
         @BindView(R.id.btn_save)
         Button btnSave;
 

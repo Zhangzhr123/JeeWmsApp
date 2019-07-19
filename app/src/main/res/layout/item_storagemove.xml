@@ -25,6 +25,9 @@
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
 
+
+
+
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
@@ -49,16 +52,7 @@
                 />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/ItemPickdetailStyle"
-            android:visibility="gone">
 
-            <TextView
-                style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/xiajiacunwei" />
-
-            <TextView style="@style/ItemPickdetailRightStyle" />
-        </LinearLayout>
 
         <LinearLayout style="@style/ItemPickdetailStyle">
 
@@ -136,7 +130,17 @@
                 android:id="@+id/tv_pinming"
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
+        <LinearLayout
+            style="@style/ItemPickdetailStyle"
+            >
 
+            <TextView
+                style="@style/ItemPickdetailLeftStyle"
+                android:text="到货主" />
+
+            <TextView android:id="@+id/tv_toCusName"
+                style="@style/ItemPickdetailRightStyle" />
+        </LinearLayout>
         <Button
             android:id="@+id/btn_save"
             style="@style/ItemPickSaveBtnStyle" />

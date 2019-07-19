@@ -10,8 +10,8 @@ import com.jeewms.www.wms.util.StringUtil;
 public class Constance {
 
     //测试站
-//    public static String COMMON_URL = "http://192.168.0.107:8080/wms";
-    public static String COMMON_URL = "http://120.78.150.43/wmstest";
+    public static String COMMON_URL = "http://119.23.251.167/wms";
+//    public static String COMMON_URL = "http://120.78.150.43/wmstest";
 
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
