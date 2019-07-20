@@ -141,8 +141,8 @@ public class StorageMoveItemView {
         Map<String, String> map = new HashMap<>();
         map.put("id", vm.getId());
         map.put("updateBy", SharedPreferencesUtil.getInstance(mContext).getKeyValue(Constance.SHAREP.LOGINNAME));
-        map.put("goodsQua",vm.getGoodsQua());
-        map.put("baseGoodscount",vm.getGoodsQua());
+        map.put("goodsQua",holder.tvShuliang2.getText().toString());
+        map.put("baseGoodscount",holder.tvShuliang1.getText().toString());
 
         map.put("tinFrom",holder.tvYichutuopan.getText().toString());
         map.put("tinId",holder.tvYirutuopan.getText().toString());
