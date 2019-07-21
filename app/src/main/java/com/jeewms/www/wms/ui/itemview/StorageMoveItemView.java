@@ -71,9 +71,9 @@ public class StorageMoveItemView {
             holder.tvYiruchuwei.setText(vm.getBinTo());
         }
         if (!StringUtil.isEmpty(vm.getGoodsQua())) {
-            holder.tvShuliang1.setText(vm.getGoodsQua());
+            holder.tvShuliang1.setText(vm.getBaseGoodscount());
         }
-        holder.tvShuliang2.setText(vm.getBaseGoodscount());
+        holder.tvShuliang2.setText(vm.getGoodsQua());
         holder.tvYuanchuwei.setText(vm.getBinFrom());
         holder.tvMubiaochuwei.setText(vm.getBinTo());
         holder.tvPinming.setText(vm.getGoodsName());
