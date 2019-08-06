@@ -59,8 +59,8 @@ public class GroundingItemView {
         holder.tvZhongWenQch.setText(vm.getCusName());
         holder.tvTuopanhao.setText(vm.getTinId());
         holder.tvShangjiacunwei.setText(vm.getBinId());
-        holder.tvBinId.setText(vm.getBinId());
-        holder.tvShangjiacunwei.setText(vm.getShangjiacunwei());
+//        holder.tvBinId.setText(vm.getBinId());
+        holder.tvShangjiacunwei.setText(vm.getBinId());
         holder.tvShpMingCheng.setText(vm.getGoodsName());
         holder.tvBaseGoodscount.setText(vm.getQmOkQuat());
         holder.tvShlDanWei.setText(vm.getGoodsUnit());

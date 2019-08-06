@@ -48,16 +48,16 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <!--<LinearLayout style="@style/ItemPickdetailStyle">-->
 
-            <TextView
-                style="@style/ItemPickdetailLeftStyle"
-                android:text="@string/chuwei" />
+            <!--<TextView-->
+                <!--style="@style/ItemPickdetailLeftStyle"-->
+                <!--android:text="@string/chuwei" />-->
 
-            <TextView
-                android:id="@+id/tv_binId"
-                style="@style/ItemPickdetailRightStyle" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_binId"-->
+                <!--style="@style/ItemPickdetailRightStyle" />-->
+        <!--</LinearLayout>-->
 
 
 
