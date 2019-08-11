@@ -60,6 +60,7 @@ public class GroundingItemView {
         holder.tvTuopanhao.setText(vm.getTinId());
         holder.tvShangjiacunwei.setText(vm.getBinId());
 //        holder.tvBinId.setText(vm.getBinId());
+
         holder.tvShangjiacunwei.setText(vm.getBinId());
         holder.tvShpMingCheng.setText(vm.getGoodsName());
         holder.tvBaseGoodscount.setText(vm.getQmOkQuat());
@@ -138,8 +139,8 @@ public class GroundingItemView {
         TextView tvTuopanhao;
         @BindView(R.id.tv_shangjiacunwei)
         EditText tvShangjiacunwei;
-        @BindView(R.id.tv_binId)
-        TextView tvBinId;
+//        @BindView(R.id.tv_binId)
+//        TextView tvBinId;
         @BindView(R.id.tv_shpMingCheng)
         TextView tvShpMingCheng;
         @BindView(R.id.tv_baseGoodscount)
