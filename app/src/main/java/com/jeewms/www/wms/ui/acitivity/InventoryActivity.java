@@ -93,7 +93,8 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-
+                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                    et_search2.setText("");
                     return true;
                 }
                 return false;
