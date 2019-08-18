@@ -105,6 +105,7 @@ public class CollectGoodsItemView {
 //        else {
 //            holder.tvKucunleixing.setText(vm.getShpTiaoMa());
 //        }
+        holder.tvShengchanriqi.setText(StringUtil.getdata());
         holder.tvShpMingCheng.setText(vm.getShpMingCheng());
         holder.tvYuqishuliang.setText(vm.getGoodsCount());
         holder.tvYishoushuliang.setText(vm.getGoodsQmCount());
