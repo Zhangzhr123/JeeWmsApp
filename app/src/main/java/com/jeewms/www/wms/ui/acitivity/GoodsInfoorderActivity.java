@@ -84,8 +84,11 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
-                    final EditText et_search1 = (EditText) findViewById(R.id.et_search1);
-                    et_search1.requestFocus();
+                    if(!StringUtil.isEmpty(etSearch.getText().toString())) {
+
+                        final EditText et_search1 = (EditText) findViewById(R.id.et_search1);
+                        et_search1.requestFocus();
+                    }
                     return true;
                 }
                 return false;
@@ -134,7 +137,7 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 
                         final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
                         et_search2.requestFocus();
-                        et_search2.setText("");
+
                     }
                     return true;
                 }
@@ -192,7 +195,8 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
                 mAdapter.setGoodsInfoList(vm.getObj());
                 mAdapter.notifyDataSetChanged();
                 LoadingUtil.hideLoading();
-
+                final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                et_search2.setText("");
             }
         });
     }
@@ -216,8 +220,6 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 //        getDate(etSearch.getText().toString());
 
         getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
-        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-        et_search2.requestFocus();
-        et_search2.setText("");
+
     }
 }
