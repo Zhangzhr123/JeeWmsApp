@@ -36,7 +36,7 @@
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle" android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -47,14 +47,14 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle" >
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
                 android:text="下单数量" />
 
             <EditText
-                android:id="@+id/tv_chang"
+                android:id="@+id/tv_tiji"
                 style="@style/ItemPickdetailRightEnableStyle"
 
                 />
@@ -62,7 +62,7 @@
 
         <LinearLayout
             style="@style/ItemPickdetailStyle"
-            android:visibility="gone">
+                  android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -71,7 +71,7 @@
             <TextView style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle" android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -82,7 +82,7 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle" android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"
@@ -100,7 +100,7 @@
                 android:text="@string/tiji" />
 
             <EditText
-                android:id="@+id/tv_tiji"
+                android:id="@+id/tv_chang"
                 style="@style/ItemPickdetailRightEnableStyle"
 
                 />
@@ -139,7 +139,7 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-        <LinearLayout style="@style/ItemPickdetailStyle">
+        <LinearLayout style="@style/ItemPickdetailStyle" android:visibility="gone">
 
             <TextView
                 style="@style/ItemPickdetailLeftStyle"

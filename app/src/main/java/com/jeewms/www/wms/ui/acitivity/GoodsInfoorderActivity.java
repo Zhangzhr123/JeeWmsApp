@@ -54,6 +54,10 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
     ListView mListView;
     @BindView(R.id.et_search)
     AutoCompleteTextView etSearch;
+    @BindView(R.id.et_search1)
+    AutoCompleteTextView etSearch1;
+    @BindView(R.id.et_search3)
+    AutoCompleteTextView etSearch3;
     @BindView(R.id.btn_search)
     Button btnSearch;
     @BindView(R.id.et_search2)
@@ -78,7 +82,34 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
             public boolean onKey(View v, int i, KeyEvent keyEvent) {
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                    getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
+                    final EditText et_search1 = (EditText) findViewById(R.id.et_search1);
+                    et_search1.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        etSearch1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
+                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
+                    et_search3.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        etSearch3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
+
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
                     final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
                     et_search2.requestFocus();
                     return true;
@@ -87,31 +118,9 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
             }
         });
 
-        etSearch2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int i, KeyEvent keyEvent) {
-
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-
-                    return true;
-                }
-                return false;
-            }
-        });
 
 
-        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_GO){
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
-        getDate("","");
+        getDate("","","","");
         LoadingUtil.showLoading(this);
 
     }
@@ -123,7 +132,7 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(MessageEvent msg) {
-        getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+        getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
     }
 
     private void addAdapter() {
@@ -138,15 +147,17 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 
     @Override
     protected int getContentResId() {
-        return R.layout.activity_picking_goods;
+        return R.layout.activity_order_goods;
     }
 
-    private void getDate(String searchKey,String searchKey2) {
+    private void getDate(String searchKey,String searchKey1,String searchKey3,String searchKey2) {
 
         Map<String, String> params = new HashMap<>();
         String url = Constance.getGoodsControllerURL() + "?username=" + SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME);
-        url += "&searchstr=" + searchKey;
         url += "&searchstr2=" + searchKey2;
+        url += "&searchstrin1=" + searchKey;
+        url += "&searchstrin2=" + searchKey1;
+        url += "&searchstrin3=" + searchKey3;
         HTTPUtils.get(this, url, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -181,6 +192,6 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
 //        getDate(etSearch.getText().toString());
-        getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+        getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
     }
 }

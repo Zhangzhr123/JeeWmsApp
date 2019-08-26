@@ -64,6 +64,12 @@
     <string name="search1">请扫描单号或储位</string>
     <string name="searchgoods">请扫描商品编码</string>
     <string name="search2">请扫描商品条码</string>
+
+    <string name="orderdh">单号</string>
+    <string name="orderydh">运单号</string>
+    <string name="orderbz">备注</string>
+    <string name="ordersp">请扫描商品</string>
+
     <string name="search3">请扫描储位</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="jiaojiedan">交接单</string>

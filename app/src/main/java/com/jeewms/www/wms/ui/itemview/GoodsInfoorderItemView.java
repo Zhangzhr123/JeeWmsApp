@@ -183,15 +183,16 @@ public class GoodsInfoorderItemView {
         Map<String, String> map = new HashMap<>();
         map.put("id", vm.getId());
         map.put("createBy", SharedPreferencesUtil.getInstance(mContext).getKeyValue(Constance.SHAREP.LOGINNAME));
-        map.put("mpDanCeng", holder.tvDancengshuliang.getText().toString());
-        map.put("mpCengGao",holder.tvCenggao.getText().toString());
-        map.put("bzhiQi", holder.tvBaozhiqi.getText().toString());
-        map.put("zhlKg",holder.tvZhongliang.getText().toString());
-        map.put("chZhXiang", holder.tvChang.getText().toString());
-        map.put("kuZhXiang", holder.tvKuang.getText().toString());
-        map.put("gaoZhXiang",holder.tvGao.getText().toString());
-        map.put("shpTiaoMa",holder.tvTiaoma.getText().toString());
-        map.put("tiJiCm",holder.tvTiji.getText().toString());
+
+        map.put("imCusCode", vm.getShpYanSe());
+        map.put("reCarno",vm.getPpTuPian());
+        map.put("imBeizhu", vm.getJjZhongBi());
+        map.put("goodsQua",holder.tvTiji.getText().toString());
+//        map.put("chZhXiang", holder.tvChang.getText().toString());
+//        map.put("kuZhXiang", holder.tvKuang.getText().toString());
+//        map.put("gaoZhXiang",holder.tvGao.getText().toString());
+//        map.put("shpTiaoMa",holder.tvTiaoma.getText().toString());
+//        map.put("tiJiCm",holder.tvTiji.getText().toString());
 
         JSONObject jsonObject = new JSONObject(map);
         Map<String, String> params = new HashMap<>();
