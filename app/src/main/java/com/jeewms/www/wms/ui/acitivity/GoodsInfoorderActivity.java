@@ -24,6 +24,7 @@ import com.jeewms.www.wms.ui.adapter.GoodsInfoorderAdaper;
 import com.jeewms.www.wms.util.GsonUtils;
 import com.jeewms.www.wms.util.LoadingUtil;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
+import com.jeewms.www.wms.util.StringUtil;
 import com.jeewms.www.wms.util.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.jeewms.www.wms.volley.HTTPUtils;
 import com.jeewms.www.wms.volley.VolleyListener;
@@ -97,8 +98,10 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
-                    final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
-                    et_search3.requestFocus();
+                    if(!StringUtil.isEmpty(etSearch1.getText().toString())){
+
+                        final EditText et_search3 = (EditText) findViewById(R.id.et_search3);
+                    et_search3.requestFocus();}
                     return true;
                 }
                 return false;
@@ -110,15 +113,34 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
-                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-                    et_search2.requestFocus();
+                    if(!StringUtil.isEmpty(etSearch3.getText().toString())) {
+
+                        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                        et_search2.requestFocus();
+                    }
                     return true;
                 }
                 return false;
             }
         });
 
+        etSearch2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int i, KeyEvent keyEvent) {
 
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
+                    if(!StringUtil.isEmpty(etSearch2.getText().toString())) {
+
+                        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                        et_search2.requestFocus();
+                        et_search2.setText("");
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
         getDate("","","","");
         LoadingUtil.showLoading(this);
@@ -192,6 +214,10 @@ public class GoodsInfoorderActivity extends BaseActivity implements OnDismissCal
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
 //        getDate(etSearch.getText().toString());
+
         getDate(etSearch.getText().toString(),etSearch1.getText().toString(),etSearch3.getText().toString(),etSearch2.getText().toString());
+        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+        et_search2.requestFocus();
+        et_search2.setText("");
     }
 }
