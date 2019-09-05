@@ -15,6 +15,7 @@ import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.util.GsonUtils;
 import com.jeewms.www.wms.util.LoadingUtil;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
+import com.jeewms.www.wms.util.StringUtil;
 import com.jeewms.www.wms.util.ToastUtil;
 import com.jeewms.www.wms.volley.HTTPUtils;
 import com.jeewms.www.wms.volley.VolleyListener;
@@ -59,29 +60,58 @@ public class InventoryItemView {
         holder.tvZhongWenQch.setText(vm.getCusName());
         holder.tvTuopanhao.setText(vm.getTinId());
         holder.tvPandianchuwei.setText(vm.getBinId());
-        holder.tvShijishuliang.setText(vm.getGoodsQua());
         holder.tvChuwei.setText(vm.getBinId());
         holder.tvPinming.setText(vm.getGoodsName());
         holder.tvShengchanriqi.setText(vm.getGoodsProData());
         holder.tvShlDanWei.setText(vm.getGoodsUnit());
+        holder.tvShijishuliang.setText(vm.getGoodsQua());
+
+//        holder.tvPandianchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus && !ptr1.equals(holder.tvPandianchuwei)) {
+//                    ptr1 = holder.tvPandianchuwei.getText().toString();
+//                    saveVm(position, holder);
+//                }
+//            }
+//        });
+//        holder.tvShijishuliang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus && !ptr2.equals(holder.tvShijishuliang)) {
+//                    ptr2 = holder.tvShijishuliang.getText().toString();
+//                    saveVm(position, holder);
+//                }
+//            }
+//        });
+
 
         holder.tvPandianchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr1.equals(holder.tvPandianchuwei)) {
-                    ptr1 = holder.tvPandianchuwei.getText().toString();
-                    saveVm(position, holder);
-                }
-            }
-        });holder.tvShijishuliang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr2.equals(holder.tvShijishuliang)) {
-                    ptr2 = holder.tvShijishuliang.getText().toString();
-                    saveVm(position, holder);
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr1)) {
+                    if (!b && !ptr1.equals(holder.tvPandianchuwei.getText().toString())) {
+                        ptr1 = holder.tvPandianchuwei.getText().toString();
+                        listent.setchuwei(position, holder.tvPandianchuwei.getText().toString());
+                    }
                 }
             }
         });
+
+
+        holder.tvShijishuliang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr2)) {
+                    if (!b && !ptr2.equals(holder.tvShijishuliang.getText().toString())) {
+                        ptr2 = holder.tvShijishuliang.getText().toString();
+                        listent.setsjsl(position, holder.tvShijishuliang.getText().toString());
+                    }
+                }
+            }
+        });
+
+
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +127,8 @@ public class InventoryItemView {
     public interface InventoryListent {
         public void save(int position);
         public void saveVm(int position, String binId, String goodsQua);
+        public void setchuwei(int position,String value);
+        public void setsjsl(int position,String value);
     }
 
     private void save(final int position, InventoryVm vm, ViewHolder holder) {
@@ -124,6 +156,7 @@ public class InventoryItemView {
                 PickingSaveVm vm = GsonUtils.parseJSON(response, PickingSaveVm.class);
                 if (vm != null && vm.isOk()) {
                     listent.save(position);
+
                 }else if(vm!=null){
                     ToastUtil.show(mContext,vm.getErrorMsg());
                 }else{

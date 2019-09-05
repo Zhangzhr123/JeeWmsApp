@@ -83,6 +83,7 @@ public class GoogleCardsAdapter extends BaseAdapter{
                 mPickingList.get(position).setBinId2(value);
 
             }
+
         });
         return view;
     }

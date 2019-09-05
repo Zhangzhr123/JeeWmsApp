@@ -10,7 +10,7 @@ import com.jeewms.www.wms.util.StringUtil;
 public class Constance {
 
     //测试站http://119.23.251.167/wms/
-    public static String COMMON_URL = "http://119.23.251.167/wms";
+    public static String COMMON_URL = "http://39.98.136.110/wms";
 //    public static String COMMON_URL = "http://120.78.150.43/wmstest";
 
     //主界面按钮图片

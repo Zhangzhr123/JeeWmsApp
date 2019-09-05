@@ -64,6 +64,28 @@ public class InventoryAdapter extends BaseAdapter {
                 obj.get(position).setBinId(binId);
                 obj.get(position).setGoodsQua(goodsQua);
             }
+            @Override
+            public void setchuwei(int position,String value){
+                obj.get(position).setBinId(value);
+
+            }
+            @Override
+            public void setsjsl(int position,String value){
+                obj.get(position).setGoodsQua(value);
+
+            }
+
+//            @Override
+//            public void setTinId2(int position, String value) {
+//                obj.get(position).set(value);
+//            }
+//
+//            @Override
+//            public void setBinId2(int position, String value) {
+//                obj.get(position).setBinId2(value);
+//
+//            }
+
         });
         return view;
     }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
 import com.jeewms.www.wms.util.LoadingUtil;
+import com.jeewms.www.wms.util.StringUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -93,8 +94,11 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-                    et_search2.setText("");
+                    if(!StringUtil.isEmpty(etSearch2.getText().toString())){
+                        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                        et_search2.setText("");
+                    }
+
                     return true;
                 }
                 return false;
@@ -108,6 +112,10 @@ public class InventoryActivity extends BaseActivity implements OnDismissCallback
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_ACTION_GO){
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                    if(!StringUtil.isEmpty(etSearch2.getText().toString())){
+                        final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                        et_search2.setText("");
+                    }
                     return true;
                 }
                 return false;
