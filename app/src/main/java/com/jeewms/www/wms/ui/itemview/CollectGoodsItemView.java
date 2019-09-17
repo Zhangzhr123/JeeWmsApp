@@ -49,7 +49,7 @@ public class CollectGoodsItemView {
     private String ptr3="";
     private String ptr4="";
     private String ptr5="";
-
+    private String saveon="";
     public void setListenter(PickingDetailListent listenter) {
         this.listenter = listenter;
     }
@@ -174,7 +174,11 @@ public class CollectGoodsItemView {
 //                            CheckUtil.checkText(mContext, holder.tvShouhuowendu, "请输入收货温度") || CheckUtil.checkText(mContext, holder.tvTinId2, "请输入托盘号"))
                                                       )
 
-                            save(position, vm, holder);
+                    if(StringUtil.isEmpty(saveon)){
+                        saveon = "on";
+                        save(position, vm, holder);
+
+                    }
                 }
             }
         });
@@ -223,6 +227,7 @@ public class CollectGoodsItemView {
 
             @Override
             public void onResponse(String response) {
+                saveon = "";
                 Logutil.print("res=="+response);
                 PickingSaveVm vm = GsonUtils.parseJSON(response, PickingSaveVm.class);
                 if (vm != null && vm.isOk()) {
