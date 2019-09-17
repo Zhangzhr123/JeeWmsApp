@@ -78,42 +78,56 @@ public class StorageMoveItemView {
         holder.tvMubiaochuwei.setText(vm.getBinTo());
         holder.tvPinming.setText(vm.getGoodsName());
         holder.tvToCusName.setText(vm.getToCusName());
+
+
+
         holder.tvYichuchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr1.equals(holder.tvYichuchuwei)) {
-                    ptr1 = holder.tvYichuchuwei.getText().toString();
-                    saveVm(position, holder);
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr1)) {
+                    if (!b && !ptr1.equals(holder.tvYichuchuwei.getText().toString())) {
+                        ptr1 = holder.tvYichuchuwei.getText().toString();
+                        listent.setchuwei(position, holder.tvYichuchuwei.getText().toString());
+                    }
                 }
             }
         });
+
         holder.tvYirutuopan.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr2.equals(holder.tvYirutuopan)) {
-                    ptr2 = holder.tvYirutuopan.getText().toString();
-                    saveVm(position, holder);
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr2)) {
+                    if (!b && !ptr2.equals(holder.tvYirutuopan.getText().toString())) {
+                        ptr2 = holder.tvYirutuopan.getText().toString();
+                        listent.setyirutuopan(position, holder.tvYirutuopan.getText().toString());
+                    }
                 }
             }
         });
-        holder.tvYiruchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+      holder.tvYiruchuwei.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr3.equals(holder.tvYiruchuwei)) {
-                    ptr3 = holder.tvYiruchuwei.getText().toString();
-                    saveVm(position, holder);
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr3)) {
+                    if (!b && !ptr3.equals(holder.tvYiruchuwei.getText().toString())) {
+                        ptr3 = holder.tvYiruchuwei.getText().toString();
+                        listent.setyiruchuwei(position, holder.tvYiruchuwei.getText().toString());
+                    }
                 }
             }
         });
+
         holder.tvShuliang1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !ptr4.equals(holder.tvShuliang1)) {
-                    ptr4 = holder.tvShuliang1.getText().toString();
-                    saveVm(position, holder);
+            public void onFocusChange(View view, boolean b) {
+                if(!StringUtil.isEmpty(ptr4)) {
+                    if (!b && !ptr4.equals(holder.tvShuliang1.getText().toString())) {
+                        ptr4 = holder.tvShuliang1.getText().toString();
+                        listent.setyirushuliang(position, holder.tvShuliang1.getText().toString());
+                    }
                 }
             }
         });
+
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +147,13 @@ public class StorageMoveItemView {
         public void save(int position);
 
         public void saveVm(int position, String yichuchuwei, String yirutuopan, String yiruchuwei, String shuliang1);
+
+        public void setchuwei(int position,String value);
+        public void setyirutuopan(int position,String value);
+        public void setyiruchuwei(int position,String value);
+
+        public void setyirushuliang(int position,String value);
+
     }
 
     private void save(final int position, StorageMoveVm vm, ViewHolder holder) {

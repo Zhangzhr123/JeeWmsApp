@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
 import com.jeewms.www.wms.util.LoadingUtil;
+import com.jeewms.www.wms.util.StringUtil;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.jeewms.www.wms.R;
@@ -93,7 +94,11 @@ public class StorageMoveActivity extends BaseActivity implements OnDismissCallba
 
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
+                    if(!StringUtil.isEmpty(et_search2.getText().toString())){
+                        et_search2.setText("");
 
+                    }
                     return true;
                 }
                 return false;

@@ -69,6 +69,26 @@ public class StorageMoveAdapter extends BaseAdapter {
                 obj.get(position).setBinTo(yiruchuwei);
                 obj.get(position).setGoodsQua(shuliang1);
             }
+            @Override
+            public void setchuwei(int position,String value){
+                obj.get(position).setBinFrom(value);
+
+            }
+            @Override
+            public void setyirutuopan(int position,String value){
+                obj.get(position).setTinId(value);
+
+            }
+            @Override
+            public void setyiruchuwei(int position,String value){
+                obj.get(position).setBinTo(value);
+
+            }
+            @Override
+            public void setyirushuliang(int position,String value){
+                obj.get(position).setGoodsQua(value);
+
+            }
         });
         return view;
     }
