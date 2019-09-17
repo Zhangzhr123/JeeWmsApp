@@ -221,6 +221,7 @@ public class CollectGoodsItemView {
         HTTPUtils.post(mContext, Constance.getWmInQmIControllerURL(), params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                saveon = "";
                 LoadingUtil.hideLoading();
                 ToastUtil.show(mContext, "未知错误");
             }
