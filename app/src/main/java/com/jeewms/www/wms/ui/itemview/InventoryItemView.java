@@ -40,6 +40,7 @@ public class InventoryItemView {
 
     private String ptr1="";
     private String ptr2="";
+    private String saveon="";
 
 
     public void setListent(InventoryListent listent) {
@@ -115,7 +116,10 @@ public class InventoryItemView {
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save(position,vm,holder);
+                if(StringUtil.isEmpty(saveon)) {
+                    saveon = "on";
+                    save(position, vm, holder);
+                }
             }
         });
     }
@@ -147,11 +151,15 @@ public class InventoryItemView {
             @Override
             public void onErrorResponse(VolleyError error) {
                 LoadingUtil.hideLoading();
+                saveon = "";
+
                 ToastUtil.show(mContext, "未知错误");
             }
 
             @Override
             public void onResponse(String response) {
+                saveon = "";
+
                 LoadingUtil.hideLoading();
                 PickingSaveVm vm = GsonUtils.parseJSON(response, PickingSaveVm.class);
                 if (vm != null && vm.isOk()) {
