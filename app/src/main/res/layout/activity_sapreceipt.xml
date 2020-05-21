@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+>
+    <LinearLayout
+            android:id="@+id/ll_scan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:background="@color/app_bg"
+            android:visibility="visible"
+    >
+        <AutoCompleteTextView
+                android:id="@+id/et_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:imeOptions="actionGo"
+                android:hint="@string/search1"
+        />
+        <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/sousuo"
+        />
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:id="@+id/rl_sap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+    >
+
+        <LinearLayout
+                android:id="@+id/ll_bh"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+            >
+                <CheckBox
+                        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                        android:id="@+id/cb_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false"/>
+                <TextView
+                        android:id="@+id/tv_shdbm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black666666"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/ll_fangshi"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+            >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="方式："
+                        android:layout_marginRight="20dp"
+                        android:textSize="18dp"/>
+                <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_radiogroup"
+                        android:orientation="horizontal"
+
+                >
+                    <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radio_1"
+                            android:text="收货"
+                    />
+                    <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radio_2"
+                            android:text="收货投料"
+                    />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_below="@+id/ll_bh"
+                android:layout_above="@+id/ll_btn">
+            <ListView
+                    android:id="@+id/sapreceipt_googlecards_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#e2e2e2"
+                    android:divider="@null"
+                    android:dividerHeight="16dp"
+                    android:padding="16dp"
+                    android:layout_marginTop="@dimen/paddingTop"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/app_bg"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp">
+            <Button
+                    android:id="@+id/btn_Out"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:text="取消"
+            />
+
+            <Button
+                    android:id="@+id/btn_OK"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@color/app_orange_hl"
+                    android:textColor="@color/white"
+                    android:text="确定"
+            />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

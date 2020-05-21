@@ -14,7 +14,7 @@
             android:id="@+id/btn_titlebar_left"
             style="@style/TitlebarButtonStyle"
             android:layout_alignParentLeft="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:src="@drawable/back_red" />
 
         <Button
@@ -29,7 +29,7 @@
             android:id="@+id/tv_title"
             style="@style/TitlebarTextStyle"
             android:layout_centerInParent="true"
-            android:text="灵鹿谷WMS系统"
+            android:text="WMS系统"
             />
 
     </RelativeLayout>

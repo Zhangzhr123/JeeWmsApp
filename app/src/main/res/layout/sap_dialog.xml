@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/saploading"
+    android:layout_width="200dp"
+    android:layout_height="150dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp"
+    android:background="@drawable/sy_dialog_background"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:id="@+id/sy_dlg_top_holder"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="0dp" >
+
+        <ImageView
+            android:id="@+id/iv_sy_dlg_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_sy_ok" />
+
+        <TextView
+                android:id="@+id/tv_sy_dlg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sy_dialog_default_title"
+                android:textColor="@color/sy_dlg_title_text_color"
+                android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sy_dlg_btn_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sy_dialog_top_border_bg" >
+
+        <Button
+            android:id="@+id/sy_dlg_btn_negative"
+            style="@style/sy_dialog_button"
+            android:background="@drawable/sy_dialog_button_left"
+            android:visibility="gone"
+            android:text="@string/sy_dialog_cancel" />
+
+        <Button
+            android:id="@+id/sy_dlg_btn_positive"
+            style="@style/sy_dialog_button"
+            android:background="@drawable/sy_dialog_button_right"
+            android:text="@string/sy_dialog_ok"
+            android:visibility="visible"
+            android:textColor="@drawable/sy_dialog_btn_positive_text_color" />
+    </LinearLayout>
+
+</LinearLayout>

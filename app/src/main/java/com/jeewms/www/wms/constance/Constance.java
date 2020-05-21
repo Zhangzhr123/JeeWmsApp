@@ -10,16 +10,15 @@ import com.jeewms.www.wms.util.StringUtil;
 public class Constance {
 
     //测试站http://119.23.251.167/wms/
-//    public static String COMMON_URL = "http://39.98.136.110/wms";
-//    public static String COMMON_URL = "http://192.168.31.8:8081/jeewms";
-    public static String COMMON_URL = "http://wms.daojiadiandian.com:88";
-
+    public static String COMMON_URL = "http://192.168.0.122:8083/rkwms";
 
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
+
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "下单"};
+    public static final String[] btnNameList = {"采购订单收货"};
+
 
     public static void setBaseUrl(String baseUrl) {
         if (!StringUtil.isEmpty(baseUrl)) {
@@ -29,6 +28,18 @@ public class Constance {
 
     //登录
     public static final String LOGIN = "/rest/tokens/login";
+    //获取SAP送货单数据
+    public static final String POSTRiWmsSAPEntity = "/rest/rkWmsSctlController/getSAPDate";
+    //发送收货单
+    public static final String POSTRiWmsShdbEntity = "/rest/riWmsShdbController/getAppDate";
+    //发送收货投料单
+    public static final String POSTRiWmsShtlEntity = "/rest/rkWmsSctlController/getAppDate";
+    //发送入库单
+    public static final String POSTRiWmsRkdbEntity = "/rest/rkWmsRkdbController /getAppDate";
+
+
+
+
     //按货捡单
     public static final String GINOTICE = "/rest/wvGiNoticeController";
     //保存捡单
@@ -46,7 +57,6 @@ public class Constance {
     //保存上架
     public static final String wmToUpGoodsController = "/rest/wmToUpGoodsController";
     public static final String wmInQmIController = "/rest/wmInQmIController";
-
     //盘点保存
     public static final String wmSttInGoodsControllerc = "/rest/wmSttInGoodsController/change";
     //装车复核保存
@@ -156,7 +166,10 @@ public class Constance {
         public static final String PASSWORD = "passWord";
         //地址
         public static final String HTTPADDRESS = "httpAddress";
-        public static final String HTTPADDRESS1 = "httpAddress1";
+        //版本
+        public static final String VERSION = "version";
+        //用户名
+        public static final String USERNAME = "realName";
 
     }
 }

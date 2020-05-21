@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 public final class GsonUtils {
 
 	public static Context context;
+	public static Gson gson;
 
 	/**
 	 *

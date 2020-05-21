@@ -93,6 +93,8 @@
 
        <activity android:name=".ui.acitivity.Demo2Activity"/>
         <activity android:name=".ui.acitivity.DemoDetailActivity"/>
+        <activity android:name=".ui.acitivity.SAPReceiptActivity"/>
+
     </application>
 
 </manifest>

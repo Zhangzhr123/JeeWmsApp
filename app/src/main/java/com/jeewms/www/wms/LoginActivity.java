@@ -1,20 +1,20 @@
 package com.jeewms.www.wms;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.widget.*;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.base.BaseActivity;
+import com.jeewms.www.wms.bean.bean.TSUser;
 import com.jeewms.www.wms.bean.vm.LoginVm;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.util.GsonUtils;
@@ -37,31 +37,34 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    @BindView(R.id.tv_userName)
-    EditText tvUserName;
-    @BindView(R.id.tv_password)
-    EditText tvPassword;
-    @BindView(R.id.forgetPassword)
-    TextView forgetPassword;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
-    @BindView(R.id.btn_regist)
-    Button btnRegist;
-    @BindView(R.id.tv_address)
-    EditText tvAddress;
-    @BindView(R.id.radio1)
-    RadioButton radio1;
-    @BindView(R.id.radio2)
-    RadioButton radio2;
-    String addressTemp;
+    @BindView(R.id.tv_userName)//登录名
+            EditText tvUserName;
+    @BindView(R.id.tv_password)//密码
+            EditText tvPassword;
+    @BindView(R.id.forgetPassword)//忘记密码
+            TextView forgetPassword;
+    @BindView(R.id.btn_login)//登录按钮
+            Button btnLogin;
+    @BindView(R.id.btn_register)//底部按钮
+            Button btnRegister;
+    @BindView(R.id.tv_address)//输入地址
+            EditText tvAddress;
+    @BindView(R.id.radio1)//单选框
+            RadioButton radio1;
+    @BindView(R.id.radio2)//单选框
+            RadioButton radio2;
+    @BindView(R.id.tv_setIP)//头部文本
+            TextView tvSetIP;
+
+    String addressTemp;//登录使用地址
     String addressPer;
+    String userName;//登录人姓名
     private long exitTime = 0;
 
     public static void show(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
-
 
     @Override
     protected int getContentResId() {
@@ -81,14 +84,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //自动登录
-//        if (!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.PASSWORD))) {
-//            doLogin(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME), SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.PASSWORD));
-//        }
+        if (!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.PASSWORD))) {
+            doLogin(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME), SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.PASSWORD));
+        }
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-        setAddress();
-        if(!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME))&&tvUserName!=null){
+        if (!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME)) && tvUserName != null) {
             tvUserName.setText(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
             tvPassword.setFocusable(true);
             tvPassword.setFocusableInTouchMode(true);
@@ -96,37 +98,43 @@ public class LoginActivity extends BaseActivity {
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
         }
-        tvAddress.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
 
+        //设置点击事件
+        tvSetIP.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                addressPer=charSequence+"";
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                radio2.setText(addressTemp);
-                radio2.setVisibility(View.VISIBLE);
-                radio1.setText(addressPer);
+            public void onClick(View v) {
+                //设置登录IP地址
+                final EditText et = new EditText(LoginActivity.this);
+                et.setHint(Constance.COMMON_URL);
+                new AlertDialog.Builder(LoginActivity.this).setTitle("请输入IP地址")
+                        .setView(et)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //按下确定键后的事件
+                                if (!StringUtil.isEmpty(et.getText().toString())) {
+                                    addressTemp = et.getText().toString();
+                                }
+                                Toast.makeText(getApplicationContext(), et.getText().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }).setNegativeButton("取消", null).show();
             }
         });
+
     }
 
-    @OnClick({R.id.forgetPassword, R.id.btn_login, R.id.btn_regist})
+    @OnClick({R.id.forgetPassword, R.id.btn_login, R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.forgetPassword:
-                ToastUtil.show(this, "忘记密码");
-                break;
+//            case R.id.forgetPassword:
+//                ToastUtil.show(this, "忘记密码");
+//                break;
             case R.id.btn_login:
                 check();
                 break;
-            case R.id.btn_regist:
-                ToastUtil.show(this, "注册");
-                break;
+//            case R.id.btn_register:
+//                ToastUtil.show(this, "注册");
+//                break;
         }
     }
 
@@ -146,16 +154,12 @@ public class LoginActivity extends BaseActivity {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
-        if(radio1!=null) {
-            if (radio1.isChecked()) {
-                Constance.setBaseUrl(radio1.getText().toString());
-            } else {
-                Constance.setBaseUrl(radio2.getText().toString());
-            }
-        }else{
-            Constance.setBaseUrl(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS));
+
+        if (StringUtil.isEmpty(addressTemp)) {
+            addressTemp = Constance.COMMON_URL;
         }
-        HTTPUtils.post(this, Constance.getLoginURL(), params, new VolleyListener() {
+
+        HTTPUtils.post(this, addressTemp + Constance.LOGIN, params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ToastUtil.show(LoginActivity.this, "网络连接失败");
@@ -165,6 +169,12 @@ public class LoginActivity extends BaseActivity {
             public void onResponse(String response) {
                 LoginVm vm = GsonUtils.parseJSON(response, LoginVm.class);
                 if (vm.isOk()) {
+                    //获取json内的数据
+                    JSONObject jsonobj2 = JSON.parseObject(response);
+                    System.out.println(jsonobj2.getJSONObject("obj").getString("realName"));
+                    userName = jsonobj2.getJSONObject("obj").getString("realName");
+                    //保存登录用户名
+                    SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.USERNAME, userName);
                     savePassword();
                 } else {
                     ToastUtil.show(LoginActivity.this, vm.getErrorMsg());
@@ -177,38 +187,18 @@ public class LoginActivity extends BaseActivity {
         ToastUtil.show(this, "登陆成功");
         if (!StringUtil.isEmpty(tvPassword.getText().toString())) {
             SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.LOGINNAME, tvUserName.getText().toString());
-            if(!radio1.getText().toString().equals(radio2.getText().toString()))
             SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.PASSWORD, tvPassword.getText().toString());
         }
+        if (!StringUtil.isEmpty(addressTemp)) {
+            SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.HTTPADDRESS, addressTemp);
+        }
         HomeActivity.show(this);
-        saveAddress();
         finish();
-    }
-    //初始化地址
-    private void setAddress(){
-        //如果为保存地址，则使用最初地址
-        if(StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS))){
-            SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.HTTPADDRESS,Constance.COMMON_URL);
-            radio1.setText(Constance.COMMON_URL);
-        }else{
-            radio1.setText(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS));
-        }
-        if(!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS1))){
-            radio2.setText(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS1));
-            radio2.setVisibility(View.VISIBLE);
-        }
-        addressTemp=radio1.getText().toString();
-    }
-    //保存输入地址
-    private void saveAddress(){
-       if(radio1.isChecked()){
-           SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.HTTPADDRESS,radio1.getText().toString());
-           SharedPreferencesUtil.getInstance(this).setKeyValue(Constance.SHAREP.HTTPADDRESS1,radio2.getText().toString());
-       }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //返回键双击退出
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -219,6 +209,10 @@ public class LoginActivity extends BaseActivity {
                 System.exit(0);
             }
             return true;
+        }
+        //右方向键登录按钮
+        if (keyCode == 22) {
+            check();
         }
         return super.onKeyDown(keyCode, event);
     }

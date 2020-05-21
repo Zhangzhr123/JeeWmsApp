@@ -1,5 +1,7 @@
 package com.jeewms.www.wms.bean.vm;
 
+import com.jeewms.www.wms.bean.bean.TSUser;
+
 /**
  * Created by 13799 on 2018/6/2.
  */
@@ -10,7 +12,7 @@ public class LoginVm {
     private String errorCode;
     private boolean ok;
     private String errorMsg;
-//    private String obj;
+//    private TSUser obj;
 
     public String getErrorCode() {
         return errorCode;
@@ -35,12 +37,13 @@ public class LoginVm {
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
-
-//    public String getObj() {
+//
+//    public TSUser getObj() {
 //        return obj;
 //    }
 //
-//    public void setObj(String obj) {
+//    public void setObj(TSUser obj) {
 //        this.obj = obj;
 //    }
+
 }

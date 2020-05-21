@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.ui.adapter.SAPReceiptAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.base.BaseActivity;
@@ -53,8 +54,6 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
     AutoCompleteTextView etSearch;
     @BindView(R.id.btn_search)
     Button btnSearch;
-    @BindView(R.id.et_search2)
-    AutoCompleteTextView etSearch2;
 
     public static void show(Context context) {
         Intent intent = new Intent(context, CollectGoodsActivity.class);
@@ -68,14 +67,12 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
         EventBus.getDefault().register(this);
         mBtnLeft.setVisibility(View.VISIBLE);
 
-
-
         etSearch.setOnKeyListener(new View.OnKeyListener() {
                                       @Override
                                       public boolean onKey(View v, int i, KeyEvent keyEvent) {
 
                                           if (i == KeyEvent.KEYCODE_ENTER) {
-                                              getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+                                              getDate(etSearch.getText().toString());
                                               final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
                                               et_search2.requestFocus();
                                               return true;
@@ -84,33 +81,9 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
                                       }
                                   });
 
-        etSearch2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int i, KeyEvent keyEvent) {
-
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-
-                    return true;
-                }
-                return false;
-            }
-        });
-//        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_GO) {
-//                    getDate(etSearch.getText().toString(),etSearch2.getText().toString());
-//                    final EditText et_search2 = (EditText) findViewById(R.id.et_search2);
-//                    et_search2.requestFocus();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
         setTitle("收货");
         addAdapter();
-        getDate("","");
+        getDate("");
         LoadingUtil.showLoading(this);
 
     }
@@ -122,13 +95,12 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(MessageEvent msg) {
-        getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+        getDate(etSearch.getText().toString());
     }
 
     private void addAdapter() {
         mAdapter = new CollectGoodsAdapter(this);
         mListView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -136,11 +108,10 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
         return R.layout.activity_picking;
     }
 
-    private void getDate(String searchKey,String searchKey2) {
+    private void getDate(String searchKey) {
         Map<String, String> params = new HashMap<>();
         String url = Constance.getNoticeControllerURL() + "?username=" + SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME);
         url += "&searchstr=" + searchKey;
-        url += "&searchstr2=" + searchKey2;
         HTTPUtils.get(this, url, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -175,6 +146,7 @@ public class CollectGoodsActivity extends BaseActivity implements OnDismissCallb
 
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
-        getDate(etSearch.getText().toString(),etSearch2.getText().toString());
+        getDate(etSearch.getText().toString());
     }
+
 }

@@ -47,18 +47,6 @@
                 style="@style/ItemPickdetailRightStyle" />
         </LinearLayout>
 
-
-        <!--<LinearLayout-->
-            <!--style="@style/ItemPickdetailStyle"-->
-            <!--android:visibility="gone">-->
-
-            <!--<TextView-->
-                <!--style="@style/ItemPickdetailLeftStyle"-->
-                <!--android:text="@string/xiajiacunwei" />-->
-
-            <!--<TextView style="@style/ItemPickdetailRightStyle" />-->
-        <!--</LinearLayout>-->
-
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
@@ -81,18 +69,6 @@
                 style="@style/ItemPickdetailRightEnableStyle" />
         </LinearLayout>
 
-
-
-        <!--<LinearLayout style="@style/ItemPickdetailStyle" >-->
-
-            <!--<TextView-->
-                <!--style="@style/ItemPickdetailLeftStyle"-->
-                <!--android:text="@string/shouhuowendu" />-->
-
-            <!--<EditText-->
-                <!--android:id="@+id/tv_shouhuowendu"-->
-                <!--style="@style/ItemPickdetailRightEnableStyle" />-->
-        <!--</LinearLayout>-->
         <LinearLayout style="@style/ItemPickdetailStyle">
 
             <TextView
@@ -119,20 +95,6 @@
 
                 />
         </LinearLayout>
-        <!--cez-->
-
-        <!--<LinearLayout style="@style/ItemPickdetailStyle">-->
-            <!--<TextView-->
-                <!--style="@style/ItemPickdetailLeftStyle"-->
-                <!--android:text="@string/kucunleixing" />-->
-
-            <!--<EditText-->
-                <!--android:id="@+id/tv_kucunleixing"-->
-                <!--style="@style/ItemPickdetailRightEnableStyle" />-->
-        <!--</LinearLayout>-->
-
-
-
 
         <LinearLayout style="@style/ItemPickdetailStyle">
 
