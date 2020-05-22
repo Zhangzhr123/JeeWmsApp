@@ -172,9 +172,9 @@ public class Constance {
         public static final String HTTPADDRESS = "httpAddress";
         //用户名
         public static final String USERNAME = "realName";
-        //用户名
+        //部门
         public static final String DEPT = "dept";
-        //用户名
+        //公司
         public static final String COMPANY = "company";
 
     }
