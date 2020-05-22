@@ -83,7 +83,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         super.initView();
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-        mBtnLeft.setVisibility(View.VISIBLE);
+        mBtnLeft.setVisibility(View.VISIBLE);//左方向键
 
         //获取收货单编码
         etSearch.setOnKeyListener(new View.OnKeyListener() {
@@ -104,6 +104,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton rb = (RadioButton) SAPReceiptActivity.this.findViewById(radioGroup.getCheckedRadioButtonId());
+                //获取收货方式
                 shType = rb.getText().toString();
             }
         });
@@ -129,7 +130,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
     //获取收货单编码查询收货单数据添加列表内容
     private void getDate(String searchKey) {
-
+        //加载动画开启
+        LoadingUtil.showLoading(this);
         //SAP送货单接口
         Map<String, String> params = new HashMap<>();
         params.put("syd", searchKey);
@@ -145,8 +147,9 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //将json对象转换为java对象
                 SAPRkWmsListVm res = GsonUtils.parseJSON(response, SAPRkWmsListVm.class);
                 dataList = res.getObj();
+                //判断是否为空
                 if (dataList != null && dataList.getClass() != null) {
-                    //设置展示数据
+                    //设置展示数据设置未选中
                     for (int i = 0; i < dataList.size(); i++) {
                         dataList.get(i).setChecked(false);
                     }
@@ -189,8 +192,6 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     @OnClick(R.id.btn_search)
     public void onViewClicked(View view) {
         getDate(etSearch.getText().toString());
-        //加载动画开启
-        LoadingUtil.showLoading(this);
     }
 
     //全选按钮
@@ -221,13 +222,15 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     public void onOKClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_OK:
+                //判断收货方式是否为空
                 if (StringUtil.isEmpty(shType)) {
                     SyDialogHelper.showWarningDlg(this, "", "请选择方式", "确定");
                 } else {
                     List<RkWmsSctlEntity> list = new ArrayList<>();
                     //获取选中的数据
                     for (int i = 0; i < saplist.size(); i++) {
-                        if (saplist.get(i).getChecked()) {//判断是否勾选
+                        //判断是否勾选
+                        if (saplist.get(i).getChecked()) {
                             list.add(saplist.get(i));
                         }
                     }
@@ -335,11 +338,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     //修改数据
     @Override
     public void setData(final SAPReceiptAdapter.ViewHolder viewHolder, final int position) {
+        //获取修改的子列对象
         final RkWmsSctlEntity bean = saplist.get(position);
-        //添加数据
-//        viewHolder.sapHxm.setText(bean.getRkSydhxm());
-//        viewHolder.rkWlms.setText(bean.getRkWlms());
-//        viewHolder.checkbox.setChecked(bean.getChecked());
         //减号
         viewHolder.btn_jian.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,7 +370,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
             }
         });
-        //勾选时设置数据
+        //勾选按钮 设置发送数据
         viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -409,8 +409,6 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         switch (keyCode) {
             case 22:
                 getDate(etSearch.getText().toString());
-                //加载动画开启
-                LoadingUtil.showLoading(this);
                 break;
         }
         return super.onKeyDown(keyCode, event);

@@ -172,12 +172,13 @@ public class LoginActivity extends BaseActivity {
                 LoginVm vm = GsonUtils.parseJSON(response, LoginVm.class);
                 if (vm.isOk()) {
                     //获取json内的数据
-                    JSONObject jsonobj2 = JSON.parseObject(response);
-//                    System.out.println(jsonobj2.getJSONObject("obj").getString("realName"));
+                    JSONObject jsonobj = JSON.parseObject(response);
+//                    System.out.println(jsonobj.getJSONObject("obj").getString("realName"));
                     //获取用户名
-                    userName = jsonobj2.getJSONObject("obj").getString("realName");
+                    userName = jsonobj.getJSONObject("obj").getString("realName");
                     //保存登录用户名
                     SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.USERNAME, userName);
+                   //保存登录名、密码和IP地址并跳转到菜单页面
                     savePassword();
                 } else {
                     ToastUtil.show(LoginActivity.this, vm.getErrorMsg());
