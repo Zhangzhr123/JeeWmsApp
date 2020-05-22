@@ -1,7 +1,5 @@
 package com.jeewms.www.wms.bean.vm;
 
-import com.jeewms.www.wms.bean.bean.TSUser;
-
 /**
  * Created by 13799 on 2018/6/2.
  */

@@ -14,7 +14,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.base.BaseActivity;
-import com.jeewms.www.wms.bean.bean.TSUser;
 import com.jeewms.www.wms.bean.vm.LoginVm;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.util.GsonUtils;
