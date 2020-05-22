@@ -38,9 +38,10 @@
                         style="@style/ItemPickdetailRightStyle"
                         />
                 <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ll_zhijian"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:visibility="gone"
                 >
                     <ImageView
                             android:id="@+id/zhijian"

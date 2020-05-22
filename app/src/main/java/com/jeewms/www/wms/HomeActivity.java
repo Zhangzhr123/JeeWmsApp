@@ -29,6 +29,7 @@ public class HomeActivity extends BaseActivity {
     GridView gvHome;
     LinearLayout ll_Main;
     TextView tv_User;
+    Boolean isShow = false;
 
     ArrayList<HomeBtnBean> list = new ArrayList<>();
     public static void show(Context context) {
@@ -43,30 +44,31 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
-//        findViewById(R.id.btn_titlebar_right).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferencesUtil.getInstance(HomeActivity.this).setKeyValue(Constance.SHAREP.PASSWORD,"");
-//                LoginActivity.show(HomeActivity.this);
-//                finish();
-//            }
-//        });
+        //获取控件
         ll_Main = (LinearLayout)findViewById(R.id.ll_Main);
         tv_User = (TextView) findViewById(R.id.tv_User);
+        //设置用户名
         if(!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME))){
             tv_User.setText(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
         }
+        //点击用户名
         findViewById(R.id.tv_User).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ll_Main.setVisibility(View.VISIBLE);
+                if(isShow){
+                    isShow = false;
+                    ll_Main.setVisibility(View.GONE);
+                }else{
+                    isShow = true;
+                    ll_Main.setVisibility(View.VISIBLE);
+                }
+
             }
         });
         //更新按钮
         findViewById(R.id.btn_Update).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ll_Main.setVisibility(View.GONE);
 
             }
         });
@@ -74,13 +76,17 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.btn_Finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ll_Main.setVisibility(View.GONE);
+                //清空保存数据
                 SharedPreferencesUtil.getInstance(HomeActivity.this).setKeyValue(Constance.SHAREP.USERNAME, "");
+                SharedPreferencesUtil.getInstance(HomeActivity.this).setKeyValue(Constance.SHAREP.DEPT, "");
+                SharedPreferencesUtil.getInstance(HomeActivity.this).setKeyValue(Constance.SHAREP.COMPANY, "");
                 SharedPreferencesUtil.getInstance(HomeActivity.this).setKeyValue(Constance.SHAREP.PASSWORD,"");
+                //退出
                 LoginActivity.show(HomeActivity.this);
                 finish();
             }
         });
+
         adapter = new HomeGridAdapter();
         gvHome =findViewById(R.id.gv_home);
         gvHome.setAdapter(adapter);

@@ -10,15 +10,15 @@ import java.math.BigDecimal;
 
 /**   
  * @Title: Entity
- * @Description: 生产投料
+ * @Description: 外协检验记录表
  * @author onlineGenerator
- * @date 2020-05-20 10:23:50
+ * @date 2020-05-22 11:45:15
  * @version V1.0   
  *
  */
 
 @SuppressWarnings("serial")
-public class RkWmsSctlEntity implements java.io.Serializable {
+public class RkWmsWxjyjlbEntity implements java.io.Serializable {
 	/**主键*/
 	private String id;
 	/**创建人名称*/
@@ -39,50 +39,22 @@ public class RkWmsSctlEntity implements java.io.Serializable {
 	private String sysCompanyCode;
 	/**流程状态*/
 	private String bpmStatus;
-	/**工厂*/
-	private String rkGc;
 	/**WBS*/
 	private String rkWbs;
-	/**投料编号*/
-	private String rkTlbh;
-	/**投料类型*/
-	private String rkTllx;
+	/**采购订单*/
+	private String rkCgdd;
+	/**行项目*/
+	private String rkHxm;
 	/**物料编码*/
 	private String rkWlbm;
 	/**物料描述*/
 	private String rkWlms;
-	/**投料库存地点*/
-	private String rkTlkcdd;
-	/**数量*/
-	private Double rkSl;
-	/**投料时间*/
-	private String rkTlsj;
-	/**投料人*/
-	private String rkTlr;
-	/**溯源单*/
-	private String rkSyd;
-	/**溯源单行项目*/
-	private String rkSydhxm;
-	/**SAP状态*/
-	private String rkSapzt;
-	/**SAP异常信息*/
-	private String rkSapycxx;
-	/**人工处理*/
-	private Integer rkRgcl;
-	/**处理时间*/
-	private Date rkClsj;
-	/**处理人*/
-	private String rkClr;
-	/**是否选中*/
-	private Boolean checked;
-
-	public Boolean getChecked() {
-		return checked;
-	}
-
-	public void setChecked(Boolean checked) {
-		this.checked = checked;
-	}
+	/**订单数量*/
+	private Double rkDdsl;
+	/**收货数量*/
+	private Double rkShsl;
+	/**检验类型*/
+	private String rkJylx;
 
 	public String getId() {
 		return id;
@@ -164,14 +136,6 @@ public class RkWmsSctlEntity implements java.io.Serializable {
 		this.bpmStatus = bpmStatus;
 	}
 
-	public String getRkGc() {
-		return rkGc;
-	}
-
-	public void setRkGc(String rkGc) {
-		this.rkGc = rkGc;
-	}
-
 	public String getRkWbs() {
 		return rkWbs;
 	}
@@ -180,20 +144,20 @@ public class RkWmsSctlEntity implements java.io.Serializable {
 		this.rkWbs = rkWbs;
 	}
 
-	public String getRkTlbh() {
-		return rkTlbh;
+	public String getRkCgdd() {
+		return rkCgdd;
 	}
 
-	public void setRkTlbh(String rkTlbh) {
-		this.rkTlbh = rkTlbh;
+	public void setRkCgdd(String rkCgdd) {
+		this.rkCgdd = rkCgdd;
 	}
 
-	public String getRkTllx() {
-		return rkTllx;
+	public String getRkHxm() {
+		return rkHxm;
 	}
 
-	public void setRkTllx(String rkTllx) {
-		this.rkTllx = rkTllx;
+	public void setRkHxm(String rkHxm) {
+		this.rkHxm = rkHxm;
 	}
 
 	public String getRkWlbm() {
@@ -212,91 +176,27 @@ public class RkWmsSctlEntity implements java.io.Serializable {
 		this.rkWlms = rkWlms;
 	}
 
-	public String getRkTlkcdd() {
-		return rkTlkcdd;
+	public Double getRkDdsl() {
+		return rkDdsl;
 	}
 
-	public void setRkTlkcdd(String rkTlkcdd) {
-		this.rkTlkcdd = rkTlkcdd;
+	public void setRkDdsl(Double rkDdsl) {
+		this.rkDdsl = rkDdsl;
 	}
 
-	public Double getRkSl() {
-		return rkSl;
+	public Double getRkShsl() {
+		return rkShsl;
 	}
 
-	public void setRkSl(Double rkSl) {
-		this.rkSl = rkSl;
+	public void setRkShsl(Double rkShsl) {
+		this.rkShsl = rkShsl;
 	}
 
-	public String getRkTlsj() {
-		return rkTlsj;
+	public String getRkJylx() {
+		return rkJylx;
 	}
 
-	public void setRkTlsj(String rkTlsj) {
-		this.rkTlsj = rkTlsj;
-	}
-
-	public String getRkTlr() {
-		return rkTlr;
-	}
-
-	public void setRkTlr(String rkTlr) {
-		this.rkTlr = rkTlr;
-	}
-
-	public String getRkSyd() {
-		return rkSyd;
-	}
-
-	public void setRkSyd(String rkSyd) {
-		this.rkSyd = rkSyd;
-	}
-
-	public String getRkSydhxm() {
-		return rkSydhxm;
-	}
-
-	public void setRkSydhxm(String rkSydhxm) {
-		this.rkSydhxm = rkSydhxm;
-	}
-
-	public String getRkSapzt() {
-		return rkSapzt;
-	}
-
-	public void setRkSapzt(String rkSapzt) {
-		this.rkSapzt = rkSapzt;
-	}
-
-	public String getRkSapycxx() {
-		return rkSapycxx;
-	}
-
-	public void setRkSapycxx(String rkSapycxx) {
-		this.rkSapycxx = rkSapycxx;
-	}
-
-	public Integer getRkRgcl() {
-		return rkRgcl;
-	}
-
-	public void setRkRgcl(Integer rkRgcl) {
-		this.rkRgcl = rkRgcl;
-	}
-
-	public Date getRkClsj() {
-		return rkClsj;
-	}
-
-	public void setRkClsj(Date rkClsj) {
-		this.rkClsj = rkClsj;
-	}
-
-	public String getRkClr() {
-		return rkClr;
-	}
-
-	public void setRkClr(String rkClr) {
-		this.rkClr = rkClr;
+	public void setRkJylx(String rkJylx) {
+		this.rkJylx = rkJylx;
 	}
 }

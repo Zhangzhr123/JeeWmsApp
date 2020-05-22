@@ -29,17 +29,17 @@ public class Constance {
     //登录
     public static final String LOGIN = "/rest/tokens/login";
     //获取SAP送货单数据
-    public static final String POSTRiWmsSAPEntity = "/rest/rkWmsSctlController/getSAPDate";
+    public static final String POSTRiWmsSAPEntity = "/rest/rkWmsShdbController/getSAPDate";
     //发送收货单
     public static final String POSTRiWmsShdbEntity = "/rest/riWmsShdbController/getAppDate";
     //发送收货投料单
     public static final String POSTRiWmsShtlEntity = "/rest/rkWmsSctlController/getAppDate";
     //发送入库单
-    public static final String POSTRiWmsRkdbEntity = "/rest/rkWmsRkdbController /getAppDate";
+    public static final String POSTRiWmsRkdbEntity = "/rest/rkWmsRkdbController/getAppDate";
+    //发送检验记录单
+    public static final String POSTRkWmsWxjyjlbEntity = "/rest/rkWmsWxjyjlbController/getAppDate";
 
-
-
-
+    //原生接口
     //按货捡单
     public static final String GINOTICE = "/rest/wvGiNoticeController";
     //保存捡单
@@ -77,7 +77,7 @@ public class Constance {
     //登录
     public static String getLoginURL() {
         return COMMON_URL + LOGIN;
-    } //登录
+    }
 
     //获取简单详情
     public static String getGiNoticeURL() {
@@ -108,7 +108,6 @@ public class Constance {
         return COMMON_URL + GoodsController;
     }
 
-
     public static String getStockControllerURL() {
         return COMMON_URL + StockController;
     }
@@ -136,6 +135,7 @@ public class Constance {
     public static String getmdGoodsControllercURL() {
         return COMMON_URL + mdGoodsControllerc;
     }
+
     public static String getmdGoodsControllerorderURL() {
         return COMMON_URL + mdGoodsControllercorder;
     }
@@ -147,9 +147,11 @@ public class Constance {
     public static String gettSapLsqdControllerURL() {
         return COMMON_URL + tSapLsqdController;
     }
+
     public static String gettSapStockControllerURL() {
         return COMMON_URL + tSapStockController;
     }
+
     public static String gettSapLtttControllerURL() {
         return COMMON_URL + tSapLtttController;
     }
@@ -159,6 +161,8 @@ public class Constance {
          * SharedPreferences
          */
         public static final String SHAREDSAVE = "save";
+        //版本
+        public static final String VERSION = "version";
 
         //登录名
         public static final String LOGINNAME = "userName";
@@ -166,10 +170,12 @@ public class Constance {
         public static final String PASSWORD = "passWord";
         //地址
         public static final String HTTPADDRESS = "httpAddress";
-        //版本
-        public static final String VERSION = "version";
         //用户名
         public static final String USERNAME = "realName";
+        //用户名
+        public static final String DEPT = "dept";
+        //用户名
+        public static final String COMPANY = "company";
 
     }
 }

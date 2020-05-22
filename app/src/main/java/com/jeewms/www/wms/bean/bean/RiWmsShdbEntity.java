@@ -90,454 +90,243 @@ public class RiWmsShdbEntity implements java.io.Serializable {
 		this.checked = checked;
 	}
 
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  主键
-	 */
-	public String getId(){
-		return this.id;
+	public String getId() {
+		return id;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  主键
-	 */
-	public void setId(String id){
+	public void setId(String id) {
 		this.id = id;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  创建人名称
-	 */
-	public String getCreateName(){
-		return this.createName;
+
+	public String getCreateName() {
+		return createName;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  创建人名称
-	 */
-	public void setCreateName(String createName){
+	public void setCreateName(String createName) {
 		this.createName = createName;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  创建人登录名称
-	 */
-	public String getCreateBy(){
-		return this.createBy;
+
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  创建人登录名称
-	 */
-	public void setCreateBy(String createBy){
+	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
-	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  创建日期
-	 */
-	public Date getCreateDate(){
-		return this.createDate;
+
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  创建日期
-	 */
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  更新人名称
-	 */
-	public String getUpdateName(){
-		return this.updateName;
+
+	public String getUpdateName() {
+		return updateName;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  更新人名称
-	 */
-	public void setUpdateName(String updateName){
+	public void setUpdateName(String updateName) {
 		this.updateName = updateName;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  更新人登录名称
-	 */
-	public String getUpdateBy(){
-		return this.updateBy;
+
+	public String getUpdateBy() {
+		return updateBy;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  更新人登录名称
-	 */
-	public void setUpdateBy(String updateBy){
+	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  更新日期
-	 */
-	public Date getUpdateDate(){
-		return this.updateDate;
+
+	public Date getUpdateDate() {
+		return updateDate;
 	}
 
-	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  更新日期
-	 */
-	public void setUpdateDate(Date updateDate){
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  所属部门
-	 */
-	public String getSysOrgCode(){
-		return this.sysOrgCode;
+
+	public String getSysOrgCode() {
+		return sysOrgCode;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  所属部门
-	 */
-	public void setSysOrgCode(String sysOrgCode){
+	public void setSysOrgCode(String sysOrgCode) {
 		this.sysOrgCode = sysOrgCode;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  所属公司
-	 */
-	public String getSysCompanyCode(){
-		return this.sysCompanyCode;
+
+	public String getSysCompanyCode() {
+		return sysCompanyCode;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  所属公司
-	 */
-	public void setSysCompanyCode(String sysCompanyCode){
+	public void setSysCompanyCode(String sysCompanyCode) {
 		this.sysCompanyCode = sysCompanyCode;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  流程状态
-	 */
-	public String getBpmStatus(){
-		return this.bpmStatus;
+
+	public String getBpmStatus() {
+		return bpmStatus;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  流程状态
-	 */
-	public void setBpmStatus(String bpmStatus){
+	public void setBpmStatus(String bpmStatus) {
 		this.bpmStatus = bpmStatus;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  工厂
-	 */
-	public String getRkGc(){
-		return this.rkGc;
+
+	public String getRkGc() {
+		return rkGc;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  工厂
-	 */
-	public void setRkGc(String rkGc){
+	public void setRkGc(String rkGc) {
 		this.rkGc = rkGc;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  采购订单
-	 */
-	public String getRkCgdd(){
-		return this.rkCgdd;
+
+	public String getRkCgdd() {
+		return rkCgdd;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  采购订单
-	 */
-	public void setRkCgdd(String rkCgdd){
+	public void setRkCgdd(String rkCgdd) {
 		this.rkCgdd = rkCgdd;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  行项目
-	 */
-	public String getRkHxm(){
-		return this.rkHxm;
+
+	public String getRkHxm() {
+		return rkHxm;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  行项目
-	 */
-	public void setRkHxm(String rkHxm){
+	public void setRkHxm(String rkHxm) {
 		this.rkHxm = rkHxm;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  供应商编号
-	 */
-	public String getRkGysbh(){
-		return this.rkGysbh;
+
+	public String getRkGysbh() {
+		return rkGysbh;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  供应商编号
-	 */
-	public void setRkGysbh(String rkGysbh){
+	public void setRkGysbh(String rkGysbh) {
 		this.rkGysbh = rkGysbh;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  供应商名称
-	 */
-	public String getRkGysmc(){
-		return this.rkGysmc;
+
+	public String getRkGysmc() {
+		return rkGysmc;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  供应商名称
-	 */
-	public void setRkGysmc(String rkGysmc){
+	public void setRkGysmc(String rkGysmc) {
 		this.rkGysmc = rkGysmc;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  用途描述
-	 */
-	public String getRkYtms(){
-		return this.rkYtms;
+
+	public String getRkYtms() {
+		return rkYtms;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  用途描述
-	 */
-	public void setRkYtms(String rkYtms){
+	public void setRkYtms(String rkYtms) {
 		this.rkYtms = rkYtms;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  送货地点
-	 */
-	public String getRkShdd(){
-		return this.rkShdd;
+
+	public String getRkShdd() {
+		return rkShdd;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  送货地点
-	 */
-	public void setRkShdd(String rkShdd){
+	public void setRkShdd(String rkShdd) {
 		this.rkShdd = rkShdd;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  WBS
-	 */
-	public String getRkWbs(){
-		return this.rkWbs;
+
+	public String getRkWbs() {
+		return rkWbs;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  WBS
-	 */
-	public void setRkWbs(String rkWbs){
+	public void setRkWbs(String rkWbs) {
 		this.rkWbs = rkWbs;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  物料编码
-	 */
-	public String getRkWlbm(){
-		return this.rkWlbm;
+
+	public String getRkWlbm() {
+		return rkWlbm;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  物料编码
-	 */
-	public void setRkWlbm(String rkWlbm){
+	public void setRkWlbm(String rkWlbm) {
 		this.rkWlbm = rkWlbm;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  物料描述
-	 */
-	public String getRkWlms(){
-		return this.rkWlms;
+
+	public String getRkWlms() {
+		return rkWlms;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  物料描述
-	 */
-	public void setRkWlms(String rkWlms){
+	public void setRkWlms(String rkWlms) {
 		this.rkWlms = rkWlms;
 	}
-	/**
-	 *方法: 取得java.lang.Double
-	 *@return: java.lang.Double  数量
-	 */
-	public Double getRkSl(){
-		return this.rkSl;
+
+	public Double getRkSl() {
+		return rkSl;
 	}
 
-	/**
-	 *方法: 设置java.lang.Double
-	 *@param: java.lang.Double  数量
-	 */
-	public void setRkSl(Double rkSl){
+	public void setRkSl(Double rkSl) {
 		this.rkSl = rkSl;
 	}
-	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  收货日期
-	 */
-	public Date getRkShrq(){
-		return this.rkShrq;
+
+	public Date getRkShrq() {
+		return rkShrq;
 	}
 
-	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  收货日期
-	 */
-	public void setRkShrq(Date rkShrq){
+	public void setRkShrq(Date rkShrq) {
 		this.rkShrq = rkShrq;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  收货人
-	 */
-	public String getRkShr(){
-		return this.rkShr;
+
+	public String getRkShr() {
+		return rkShr;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  收货人
-	 */
-	public void setRkShr(String rkShr){
+	public void setRkShr(String rkShr) {
 		this.rkShr = rkShr;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  溯源单据号
-	 */
-	public String getRkSydjh(){
-		return this.rkSydjh;
+
+	public String getRkSydjh() {
+		return rkSydjh;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  溯源单据号
-	 */
-	public void setRkSydjh(String rkSydjh){
+	public void setRkSydjh(String rkSydjh) {
 		this.rkSydjh = rkSydjh;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  溯源单行项目
-	 */
-	public String getRkSydhxm(){
-		return this.rkSydhxm;
+
+	public String getRkSydhxm() {
+		return rkSydhxm;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  溯源单行项目
-	 */
-	public void setRkSydhxm(String rkSydhxm){
+	public void setRkSydhxm(String rkSydhxm) {
 		this.rkSydhxm = rkSydhxm;
 	}
-	/**
-	 *方法: 取得java.lang.Integer
-	 *@return: java.lang.Integer  SAP状态
-	 */
-	public Integer getRkSapzz(){
-		return this.rkSapzz;
+
+	public Integer getRkSapzz() {
+		return rkSapzz;
 	}
 
-	/**
-	 *方法: 设置java.lang.Integer
-	 *@param: java.lang.Integer  SAP状态
-	 */
-	public void setRkSapzz(Integer rkSapzz){
+	public void setRkSapzz(Integer rkSapzz) {
 		this.rkSapzz = rkSapzz;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  SAP异常信息
-	 */
-	public String getRkSapycxx(){
-		return this.rkSapycxx;
+
+	public String getRkSapycxx() {
+		return rkSapycxx;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  SAP异常信息
-	 */
-	public void setRkSapycxx(String rkSapycxx){
+	public void setRkSapycxx(String rkSapycxx) {
 		this.rkSapycxx = rkSapycxx;
 	}
-	/**
-	 *方法: 取得java.lang.Integer
-	 *@return: java.lang.Integer  人工处理
-	 */
-	public Integer getRkRgcl(){
-		return this.rkRgcl;
+
+	public Integer getRkRgcl() {
+		return rkRgcl;
 	}
 
-	/**
-	 *方法: 设置java.lang.Integer
-	 *@param: java.lang.Integer  人工处理
-	 */
-	public void setRkRgcl(Integer rkRgcl){
+	public void setRkRgcl(Integer rkRgcl) {
 		this.rkRgcl = rkRgcl;
 	}
-	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  处理时间
-	 */
-	public Date getRkClsj(){
-		return this.rkClsj;
+
+	public Date getRkClsj() {
+		return rkClsj;
 	}
 
-	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  处理时间
-	 */
-	public void setRkClsj(Date rkClsj){
+	public void setRkClsj(Date rkClsj) {
 		this.rkClsj = rkClsj;
 	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  处理人
-	 */
-	public String getRkClr(){
-		return this.rkClr;
+
+	public String getRkClr() {
+		return rkClr;
 	}
 
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  处理人
-	 */
-	public void setRkClr(String rkClr){
+	public void setRkClr(String rkClr) {
 		this.rkClr = rkClr;
 	}
 }

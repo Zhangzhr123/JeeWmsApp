@@ -10,7 +10,7 @@ public class SAPRkWmsListVm {
     private String errorCode;
     private String ok;
     private String errorMsg;
-    private List<RkWmsSctlEntity> obj;
+    private List<RkWmsShdbEntity> obj;
 
     public String getErrorCode() {
         return errorCode;
@@ -36,11 +36,11 @@ public class SAPRkWmsListVm {
         this.errorMsg = errorMsg;
     }
 
-    public List<RkWmsSctlEntity> getObj() {
+    public List<RkWmsShdbEntity> getObj() {
         return obj;
     }
 
-    public void setObj(List<RkWmsSctlEntity> obj) {
+    public void setObj(List<RkWmsShdbEntity> obj) {
         this.obj = obj;
     }
 }
