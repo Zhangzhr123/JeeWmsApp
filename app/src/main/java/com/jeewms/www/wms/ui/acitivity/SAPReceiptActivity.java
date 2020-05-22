@@ -35,8 +35,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by 13799 on 2018/6/7.
- * 收货
+ * Created by zhangzhr
+ * Created Date 2020-05-20
+ * 采购订单收货
  */
 
 public class SAPReceiptActivity extends BaseActivity implements OnDismissCallback, SAPReceiptAdapter.DetailViewHolderListener {

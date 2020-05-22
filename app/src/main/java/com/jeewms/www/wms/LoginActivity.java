@@ -32,7 +32,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by 13799 on 2018/5/29.
+ * Created by zhangzhr
+ * Created Date 2020-05-20
+ * 登录
  */
 
 public class LoginActivity extends BaseActivity {
@@ -171,7 +173,8 @@ public class LoginActivity extends BaseActivity {
                 if (vm.isOk()) {
                     //获取json内的数据
                     JSONObject jsonobj2 = JSON.parseObject(response);
-                    System.out.println(jsonobj2.getJSONObject("obj").getString("realName"));
+//                    System.out.println(jsonobj2.getJSONObject("obj").getString("realName"));
+                    //获取用户名
                     userName = jsonobj2.getJSONObject("obj").getString("realName");
                     //保存登录用户名
                     SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.USERNAME, userName);
