@@ -45,8 +45,8 @@ public  class BaseActivity extends Activity{
         int titleBarResId=getTitleBarResId();
         if(titleBarResId>0){
             mTitleBarHolder=getLayoutInflater().inflate(titleBarResId,null);
-            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LocalDisplay.dp2px(48));
-            Logutil.print(LocalDisplay.dp2px(48));
+            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LocalDisplay.dp2px(35));
+            Logutil.print(LocalDisplay.dp2px(35));
             mLlHolder.addView(mTitleBarHolder,lp);
             mBtnLeft = mTitleBarHolder.findViewById(R.id.btn_titlebar_left);
             mBtnRight = mTitleBarHolder.findViewById(R.id.btn_titlebar_right);

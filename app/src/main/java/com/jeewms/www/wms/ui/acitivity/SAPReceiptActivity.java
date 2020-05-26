@@ -1,12 +1,15 @@
 package com.jeewms.www.wms.ui.acitivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.text.InputType;
+import android.util.Log;
+import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,10 +22,12 @@ import com.jeewms.www.wms.bean.bean.*;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.ui.adapter.SAPReceiptAdapter;
 import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
+import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
 import com.jeewms.www.wms.util.*;
 import com.jeewms.www.wms.volley.HTTPUtils;
 import com.jeewms.www.wms.volley.VolleyListener;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.zhy.android.percent.support.PercentLinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,6 +37,8 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.jeewms.www.wms.broadcast.SystemBroadCast.*;
 
 /**
  * Created by zhangzhr
@@ -70,7 +77,27 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
     private SAPReceiptAdapter mAdapter;//收货单列表适配器
     private List<RkWmsShdbEntity> dataList;//列表数据
+    //收货方式
     private String shType;
+    //判断选中子列的位置
+    private int select_item;
+    //进入的页面
+    private int pageSize = 0;
+    //分页按钮
+    @BindView(R.id.btn_pre)//方式行
+            Button mBtnPrePage;
+    @BindView(R.id.btn_next)//方式行
+            Button mBtnNextPage;
+    //显示分页信息
+    @BindView(R.id.tv_page)//方式行
+            TextView mTvPageNo;
+    //数据实现
+    private PageHelper<RkWmsShdbEntity> mPageDaoImpl;
+    //被选着的索引
+    private int selectIndex = 0;
+    private static final int PREPAGE = 0;
+    private static final int NEXTPAGE = 1;
+
 
     public static void show(Context context) {
         Intent intent = new Intent(context, SAPReceiptActivity.class);
@@ -83,21 +110,13 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         mBtnLeft.setVisibility(View.VISIBLE);//左方向键
-
-        //获取收货单编码
-        etSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int i, KeyEvent keyEvent) {
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    //查询收货单数据
-                    getDate(etSearch.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
+        //注册广播监听
+        IntentFilter intentFilter = new IntentFilter(SCN_CUST_ACTION_SCODE);
+        registerReceiver(scanDataReceiver, intentFilter);
         //设置表头名称
         setTitle("采购订单收货");
+
+
         //获取收货方式
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -107,14 +126,77 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 shType = rb.getText().toString();
             }
         });
+        //初始化
+        select_item = -1;
+        //获取所选子列位置
+        mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                select_item = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                select_item = -1;
+                mListView.setSelection(select_item);
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                select_item = position;
+            }
+        });
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                select_item = firstVisibleItem - 1;
+            }
+        });
+        //第一页
+        pageSize = 1;
+        //分页按钮
+        mBtnPrePage = (Button) findViewById(R.id.btn_pre);
+        mBtnPrePage.setTag(PREPAGE);
+        mBtnNextPage = (Button) findViewById(R.id.btn_next);
+        mBtnNextPage.setTag(NEXTPAGE);
 
     }
 
     @Override
     protected void onDestroy() {
+        unregisterReceiver(scanDataReceiver);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
+
+    //广播监听
+    private BroadcastReceiver scanDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(SCN_CUST_ACTION_SCODE)) {
+                try {
+                    String barCode = "";
+                    barCode = intent.getStringExtra(SCN_CUST_EX_SCODE);
+                    //判断条码是否为空 是否为12位 是否纯数字组成
+                    if (!StringUtil.isEmpty(barCode) && barCode.length() >= 14 || barCode.length() <= 17) {
+                        getDate(barCode);
+                    } else {
+                        Toast.makeText(SAPReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("ScannerService", e.toString());
+                }
+            }
+        }
+    };
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(MessageEvent msg) {
@@ -134,40 +216,57 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         //SAP送货单接口
         Map<String, String> params = new HashMap<>();
         params.put("shdbh", searchKey);
-        String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.POSTRiWmsSAPEntity;
+        String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcGetShw;
         HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
             }
 
             @Override
             public void onResponse(String response) {
                 //将json对象转换为java对象
                 SAPRkWmsListVm res = GsonUtils.parseJSON(response, SAPRkWmsListVm.class);
-                dataList = res.getObj();
+
                 //判断是否为空
-                if (dataList != null && dataList.size() > 0) {
+                if (res != null && res.getObj() !=null) {
+                    dataList = res.getObj();
+                    //全部选中
+                    cbAll.setChecked(true);
                     //设置展示数据设置未选中
                     for (int i = 0; i < dataList.size(); i++) {
-                        dataList.get(i).setChecked(false);
+                        dataList.get(i).setChecked(true);
                     }
+
+                    //每次读8条数据
+                    mPageDaoImpl = new PageHelper<RkWmsShdbEntity>(dataList, 4);
+                    //设置当前页码与总页码
+                    mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
+
                     //添加数据到列表中
-                    mAdapter = new SAPReceiptAdapter(SAPReceiptActivity.this, dataList, SAPReceiptActivity.this);
+                    mAdapter = new SAPReceiptAdapter(SAPReceiptActivity.this, mPageDaoImpl.currentList(), SAPReceiptActivity.this);
                     mAdapter.notifyDataSetChanged();
                     mListView.setAdapter(mAdapter);
+                    //获取焦点
+                    mListView.requestFocus();
+                    mListView.setSelection(0);
+
                     //设置送货单编号
                     tvshdbm.setText(dataList.get(0).getPshwln());
+
                     //判断用户描述是否为空
                     if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
                         ll_fangshi.setVisibility(View.GONE);
                         shType = "收货";
                     }
+
                     //加载动画关闭
                     LoadingUtil.hideLoading();
                     //前往第二页
                     llscan.setVisibility(View.GONE);
                     rlsap.setVisibility(View.VISIBLE);
+                    pageSize = 2;
+
                 } else {
                     //加载动画关闭
                     LoadingUtil.hideLoading();
@@ -206,6 +305,45 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         }
     }
 
+    //分页按钮
+    @OnClick({R.id.btn_pre, R.id.btn_next})
+    public void onPageClicked(View view) {
+        final int flag = (Integer) view.getTag();
+        switch (flag) {
+            case PREPAGE:// 上一页
+                prePage();
+                break;
+            case NEXTPAGE:// 下一页
+                nextPage();
+                break;
+        }
+
+    }
+
+    private void prePage() {
+        if (selectIndex == 0) {
+            if (mPageDaoImpl.getCurrentPage() >= 1) {
+                mPageDaoImpl.prePage();
+            }
+            mAdapter.setList(mPageDaoImpl.currentList());
+//            mListView.setSelection(mAdapter.getCount() - 1);
+            mListView.setSelection(0);
+            mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
+        } else {
+            return;
+        }
+    }
+
+    private void nextPage() {
+        if (mPageDaoImpl.getCurrentPage() <= mPageDaoImpl.getPageNum()) {
+            mPageDaoImpl.nextPage();
+        }
+        mAdapter.setList(mPageDaoImpl.currentList());
+        mListView.setSelection(0);
+        mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
+    }
+
+
     //取消按钮
     @OnClick(R.id.btn_Out)
     public void onOutClicked() {
@@ -217,6 +355,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         radio1.setChecked(false);
         radio2.setChecked(false);
         shType = "";
+        pageSize = 1;
     }
 
     //确定按钮 展示勾选的数据
@@ -226,317 +365,93 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         if (StringUtil.isEmpty(shType)) {
             SyDialogHelper.showWarningDlg(this, "", "请选择方式", "确定");
         } else {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            List<RkWmsShdbEntity> list = new ArrayList<>();
-            List<RkWmsShdbEntity> inflglist = new ArrayList<>();
+
+            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            final List<RkWmsShdbEntity> list = new ArrayList<>();
             //获取选中的数据
             for (int i = 0; i < dataList.size(); i++) {
                 //判断是否勾选
                 if (dataList.get(i).getChecked()) {
+                    //添加数据操作人和时间
+                    dataList.get(i).setMname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
+                    dataList.get(i).setMdate((new Date()).getTime());
+                    dataList.get(i).setPname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
+                    dataList.get(i).setUpdateBy(sdf.format(new Date()));
+                    dataList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     list.add(dataList.get(i));
                 }
             }
-            //获取选中质检行项目
-            for (int i = 0; i < dataList.size(); i++) {
-                //判断是否勾选
-                if (dataList.get(i).getChecked()) {
-                    if (!StringUtil.isEmpty(dataList.get(i).getInflg())) {
-                        inflglist.add(dataList.get(i));
-                    }
-                }
-            }
+
             //判断有没有选择行项目
             if (list.size() > 0 && list != null) {
-                //发送收货表
-                for (int i = 0; i < list.size(); i++) {
-                    Map<String, String> map = new HashMap<>();
-                    //创建人名称
-                    map.put("createName", dataList.get(i).getPname());
-                    //创建人登录名称
-                    map.put("createBy", dataList.get(i).getPname());
-                    //创建日期
-                    map.put("createDate", sdf.format(new Date()));
-                    //更新人名称
-                    map.put("updateName", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    //更新人登录名称
-                    map.put("updateBy", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
-                    //更新日期
-                    map.put("updateDate", sdf.format(new Date()));
-                    //所属部门
-                    map.put("sysOrgCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    //所属公司
-                    map.put("sysCompanyCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.COMPANY));
-                    //流程状态
-                    map.put("bpmStatus", dataList.get(i).getBpmStatus());
-                    //工厂
-                    map.put("rkGc", dataList.get(i).getPwerks());
-                    //采购订单
-                    map.put("rkCgdd", dataList.get(i).getEbeln());
-                    //行项目
-                    map.put("rkHxm", dataList.get(i).getShwlp());
-                    //供应商编号
-                    map.put("rkGysbh", dataList.get(i).getPlifnr());
-                    //供应商名称
-                    map.put("rkGysmc", dataList.get(i).getPliftx());
-                    //用途描述
-                    map.put("rkYtms", dataList.get(i).getPtype());
-                    //送货地点
-                    map.put("rkShdd", dataList.get(i).getPlgort());
-                    //WBS
-                    map.put("rkWbs", dataList.get(i).getPsptx());
-                    //物料编码
-                    map.put("rkWlbm", dataList.get(i).getMaktr());
-                    //物料描述
-                    map.put("rkWlms", dataList.get(i).getMaktx());
-                    //数量
-                    map.put("rkSl", dataList.get(i).getMenge() + "");
-                    //收货日期
-                    map.put("rkShrq", sdf.format(new Date()));
-                    //收货人
-                    map.put("rkShr", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    //溯源单据号
-                    map.put("rkSydjh", dataList.get(i).getPshwln());
-                    //溯源单行项目
-                    map.put("rkSydhxm", dataList.get(i).getShwlp());
-                    //SAP状态
-                    map.put("rkSapzz", "执行中");
-                    //SAP异常信息
-                    map.put("rkSapycxx", null);
-                    //人工处理
-                    map.put("rkRgcl", null);
-                    //处理时间
-                    map.put("rkClsj", null);
-                    //处理人
-                    map.put("rkClr", null);
+
+                //发送入库表
+                if (shType.equals("收货")) {
 
                     //类型转换
-                    JSONObject jsonObject = new JSONObject(map);
+                    String jsonString = com.alibaba.fastjson.JSONObject.toJSONString(list);
                     Map<String, String> params = new HashMap<>();
-                    params.put("str", jsonObject.toString());//上传实体json
-                    //发送数据
-                    String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.POSTRiWmsShdbEntity;
+                    params.put("str", jsonString);//上传实体json
+                    String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcMigoPost;
+
                     HTTPUtils.post(this, url, params, new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
                         }
 
                         @Override
                         public void onResponse(String response) {
+                            ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
+                            if (res.isOK()) {
+                                SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
+                                    @Override
+                                    public void onClick(SyMessageDialog dialog) {
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                            }
                         }
                     });
-                    SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "发送出库成功", "确定");
-                }
-
-                //发送入库表
-                if (shType.equals("收货")) {
-                    for (int i = 0; i < list.size(); i++) {
-                        Map<String, String> map = new HashMap<>();
-                        //创建人名称
-                        map.put("createName", dataList.get(i).getPname());
-                        //创建人登录名称
-                        map.put("createBy", dataList.get(i).getPname());
-                        //创建日期
-                        map.put("createDate", sdf.format(new Date()));
-                        //更新人名称
-                        map.put("updateName", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                        //更新人登录名称
-                        map.put("updateBy", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
-                        //更新日期
-                        map.put("updateDate", sdf.format(new Date()));
-                        //所属部门
-                        map.put("sysOrgCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                        //所属公司
-                        map.put("sysCompanyCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.COMPANY));
-                        //流程状态
-                        map.put("bpmStatus", dataList.get(i).getBpmStatus());
-                        //工厂
-                        map.put("rkGc", dataList.get(i).getPwerks());
-                        //WBS
-                        map.put("rkWbs", dataList.get(i).getPsptx());
-                        //物料编码
-                        map.put("rkWlbm", dataList.get(i).getMaktr());
-                        //物料描述
-                        map.put("rkWlms", dataList.get(i).getMaktx());
-                        //入库类型
-                        map.put("rkRklx", "供应商入库");
-                        //入库库存地点
-                        map.put("rkRkkcdd", dataList.get(i).getPlgort());
-                        //出库库存地点
-                        map.put("rkCkcddd", "出库地点");
-                        //数量
-                        map.put("rkSl", dataList.get(i).getMenge() + "");
-                        //入库日期
-                        map.put("rkRksj", sdf.format(new Date()));
-                        //操作人
-                        map.put("rkCzr", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                        //溯源单据号
-                        map.put("rkSydjh", dataList.get(i).getPshwln());
-                        //溯源单行项目
-                        map.put("rkSydhxm", dataList.get(i).getShwlp());
-                        //SAP状态
-                        map.put("rkSapzz", "执行中");
-                        //SAP异常信息
-                        map.put("rkSapycxx", null);
-                        //人工处理
-                        map.put("rkRgcl", null);
-                        //处理时间
-                        map.put("rkClsj", null);
-                        //处理人
-                        map.put("rkClr", null);
-
-                        //类型转换
-                        JSONObject jsonObject = new JSONObject(map);
-                        Map<String, String> params = new HashMap<>();
-                        params.put("str", jsonObject.toString());//上传实体json
-                        //发送数据
-                        String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.POSTRiWmsRkdbEntity;
-                        HTTPUtils.post(this, url, params, new VolleyListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
-
-                            @Override
-                            public void onResponse(String response) {
-                            }
-                        });
-                    }
 
                     //发送投料表
-                } else if (shType.equals("收货投料")) {
-                    for (int i = 0; i < list.size(); i++) {
-                        Map<String, String> map = new HashMap<>();
-                        //创建人名称
-                        map.put("createName", dataList.get(i).getPname());
-                        //创建人登录名称
-                        map.put("createBy", dataList.get(i).getPname());
-                        //创建日期
-                        map.put("createDate", sdf.format(new Date()));
-                        //更新人名称
-                        map.put("updateName", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                        //更新人登录名称
-                        map.put("updateBy", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
-                        //更新日期
-                        map.put("updateDate", sdf.format(new Date()));
-                        //所属部门
-                        map.put("sysOrgCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                        //所属公司
-                        map.put("sysCompanyCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.COMPANY));
-                        //流程状态
-                        map.put("bpmStatus", dataList.get(i).getBpmStatus());
-                        //工厂
-                        map.put("rkGc", dataList.get(i).getPwerks());
-                        //WBS
-                        map.put("rkWbs", dataList.get(i).getPsptx());
-                        //投料编号
-                        map.put("rkTlbh", "投料编号");
-                        //投料类型
-                        map.put("rkTllx", "投料类型");
-                        //物料编码
-                        map.put("rkWlbm", dataList.get(i).getMaktr());
-                        //物料描述
-                        map.put("rkWlms", dataList.get(i).getMaktx());
-                        //投料库存地点
-                        map.put("rkTlkcdd", dataList.get(i).getPlgort());
-                        //数量
-                        map.put("rkSl", dataList.get(i).getMenge() + "");
-                        //投料时间
-                        map.put("rkTlsj", sdf.format(new Date()));
-                        //投料人
-                        map.put("rkTlr", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                        //溯源单据号
-                        map.put("rkSydjh", dataList.get(i).getPshwln());
-                        //溯源单行项目
-                        map.put("rkSydhxm", dataList.get(i).getShwlp());
-                        //SAP状态
-                        map.put("rkSapzz", "执行中");
-                        //SAP异常信息
-                        map.put("rkSapycxx", null);
-                        //人工处理
-                        map.put("rkRgcl", null);
-                        //处理时间
-                        map.put("rkClsj", null);
-                        //处理人
-                        map.put("rkClr", null);
+                } else if (shType.equals("投料")) {
 
-                        //类型转换
-                        JSONObject jsonObject = new JSONObject(map);
-                        Map<String, String> params = new HashMap<>();
-                        params.put("str", jsonObject.toString());//上传实体json
-                        //发送数据
-                        String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.POSTRiWmsShtlEntity;
-                        HTTPUtils.post(this, url, params, new VolleyListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
+                    //类型转换
+                    String jsonString = com.alibaba.fastjson.JSONObject.toJSONString(list);
+                    Map<String, String> params = new HashMap<>();
+                    params.put("str", jsonString);//上传实体json
+                    String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcShwMgtl;
 
-                            @Override
-                            public void onResponse(String response) {
+                    HTTPUtils.post(this, url, params, new VolleyListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
+                        }
+
+                        @Override
+                        public void onResponse(String response) {
+                            ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
+                            if (res.isOK()) {
+                                SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
+                                    @Override
+                                    public void onClick(SyMessageDialog dialog) {
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
                             }
-                        });
-                    }
+                        }
+                    });
                 }
+
             } else {
                 SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定");
             }
 
-            //判断是否有质检标识的行项目
-            if (inflglist.size() > 0 && inflglist != null) {
-                //发送行项目到外协检验记录表
-                for (int i = 0; i < list.size(); i++) {
-                    Map<String, String> map = new HashMap<>();
-                    //创建人名称
-                    map.put("createName", dataList.get(i).getPname());
-                    //创建人登录名称
-                    map.put("createBy", dataList.get(i).getPname());
-                    //创建日期
-                    map.put("createDate", sdf.format(new Date()));
-                    //更新人名称
-                    map.put("updateName", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    //更新人登录名称
-                    map.put("updateBy", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
-                    //更新日期
-                    map.put("updateDate", sdf.format(new Date()));
-                    //所属部门
-                    map.put("sysOrgCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    //所属公司
-                    map.put("sysCompanyCode", SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.COMPANY));
-                    //流程状态
-                    map.put("bpmStatus", dataList.get(i).getBpmStatus());
-                    //WBS
-                    map.put("rkWbs", dataList.get(i).getPsptx());
-                    //采购订单
-                    map.put("rkCgdd", dataList.get(i).getEbeln());
-                    //行项目
-                    map.put("rkHxm", dataList.get(i).getShwlp());
-                    //物料编码
-                    map.put("rkWlbm", dataList.get(i).getMaktr());
-                    //物料描述
-                    map.put("rkWlms", dataList.get(i).getMaktx());
-                    //订单数量
-                    map.put("rkDdsl", dataList.get(i).getBdmng() + "");
-                    //收货数量
-                    map.put("rkShsl", dataList.get(i).getMenge() + "");
-                    //检验类型
-                    map.put("rkJylx", dataList.get(i).getInflg());
-
-                    //类型转换
-                    JSONObject jsonObject = new JSONObject(map);
-                    Map<String, String> params = new HashMap<>();
-                    params.put("str", jsonObject.toString());//上传实体json
-                    //发送数据
-                    String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.POSTRkWmsWxjyjlbEntity;
-                    HTTPUtils.post(this, url, params, new VolleyListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                        }
-
-                        @Override
-                        public void onResponse(String response) {
-                        }
-                    });
-                }
-            }
-            SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "发送成功", "确定");
         }
     }
 
@@ -545,7 +460,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     public void setData(final SAPReceiptAdapter.ViewHolder viewHolder, final int position) {
         //获取修改的子列对象
         final RkWmsShdbEntity bean = dataList.get(position);
-        //勾选按钮 设置发送数据
+        //勾选按钮 设置数据
         viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -553,6 +468,36 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     bean.setChecked(true);
                 } else {
                     bean.setChecked(false);
+                }
+            }
+        });
+        //减号
+        viewHolder.btn_jian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                Double old =  dataList.get(position).getBdmng();
+                if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
+                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定");
+                } else {
+                    viewHolder.number.setText("");
+                    viewHolder.number.setText(DoubleUtil.sub(number, 1) + "");
+                    dataList.get(position).setMenge(DoubleUtil.sub(number, 1));
+                }
+            }
+        });
+        //加号
+        viewHolder.btn_jia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                Double old = dataList.get(position).getBdmng();
+                if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
+                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定");
+                } else {
+                    viewHolder.number.setText("");
+                    viewHolder.number.setText(DoubleUtil.sum(number, 1) + "");
+                    dataList.get(position).setMenge(DoubleUtil.sum(number, 1));
                 }
             }
         });
@@ -580,14 +525,53 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //右方向键
+        final int action = event.getAction();
         switch (keyCode) {
-            case 22:
-                getDate(etSearch.getText().toString());
+            case 19://上方向键
+                // 移到上一项
+                if (select_item > 0 && action == 0) {
+                    mListView.setSelection(select_item - 1);
+                }
+                break;
+            case 20://下方向键
+                if (select_item < dataList.size() - 1 && action == 0) {
+                    mListView.setSelection(select_item + 1);
+                }
+                break;
+            case 21://左方向键
+                break;
+            case 22://右方向键
+                if (pageSize == 1) {
+                    getDate(etSearch.getText().toString());
+                }
+                break;
+            case 0://扫描
+                if (pageSize == 1) {
+                    etSearch.setText("");
+                }
+                break;
+            case 131://F1
+                if (pageSize == 2) {
+                    onOutClicked();
+                }
+                break;
+            case 132://F2
+                if (pageSize == 2) {
+                    prePage();
+                }
+                break;
+            case 133://F3
+                if (pageSize == 2) {
+                    nextPage();
+                }
+                break;
+            case 134://F4
+                if (pageSize == 2) {
+                    onOKClicked();
+                }
                 break;
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 }

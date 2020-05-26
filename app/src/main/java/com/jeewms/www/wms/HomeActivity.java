@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.jeewms.www.wms.base.BaseActivity;
 import com.jeewms.www.wms.bean.bean.HomeBtnBean;
 import com.jeewms.www.wms.constance.Constance;
+import com.jeewms.www.wms.ui.acitivity.SAPReceiptActivity;
 import com.jeewms.www.wms.ui.adapter.HomeGridAdapter;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
 import com.jeewms.www.wms.util.StringUtil;
@@ -108,5 +110,17 @@ public class HomeActivity extends BaseActivity {
         btn1.setBtnName(btnName);
         btn1.setImaResId(imgResId);
         list.add(btn1);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //右方向键
+        switch (keyCode) {
+            case 8://右方向键
+                SAPReceiptActivity.show(this);
+                break;
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

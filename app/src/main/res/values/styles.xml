@@ -19,13 +19,13 @@
     <!--标题风格-->
     <style name="AppTitlebarStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:background">@drawable/titlebar_bg</item>
     </style>
     <!--标题按钮风格-->
     <style name="TitlebarButtonStyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">35dp</item>
         <item name="android:minWidth">38dp</item>
         <item name="android:paddingRight">5dp</item>
         <item name="android:paddingLeft">5dp</item>
@@ -36,7 +36,7 @@
 
     <style name="TitlebarTextStyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@color/transparent</item>
         <item name="android:textColor">@color/white</item>
@@ -47,7 +47,7 @@
 
     <style name="AppTitlebarStyleRed">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_height">35dp</item>
     </style>
 
     <!--按单拣货单号-->
@@ -93,7 +93,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">@dimen/item_text_size</item>
         <item name="android:textColor">@color/black666666</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingRight">5dp</item>
         <item name="android:layout_weight">1</item>

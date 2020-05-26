@@ -10,14 +10,13 @@
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/listview_click"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:padding="10dp"
+        android:padding="5dp"
         >
 
         <CheckBox
-                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                 android:id="@+id/ch_onclick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,14 +44,14 @@
                 >
                     <ImageView
                             android:id="@+id/zhijian"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:src="@drawable/zhijian"
                             android:visibility="visible"
                     />
                     <TextView
                             android:id="@+id/tv_zhijian"
-                            android:layout_height="25dp"
+                            android:layout_height="18dp"
                             android:layout_width="wrap_content"
                             android:textSize="@dimen/item_text_size"
                             android:textColor="@color/black666666"
@@ -67,35 +66,28 @@
             <LinearLayout style="@style/ItemPickdetailStyle">
 
                 <TextView
-                        android:id="@+id/tv_huowumingcheng"
-                        style="@style/ItemPickdetailRightStyle" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/ItemPickdetailStyle">
-
-                <TextView
                         style="@style/ItemPickdetailLeftStyle"
                         android:text="@string/shouhuoshuliang" />
 
                 <ImageButton
                         android:id="@+id/btn_jian"
-                        android:layout_height="38dp"
-                        android:layout_width="34dp"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
                         android:src="@drawable/jianhao" />
 
                 <EditText
-                        android:id="@+id/tv_shouhuoshuliang"
+                        android:id="@+id/tv_number"
                         android:layout_width="70dp"
-                        android:layout_height="28dp"
+                        android:layout_height="25dp"
                         android:maxLines="1"
                         android:gravity="center"
-                        android:layout_marginTop="7dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/edit_corner_frame" />
 
                 <ImageButton
                         android:id="@+id/btn_jia"
-                        android:layout_height="38dp"
-                        android:layout_width="34dp"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
                         android:src="@drawable/jiahao" />
 
             </LinearLayout>

@@ -17,7 +17,7 @@ public class Constance {
 
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"采购订单收货"};
+    public static final String[] btnNameList = {"采购订单收货①"};
 
 
     public static void setBaseUrl(String baseUrl) {
@@ -29,15 +29,11 @@ public class Constance {
     //登录
     public static final String LOGIN = "/rest/tokens/login";
     //获取SAP送货单数据
-    public static final String POSTRiWmsSAPEntity = "/rest/rkWmsShdbController/getSAPDate";
+    public static final String getZrfcGetShw = "/rest/sAPAppService/getZrfcGetShw";
     //发送收货单
-    public static final String POSTRiWmsShdbEntity = "/rest/riWmsShdbController/getAppDate";
+    public static final String getZrfcMigoPost = "/rest/sAPAppService/getZrfcMigoPost";
     //发送收货投料单
-    public static final String POSTRiWmsShtlEntity = "/rest/rkWmsSctlController/getAppDate";
-    //发送入库单
-    public static final String POSTRiWmsRkdbEntity = "/rest/rkWmsRkdbController/getAppDate";
-    //发送检验记录单
-    public static final String POSTRkWmsWxjyjlbEntity = "/rest/rkWmsWxjyjlbController/getAppDate";
+    public static final String getZrfcShwMgtl = "/rest/sAPAppService/getZrfcShwMgtl";
 
     //原生接口
     //按货捡单

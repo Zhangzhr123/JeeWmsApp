@@ -24,7 +24,7 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:imeOptions="actionGo"
-                android:hint="@string/search1"
+                android:hint="请扫描送货单"
         />
         <Button
                 android:id="@+id/btn_search"
@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/sousuo"
+                android:visibility="gone"
         />
 
     </LinearLayout>
@@ -46,8 +47,8 @@
         <LinearLayout
                 android:id="@+id/ll_bh"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="vertical"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
                 android:layout_marginTop="0dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
@@ -55,17 +56,17 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="0dp">
             <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="30dp"
                     android:orientation="horizontal"
             >
                 <CheckBox
-                        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                         android:id="@+id/cb_all"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:gravity="center"
                         android:clickable="false"
                         android:focusable="false"/>
@@ -74,24 +75,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="2dp"
-                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:textSize="15sp"
                         android:textColor="@color/black666666"/>
             </LinearLayout>
 
             <LinearLayout
                     android:id="@+id/ll_fangshi"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="30dp"
                     android:gravity="center"
                     android:orientation="horizontal"
             >
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="方式："
-                        android:layout_marginRight="20dp"
-                        android:textSize="18dp"/>
                 <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/radio_2"
-                            android:text="收货投料"
+                            android:text="投料"
                     />
                 </RadioGroup>
 
@@ -131,39 +127,72 @@
                     android:layout_height="fill_parent"
                     android:background="#e2e2e2"
                     android:divider="@null"
-                    android:dividerHeight="16dp"
-                    android:padding="16dp"
+                    android:dividerHeight="10dp"
+                    android:padding="10dp"
                     android:layout_marginTop="@dimen/paddingTop"
+                    android:descendantFocusability="afterDescendants"
             />
         </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/ll_btn"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:gravity="center"
                 android:background="@color/app_bg"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="0dp">
             <Button
                     android:id="@+id/btn_Out"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:textColor="@color/white"
-                    android:text="取消"
+                    android:text="取消F1"
+            />
+
+            <Button
+                    android:id="@+id/btn_pre"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:text="上一页F2"
+            />
+
+            <TextView
+                    android:id="@+id/tv_page"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:maxLines="1"
+                    android:layout_marginTop="12dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black666666"/>
+
+            <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:text="下一页F3"
             />
 
             <Button
                     android:id="@+id/btn_OK"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@color/app_orange_hl"
                     android:textColor="@color/white"
-                    android:text="确定"
+                    android:background="@color/app_orange_hl"
+                    android:text="确定F4"
             />
 
         </LinearLayout>

@@ -60,8 +60,8 @@ public class SyDialogHelper {
 		return showMessageDialog(context, SyMessageDialog.TYPE_INFORMATION, title, msg, btn, null);
 	}
 	
-	public static SyMessageDialog showSuccessDlg(Context context, String title, String msg, String btn) {
-		return showMessageDialog(context, SyMessageDialog.TYPE_SUCCESS, title, msg, btn, null);
+	public static SyMessageDialog showSuccessDlg(Context context, String title, String msg, String btn,OnClickListener click) {
+		return showMessageDialog(context, SyMessageDialog.TYPE_SUCCESS, title, msg, btn, click);
 	}
 	public static SyMessageDialog showErrorDlg(Context context, String title, String msg, String btn, OnClickListener click) {
 		return showMessageDialog(context, SyMessageDialog.TYPE_ERROR, title, msg, btn, click);

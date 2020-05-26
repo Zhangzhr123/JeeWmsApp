@@ -1,9 +1,11 @@
 package com.jeewms.www.wms.ui.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.bean.bean.RkWmsSctlEntity;
@@ -13,6 +15,7 @@ import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
 import com.jeewms.www.wms.util.DoubleUtil;
 import com.jeewms.www.wms.util.StringUtil;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -24,6 +27,8 @@ public class SAPReceiptAdapter extends BaseAdapter {
     private Context mContext;
     private List<RkWmsShdbEntity> mList;
     private DetailViewHolderListener mListener;
+    // 点击过的item，用于焦点获取
+    private int touchItemPosition = -1;
 
     public SAPReceiptAdapter(Context context, List<RkWmsShdbEntity> list, DetailViewHolderListener mListener) {
         this.mContext = context;
@@ -47,25 +52,58 @@ public class SAPReceiptAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         holder = new ViewHolder();
         convertView = LayoutInflater.from(mContext).inflate(R.layout.item_sapreceipt, null);
         holder.sapHxm = (TextView) convertView.findViewById(R.id.tv_huowubianhao);
-        holder.rkWlms = (TextView) convertView.findViewById(R.id.tv_huowumingcheng);
-        holder.number = (EditText) convertView.findViewById(R.id.tv_shouhuoshuliang);
+        holder.number = (EditText) convertView.findViewById(R.id.tv_number);
         holder.checkbox = (CheckBox) convertView.findViewById(R.id.ch_onclick);
         holder.ll_zhijian = (LinearLayout) convertView.findViewById(R.id.ll_zhijian);
         holder.btn_jian = (ImageButton) convertView.findViewById(R.id.btn_jian);
         holder.btn_jia = (ImageButton) convertView.findViewById(R.id.btn_jia);
 
+        //强制隐藏软键盘
+        disableShowInput(holder.number);
+
         convertView.setTag(holder);
         //添加行数据
         final RkWmsShdbEntity rw = mList.get(position);
-        holder.sapHxm.setText(rw.getShwlp());
-        holder.rkWlms.setText(rw.getMaktx());
+        holder.sapHxm.setText(rw.getShwlp() + "/" + rw.getMaktx());
         holder.number.setText("" + rw.getMenge());
-        holder.old = rw.getMenge();
+
+        final ViewHolder finalHolder = holder;
+        holder.number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!StringUtil.isEmpty(s.toString())) {
+                    if (!(s.toString()).matches(".*[a-zA-z].*")) {
+                        if (Double.doubleToLongBits(Double.valueOf(s.toString())) > Double.doubleToLongBits(mList.get(position).getBdmng())) {
+                            SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定");
+                            finalHolder.number.setText(rw.getBdmng()+"");
+                        } else {
+                            mList.get(position).setMenge(Double.valueOf(s.toString()));
+                        }
+                    } else {
+                        SyDialogHelper.showWarningDlg(mContext, "", "请输入数字", "确定");
+                    }
+                }else{
+                    finalHolder.number.setText(rw.getBdmng()+"");
+                    SyDialogHelper.showWarningDlg(mContext, "", "不能为空", "确定");
+                }
+            }
+        });
+
         //设置质检标识
         if (!StringUtil.isEmpty(rw.getInflg())) {
             holder.ll_zhijian.setVisibility(View.VISIBLE);
@@ -76,38 +114,6 @@ public class SAPReceiptAdapter extends BaseAdapter {
         } else {
             holder.checkbox.setChecked(false);
         }
-        //减号
-        final ViewHolder finalHolder2 = holder;
-        holder.btn_jian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Double number = Double.valueOf(finalHolder2.number.getText().toString().trim());
-                Double old = finalHolder2.old;
-                if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定");
-                } else {
-                    finalHolder2.number.setText("");
-                    finalHolder2.number.setText(DoubleUtil.sub(number, 1) + "");
-                    rw.setMenge(DoubleUtil.sub(number, 1));
-                }
-            }
-        });
-        //加号
-        final ViewHolder finalHolder1 = holder;
-        holder.btn_jia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Double number = Double.valueOf(finalHolder1.number.getText().toString().trim());
-                Double old = finalHolder1.old;
-                if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定");
-                } else {
-                    finalHolder1.number.setText("");
-                    finalHolder1.number.setText(DoubleUtil.sum(number, 1) + "");
-                    rw.setMenge(DoubleUtil.sum(number, 1));
-                }
-            }
-        });
 
         mListener.setData(holder, position);
         return convertView;
@@ -115,12 +121,11 @@ public class SAPReceiptAdapter extends BaseAdapter {
 
     public class ViewHolder {
         public TextView sapHxm;
-        public TextView rkWlms;
         public EditText number;
         public CheckBox checkbox;
         public LinearLayout ll_zhijian;
-        public ImageButton btn_jian, btn_jia;
-        public Double old;
+        public ImageButton btn_jian;
+        public ImageButton btn_jia;
     }
 
     /**
@@ -128,6 +133,22 @@ public class SAPReceiptAdapter extends BaseAdapter {
      */
     public interface DetailViewHolderListener {
         void setData(ViewHolder viewHolder, int position);
+    }
+
+    public void setList(List<RkWmsShdbEntity> datas) {
+        mList = datas;
+        notifyDataSetChanged();
+    }
+
+    public void disableShowInput(EditText et) {
+        Class<EditText> cls = EditText.class;
+        Method method;
+        try {
+            method = cls.getMethod("setShowSoftInputOnFocus", boolean.class);
+            method.setAccessible(true);
+            method.invoke(et, false);
+        } catch (Exception e) {//TODO: handle exception
+        }
     }
 
 

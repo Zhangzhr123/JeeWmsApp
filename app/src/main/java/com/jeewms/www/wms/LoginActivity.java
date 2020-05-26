@@ -178,7 +178,7 @@ public class LoginActivity extends BaseActivity {
                     //保存用户名/部门/公司
                     SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.USERNAME, userName);
                     SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.DEPT, jsonobj.getJSONObject("obj").getJSONObject("currentDepart").getString("orgCode"));
-                    SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.COMPANY, jsonobj.getJSONObject("obj").getJSONObject("currentDepart").getString("departname"));
+//                    SharedPreferencesUtil.getInstance(LoginActivity.this).setKeyValue(Constance.SHAREP.COMPANY, jsonobj.getJSONObject("obj").getJSONObject("currentDepart").getString("departname"));
                     //保存登录名、密码和IP地址并跳转到菜单页面
                     savePassword();
                 } else {

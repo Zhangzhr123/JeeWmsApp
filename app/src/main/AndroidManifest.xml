@@ -93,7 +93,10 @@
 
        <activity android:name=".ui.acitivity.Demo2Activity"/>
         <activity android:name=".ui.acitivity.DemoDetailActivity"/>
-        <activity android:name=".ui.acitivity.SAPReceiptActivity"/>
+
+        <activity android:name=".ui.acitivity.SAPReceiptActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden"
+        />
 
     </application>
 
