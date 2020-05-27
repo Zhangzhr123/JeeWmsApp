@@ -220,6 +220,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                //加载动画关闭
+                LoadingUtil.hideLoading();
                 ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
             }
 
