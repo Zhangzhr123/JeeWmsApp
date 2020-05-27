@@ -272,7 +272,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 } else {
                     //加载动画关闭
                     LoadingUtil.hideLoading();
-                    Toast.makeText(SAPReceiptActivity.this, "未查询到送货单，请重新输入！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SAPReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -413,7 +413,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                     }
                                 });
                             } else {
-                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", res.getErrorMsg(), "确定");
                             }
                         }
                     });
@@ -444,7 +444,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                     }
                                 });
                             } else {
-                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", res.getErrorMsg(), "确定");
                             }
                         }
                     });
