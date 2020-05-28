@@ -365,7 +365,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     public void onOKClicked() {
         //判断收货方式是否为空
         if (StringUtil.isEmpty(shType)) {
-            SyDialogHelper.showWarningDlg(this, "", "请选择方式", "确定");
+            SyDialogHelper.showWarningDlg(this, "", "请选择方式", "确定",null);
         } else {
 
             final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -451,7 +451,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
 
             } else {
-                SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定");
+                SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定",null);
             }
 
         }
@@ -480,7 +480,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
                 Double old =  dataList.get(position).getBdmng();
                 if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定");
+                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定",null);
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sub(number, 1) + "");
@@ -495,7 +495,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
                 Double old = dataList.get(position).getBdmng();
                 if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定");
+                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定",null);
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sum(number, 1) + "");

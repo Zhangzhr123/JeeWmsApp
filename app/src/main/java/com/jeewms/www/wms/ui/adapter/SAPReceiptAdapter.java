@@ -12,6 +12,7 @@ import com.jeewms.www.wms.bean.bean.RkWmsSctlEntity;
 import com.jeewms.www.wms.bean.bean.RkWmsShdbEntity;
 import com.jeewms.www.wms.ui.acitivity.SAPReceiptActivity;
 import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
+import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
 import com.jeewms.www.wms.util.DoubleUtil;
 import com.jeewms.www.wms.util.StringUtil;
 
@@ -73,6 +74,9 @@ public class SAPReceiptAdapter extends BaseAdapter {
         holder.number.setText("" + rw.getMenge());
 
         final ViewHolder finalHolder = holder;
+
+        final ViewHolder finalHolder1 = holder;
+        final ViewHolder finalHolder2 = holder;
         holder.number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,20 +90,24 @@ public class SAPReceiptAdapter extends BaseAdapter {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!StringUtil.isEmpty(s.toString())) {
-                    if (!(s.toString()).matches(".*[a-zA-z].*")) {
-                        if (Double.doubleToLongBits(Double.valueOf(s.toString())) > Double.doubleToLongBits(mList.get(position).getBdmng())) {
-                            SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定");
-                            finalHolder.number.setText(rw.getBdmng()+"");
+                String str = String.valueOf(s).replace("\n", "");
+                if (!(str).matches(".*[a-zA-z].*")) {
+                    if (!StringUtil.isEmpty(str) && Double.valueOf(str) > 0.0) {
+                        if (Double.doubleToLongBits(Double.valueOf(str)) > Double.doubleToLongBits(mList.get(position).getBdmng())) {
+                            SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
+                                @Override
+                                public void onClick(SyMessageDialog dialog) {
+                                    finalHolder1.number.setText("" + rw.getBdmng());
+                                }
+                            });
                         } else {
-                            mList.get(position).setMenge(Double.valueOf(s.toString()));
+                            mList.get(position).setMenge(Double.valueOf(str));
                         }
                     } else {
-                        SyDialogHelper.showWarningDlg(mContext, "", "请输入数字", "确定");
+                        SyDialogHelper.showWarningDlg(mContext, "", "不能为空或负值", "确定", null);
                     }
-                }else{
-                    finalHolder.number.setText(rw.getBdmng()+"");
-                    SyDialogHelper.showWarningDlg(mContext, "", "不能为空", "确定");
+                } else {
+                    SyDialogHelper.showWarningDlg(mContext, "", "请输入数字", "确定", null);
                 }
             }
         });

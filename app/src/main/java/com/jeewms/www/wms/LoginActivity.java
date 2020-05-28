@@ -57,9 +57,8 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_setIP)//头部文本
             TextView tvSetIP;
 
-    String addressTemp;//登录使用地址
-    String addressPer;
-    String userName;//登录人姓名
+    private String addressTemp = "";//登录使用地址
+    private String userName = "";//登录人姓名
     private long exitTime = 0;
 
     public static void show(Context context) {
@@ -112,6 +111,9 @@ public class LoginActivity extends BaseActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                if(!StringUtil.isEmpty(addressTemp)){
+                                    addressTemp = "";
+                                }
                                 //按下确定键后的事件
                                 if (!StringUtil.isEmpty(et.getText().toString())) {
                                     addressTemp = et.getText().toString();
@@ -157,10 +159,16 @@ public class LoginActivity extends BaseActivity {
         params.put("password", password);
 
         if (StringUtil.isEmpty(addressTemp)) {
-            addressTemp = Constance.COMMON_URL;
+            if(!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(LoginActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS))){
+                addressTemp = SharedPreferencesUtil.getInstance(LoginActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS);
+            }else{
+                addressTemp = Constance.COMMON_URL;
+            }
         }
 
-        HTTPUtils.post(this, addressTemp + Constance.LOGIN, params, new VolleyListener() {
+        String url = addressTemp + Constance.LOGIN;
+
+        HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ToastUtil.show(LoginActivity.this, "网络连接失败");

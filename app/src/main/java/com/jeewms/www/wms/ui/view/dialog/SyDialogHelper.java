@@ -71,8 +71,8 @@ public class SyDialogHelper {
 		return showMessageDialog(context, SyMessageDialog.TYPE_ERROR, title, msg, btn, null);
 	}
 	
-	public static SyMessageDialog showWarningDlg(Context context, String title, String msg, String btn) {
-		return showMessageDialog(context, SyMessageDialog.TYPE_WARNING, title, msg, btn, null);
+	public static SyMessageDialog showWarningDlg(Context context, String title, String msg, String btn, OnClickListener click) {
+		return showMessageDialog(context, SyMessageDialog.TYPE_WARNING, title, msg, btn, click);
 	}
 	
 	public static SyMessageDialog showLoadingDlg(Context context, String title) {
@@ -84,7 +84,7 @@ public class SyDialogHelper {
 	}
 
 	public static void showAlertDlg(Context context, String title, String msg) {
-		SyDialogHelper.showWarningDlg(context, title, msg, "知道了");
+		SyDialogHelper.showWarningDlg(context, title, msg, "知道了",null);
 	}
 	public static SyMessageDialog showDlgLinear(Context context, String title, String msg, String btnOk, String btnCancle , OnClickListener click, OnClickListener cancle) {
 		return showMessageDialog(context, SyMessageDialog.TYPE_NORMAL, title, msg, btnOk,btnCancle, click,cancle);
