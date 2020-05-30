@@ -128,9 +128,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //右方向键
         switch (keyCode) {
-            case 8://右方向键
+            case 8://1
                 SAPReceiptActivity.show(this);
                 break;
 
