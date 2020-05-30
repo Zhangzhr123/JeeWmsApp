@@ -376,6 +376,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             for (int i = 0; i < dataList.size(); i++) {
                 //判断是否勾选
                 if (dataList.get(i).getChecked()) {
+                    if(dataList.get(i).getMenge() <= 0.0){
+                        SyDialogHelper.showWarningDlg(this, "", "行项目为"+dataList.get(i).getShwlp()+",收货数量不能小于等于零", "确定", null);
+                        break;
+                    }
                     //添加数据操作人和时间
                     dataList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     dataList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
