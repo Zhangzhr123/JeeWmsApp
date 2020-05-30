@@ -38,6 +38,7 @@
                     android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:text="admin"
+                    android:textSize="12sp"
                     android:textColor="@color/white"
             />
 
@@ -45,7 +46,7 @@
                     android:id="@+id/tv_title"
                     style="@style/TitlebarTextStyle"
                     android:layout_centerInParent="true"
-                    android:text="WMS系统"
+                    android:text="生产运营平台"
             />
 
         </RelativeLayout>

@@ -13,7 +13,7 @@
                 android:id="@+id/tv_setIP"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="欢迎使用WMS"
+                android:text="欢迎使用生产运营平台"
                 android:textSize="@dimen/title_size"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
