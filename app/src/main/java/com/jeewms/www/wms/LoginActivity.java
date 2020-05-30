@@ -111,7 +111,7 @@ public class LoginActivity extends BaseActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if(!StringUtil.isEmpty(addressTemp)){
+                                if (!StringUtil.isEmpty(addressTemp)) {
                                     addressTemp = "";
                                 }
                                 //按下确定键后的事件
@@ -159,9 +159,9 @@ public class LoginActivity extends BaseActivity {
         params.put("password", password);
 
         if (StringUtil.isEmpty(addressTemp)) {
-            if(!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(LoginActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS))){
+            if (!StringUtil.isEmpty(SharedPreferencesUtil.getInstance(LoginActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS))) {
                 addressTemp = SharedPreferencesUtil.getInstance(LoginActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS);
-            }else{
+            } else {
                 addressTemp = Constance.COMMON_URL;
             }
         }

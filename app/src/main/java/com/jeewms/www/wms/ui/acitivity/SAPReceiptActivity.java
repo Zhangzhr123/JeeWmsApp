@@ -227,53 +227,55 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
             @Override
             public void onResponse(String response) {
+                //加载动画关闭
+                LoadingUtil.hideLoading();
                 //将json对象转换为java对象
                 SAPRkWmsListVm res = GsonUtils.parseJSON(response, SAPRkWmsListVm.class);
-
                 //判断是否为空
-                if (res != null && res.getObj() != null) {
-                    dataList = res.getObj();
-                    //全部选中
-                    cbAll.setChecked(true);
-                    //设置展示数据设置未选中
-                    for (int i = 0; i < dataList.size(); i++) {
-                        dataList.get(i).setChecked(true);
+                if (res.getOk()) {
+                    if (res.getObj() != null && res.getObj().size() > 0) {
+                        dataList = res.getObj();
+                        //全部选中
+                        cbAll.setChecked(true);
+                        //设置展示数据设置未选中
+                        for (int i = 0; i < dataList.size(); i++) {
+                            dataList.get(i).setChecked(true);
+                        }
+
+                        //每次读4条数据
+                        mPageDaoImpl = new PageHelper<RkWmsShdbEntity>(dataList, 4);
+                        //设置当前页码与总页码
+                        mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
+
+                        //添加数据到列表中
+                        mAdapter = new SAPReceiptAdapter(SAPReceiptActivity.this, mPageDaoImpl.currentList(), SAPReceiptActivity.this);
+                        mAdapter.notifyDataSetChanged();
+                        mListView.setAdapter(mAdapter);
+                        //获取焦点
+                        mListView.requestFocus();
+                        mListView.setSelection(0);
+
+                        //设置送货单编号
+                        tvshdbm.setText(dataList.get(0).getPshwln());
+
+                        //判断用户描述是否为空
+                        if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
+                            ll_fangshi.setVisibility(View.GONE);
+                            shType = "收货";
+                        }
+
+                        //前往第二页
+                        llscan.setVisibility(View.GONE);
+                        rlsap.setVisibility(View.VISIBLE);
+                        pageSize = 2;
+                    } else {
+                        Toast.makeText(SAPReceiptActivity.this, "数据为空！", Toast.LENGTH_SHORT).show();
                     }
-
-                    //每次读8条数据
-                    mPageDaoImpl = new PageHelper<RkWmsShdbEntity>(dataList, 4);
-                    //设置当前页码与总页码
-                    mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
-
-                    //添加数据到列表中
-                    mAdapter = new SAPReceiptAdapter(SAPReceiptActivity.this, mPageDaoImpl.currentList(), SAPReceiptActivity.this);
-                    mAdapter.notifyDataSetChanged();
-                    mListView.setAdapter(mAdapter);
-                    //获取焦点
-                    mListView.requestFocus();
-                    mListView.setSelection(0);
-
-                    //设置送货单编号
-                    tvshdbm.setText(dataList.get(0).getPshwln());
-
-                    //判断用户描述是否为空
-                    if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
-                        ll_fangshi.setVisibility(View.GONE);
-                        shType = "收货";
-                    }
-
-                    //加载动画关闭
-                    LoadingUtil.hideLoading();
-                    //前往第二页
-                    llscan.setVisibility(View.GONE);
-                    rlsap.setVisibility(View.VISIBLE);
-                    pageSize = 2;
 
                 } else {
-                    //加载动画关闭
-                    LoadingUtil.hideLoading();
                     Toast.makeText(SAPReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -375,6 +377,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //判断是否勾选
                 if (dataList.get(i).getChecked()) {
                     //添加数据操作人和时间
+                    dataList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
+                    dataList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     dataList.get(i).setMname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     dataList.get(i).setMdate((new Date()).getTime());
                     dataList.get(i).setPname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
@@ -477,7 +481,13 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         viewHolder.btn_jian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                Double number = 0.0;
+                if(StringUtil.isEmpty(viewHolder.number.getText().toString().trim())){
+                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "数量不能为负", "确定", null);
+                    return;
+                }else{
+                    number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                }
                 Double old = dataList.get(position).getBdmng();
                 if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
@@ -492,7 +502,12 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         viewHolder.btn_jia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                Double number = 0.0;
+                if(StringUtil.isEmpty(viewHolder.number.getText().toString().trim())){
+                    number = 0.0;
+                }else{
+                    number = Double.valueOf(viewHolder.number.getText().toString().trim());
+                }
                 Double old = dataList.get(position).getBdmng();
                 if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
@@ -503,6 +518,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
             }
         });
+
     }
 
     /*

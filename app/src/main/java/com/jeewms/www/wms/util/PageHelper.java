@@ -5,18 +5,18 @@ import java.util.List;
 /**
  * 分页工具
  *
- * @Project App_Page
- * @Package com.android.dividepage
+ * @param <T>
  * @author chenlin
  * @version 1.0
+ * @Project App_Page
+ * @Package com.android.dividepage
  * @Date 2012年6月2日
  * @Note TODO
- * @param <T>
  */
 public class PageHelper<T> {
 
     private List<T> allData; // 所有数据
-    private int perPage = 10; // 每页条目
+    private int perPage = 4; // 每页条目
     private int currentPage = 1;// 当前页
     private int pageNum = 1; // 页码
     private List<T> childData;// 子数据
@@ -85,11 +85,16 @@ public class PageHelper<T> {
 
     /**
      * 获得当前数据
+     *
      * @return
      */
     public List<T> currentList() {
         if (currentPage == 1) {
-            childData = allData.subList(0, perPage);
+            if (allData.size() <= 4) {
+                childData = allData;
+            } else {
+                childData = allData.subList(0, perPage);
+            }
         } else if (currentPage == pageNum) {
             childData = allData.subList(perPage * (pageNum - 1), allNum);
         } else {

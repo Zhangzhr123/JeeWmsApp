@@ -4,13 +4,13 @@ import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.util.StringUtil;
 
 /**
- * Created by 13799 on 2018/6/2.
+ * Created by zhangzr on 2020/5/20.
  */
 
 public class Constance {
 
     //测试站http://119.23.251.167/wms/
-    public static String COMMON_URL = "http://192.168.0.122:8080/jeewms-3.7";
+    public static String COMMON_URL = "http://172.16.77.184:8080";
 
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
@@ -34,6 +34,8 @@ public class Constance {
     public static final String getZrfcMigoPost = "/rest/sAPAppService/getZrfcMigoPost";
     //发送收货投料单
     public static final String getZrfcShwMgtl = "/rest/sAPAppService/getZrfcShwMgtl";
+    //下载
+    public static final String download = "/rest/file/download";
 
     //原生接口
     //按货捡单

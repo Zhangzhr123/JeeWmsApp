@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SAPRkWmsListVm {
     private String errorCode;
-    private String ok;
+    private Boolean ok;
     private String errorMsg;
     private List<RkWmsShdbEntity> obj;
 
@@ -20,11 +20,11 @@ public class SAPRkWmsListVm {
         this.errorCode = errorCode;
     }
 
-    public String getOk() {
+    public Boolean getOk() {
         return ok;
     }
 
-    public void setOk(String ok) {
+    public void setOk(Boolean ok) {
         this.ok = ok;
     }
 

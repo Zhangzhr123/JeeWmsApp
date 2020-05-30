@@ -90,7 +90,7 @@ public class SAPReceiptAdapter extends BaseAdapter {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String str = String.valueOf(s).replace("\n", "");
+                String str = String.valueOf(s);
                 if (!(str).matches(".*[a-zA-z].*")) {
                     if (!StringUtil.isEmpty(str) && Double.valueOf(str) > 0.0) {
                         if (Double.doubleToLongBits(Double.valueOf(str)) > Double.doubleToLongBits(mList.get(position).getBdmng())) {
@@ -103,8 +103,6 @@ public class SAPReceiptAdapter extends BaseAdapter {
                         } else {
                             mList.get(position).setMenge(Double.valueOf(str));
                         }
-                    } else {
-                        SyDialogHelper.showWarningDlg(mContext, "", "不能为空或负值", "确定", null);
                     }
                 } else {
                     SyDialogHelper.showWarningDlg(mContext, "", "请输入数字", "确定", null);
