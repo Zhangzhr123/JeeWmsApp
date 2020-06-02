@@ -17,7 +17,7 @@ public class Constance {
 
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"采购订单收货①"};
+    public static final String[] btnNameList = {"采购订单收货","上架", "按单拣货", "装车复核", "储位转移", "盘点"};
 
 
     public static void setBaseUrl(String baseUrl) {
@@ -36,6 +36,8 @@ public class Constance {
     public static final String getZrfcShwMgtl = "/rest/sAPAppService/getZrfcShwMgtl";
     //下载
     public static final String download = "/rest/file/download";
+    //权限控制
+//    public static final String jurisdiction = "/rest/";
 
     //原生接口
     //按货捡单

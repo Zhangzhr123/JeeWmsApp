@@ -13,13 +13,22 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.android.volley.VolleyError;
 import com.jeewms.www.wms.base.BaseActivity;
 import com.jeewms.www.wms.bean.bean.HomeBtnBean;
+import com.jeewms.www.wms.bean.bean.ResultDO;
+import com.jeewms.www.wms.bean.vm.LoginVm;
 import com.jeewms.www.wms.constance.Constance;
 import com.jeewms.www.wms.ui.acitivity.SAPReceiptActivity;
 import com.jeewms.www.wms.ui.adapter.HomeGridAdapter;
+import com.jeewms.www.wms.util.GsonUtils;
 import com.jeewms.www.wms.util.SharedPreferencesUtil;
 import com.jeewms.www.wms.util.StringUtil;
+import com.jeewms.www.wms.util.ToastUtil;
+import com.jeewms.www.wms.volley.HTTPUtils;
+import com.jeewms.www.wms.volley.VolleyListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,6 +38,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 13799 on 2018/7/2.
@@ -41,9 +53,10 @@ public class HomeActivity extends BaseActivity {
     LinearLayout ll_Main;
     TextView tv_User;
     Boolean isShow = false;
-//    BroadcastReceiver receiver;
 
     ArrayList<HomeBtnBean> list = new ArrayList<>();
+
+    List<String> nameList = new ArrayList<>();
 
     public static void show(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -55,6 +68,8 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
         init();
+        //权限控制
+        jurisdiction();
     }
 
     private void init() {
@@ -102,11 +117,57 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-        adapter = new HomeGridAdapter();
-        gvHome = findViewById(R.id.gv_home);
-        gvHome.setAdapter(adapter);
-        addBtn();
+//        adapter = new HomeGridAdapter();
+//        gvHome = findViewById(R.id.gv_home);
+//        gvHome.setAdapter(adapter);
+//        addBtn();
 
+    }
+
+    //权限控制
+    public void jurisdiction() {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", SharedPreferencesUtil.getInstance(HomeActivity.this).getKeyValue(Constance.SHAREP.LOGINNAME));
+        params.put("password", SharedPreferencesUtil.getInstance(HomeActivity.this).getKeyValue(Constance.SHAREP.PASSWORD));
+
+        String url = SharedPreferencesUtil.getInstance(HomeActivity.this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.LOGIN;
+
+        HTTPUtils.post(this, url, params, new VolleyListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ToastUtil.show(HomeActivity.this, "网络连接失败");
+            }
+
+            @Override
+            public void onResponse(String response) {
+                nameList.clear();
+                LoginVm vm = GsonUtils.parseJSON(response, LoginVm.class);
+                //判断是否拥有PDA权限
+                if (vm.isOk()) {
+                    //获取json内的数据
+                    JSONObject jsonobj = JSON.parseObject(response);
+                    System.out.println(jsonobj.getJSONObject("obj").getString("appPermission"));
+                    //获取用户权限
+                    String s = jsonobj.getJSONObject("obj").getString("appPermission");
+                    String[] split = s.split(",");
+                    if (split.length > 0 && split != null) {
+                        for (int i = 0; i < split.length; i++) {
+                            nameList.add(split[i]);
+                        }
+                        //权限控制
+                        adapter = new HomeGridAdapter();
+                        gvHome = findViewById(R.id.gv_home);
+                        gvHome.setAdapter(adapter);
+                        addBtn2(nameList);
+                    }else{
+                        ToastUtil.show(HomeActivity.this,"用户没有操作PDA权限");
+                    }
+
+                } else {
+                    ToastUtil.show(HomeActivity.this, vm.getErrorMsg());
+                }
+            }
+        });
     }
 
     //添加按钮
@@ -115,6 +176,21 @@ public class HomeActivity extends BaseActivity {
         for (int i = 0; i < Constance.btnNameList.length; i++) {
             addBtn2List(Constance.btnNameList[i], Constance.btnImgList[i]);
         }
+        adapter.setList(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    //添加按钮
+    private void addBtn2(List<String> nameList) {
+        list.clear();
+        for (int j = 0; j < nameList.size(); j++) {
+            for (int i = 0; i < Constance.btnNameList.length; i++) {
+                if (nameList.get(j).equals(Constance.btnNameList[i])) {
+                    addBtn2List(Constance.btnNameList[i], Constance.btnImgList[i]);
+                }
+            }
+        }
+
         adapter.setList(list);
         adapter.notifyDataSetChanged();
     }
@@ -128,12 +204,12 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case 8://1
-                SAPReceiptActivity.show(this);
-                break;
-
-        }
+//        switch (keyCode) {
+//            case 8://1
+//                SAPReceiptActivity.show(this);
+//                break;
+//
+//        }
         return super.onKeyDown(keyCode, event);
     }
 

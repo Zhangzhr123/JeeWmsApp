@@ -15,7 +15,7 @@ package com.jeewms.www.wms.bean.bean;
 import java.io.Serializable;
 
 public class ResultDO<T>  implements Serializable {
-    private boolean isOK = true;
+    private boolean isOK;
     private T obj;
     private String errorMsg;
     private String errorCode;
