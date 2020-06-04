@@ -103,6 +103,10 @@
                   android:windowSoftInputMode="stateAlwaysHidden"
         />
 
+        <activity android:name=".ui.acitivity.TLReceiptActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden"
+        />
+
     </application>
 
 </manifest>

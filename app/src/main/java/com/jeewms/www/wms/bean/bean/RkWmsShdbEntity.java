@@ -96,6 +96,16 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	private Boolean checked;
 	/**活动号*/
 	private String pvornr;
+	/**行项目号*/
+	private String ind;
+
+	public String getInd() {
+		return ind;
+	}
+
+	public void setInd(String ind) {
+		this.ind = ind;
+	}
 
 	public String getPvornr() {
 		return pvornr;

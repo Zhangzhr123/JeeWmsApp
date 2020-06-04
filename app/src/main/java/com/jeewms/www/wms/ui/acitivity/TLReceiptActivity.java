@@ -6,39 +6,39 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.InputType;
 import android.util.Log;
-import android.view.*;
-import android.view.inputmethod.InputMethodManager;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.base.BaseActivity;
-import com.jeewms.www.wms.bean.bean.*;
+import com.jeewms.www.wms.bean.bean.MessageEvent;
+import com.jeewms.www.wms.bean.bean.ResultDO;
+import com.jeewms.www.wms.bean.bean.RkWmsShdbEntity;
+import com.jeewms.www.wms.bean.bean.SAPRkWmsListVm;
 import com.jeewms.www.wms.constance.Constance;
-import com.jeewms.www.wms.ui.adapter.SAPReceiptAdapter;
+import com.jeewms.www.wms.ui.adapter.TLReceiptAdapter;
 import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
 import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
 import com.jeewms.www.wms.util.*;
 import com.jeewms.www.wms.volley.HTTPUtils;
 import com.jeewms.www.wms.volley.VolleyListener;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
-import com.zhy.android.percent.support.PercentLinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.jeewms.www.wms.broadcast.SystemBroadCast.*;
+import static com.jeewms.www.wms.broadcast.SystemBroadCast.SCN_CUST_ACTION_SCODE;
+import static com.jeewms.www.wms.broadcast.SystemBroadCast.SCN_CUST_EX_SCODE;
 
 /**
  * Created by zhangzhr
@@ -46,7 +46,7 @@ import static com.jeewms.www.wms.broadcast.SystemBroadCast.*;
  * 采购订单收货
  */
 
-public class SAPReceiptActivity extends BaseActivity implements OnDismissCallback, SAPReceiptAdapter.DetailViewHolderListener {
+public class TLReceiptActivity extends BaseActivity implements OnDismissCallback, TLReceiptAdapter.DetailViewHolderListener {
 
     @BindView(R.id.sapreceipt_googlecards_listview)//收货单列表
             ListView mListView;
@@ -64,21 +64,11 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             RelativeLayout rlsap;
     @BindView(R.id.tv_shdbm)//收货单编码
             TextView tvshdbm;
-    //    @BindView(R.id.radio_1)//收货
-//            RadioButton radio1;
-//    @BindView(R.id.radio_2)//收货投料
-//            RadioButton radio2;
-//    @BindView(R.id.id_radiogroup)//方式单选控件
-//            RadioGroup radioGroup;
     @BindView(R.id.cb_all)//全选按钮
             CheckBox cbAll;
-//    @BindView(R.id.ll_fangshi)//方式行
-//            LinearLayout ll_fangshi;
 
-    private SAPReceiptAdapter mAdapter;//收货单列表适配器
+    private TLReceiptAdapter mAdapter;//收货单列表适配器
     private List<RkWmsShdbEntity> dataList;//列表数据
-    //收货方式
-//    private String shType;
     //判断选中子列的位置
     private int select_item;
     //进入的页面
@@ -102,7 +92,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
 
     public static void show(Context context) {
-        Intent intent = new Intent(context, SAPReceiptActivity.class);
+        Intent intent = new Intent(context, TLReceiptActivity.class);
         context.startActivity(intent);
     }
 
@@ -116,17 +106,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         IntentFilter intentFilter = new IntentFilter(SCN_CUST_ACTION_SCODE);
         registerReceiver(scanDataReceiver, intentFilter);
         //设置表头名称
-        setTitle("入库收货");
+        setTitle("投料收货");
 
-//        //获取收货方式
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = (RadioButton) SAPReceiptActivity.this.findViewById(radioGroup.getCheckedRadioButtonId());
-//                //获取收货方式
-//                shType = rb.getText().toString();
-//            }
-//        });
         //初始化
         select_item = -1;
         //获取所选子列位置
@@ -183,11 +164,14 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 try {
                     String barCode = "";
                     barCode = intent.getStringExtra(SCN_CUST_EX_SCODE);
-                    //判断条码是否为空 是否为12位 是否纯数字组成
-                    if (!StringUtil.isEmpty(barCode) && barCode.length() >= 14 || barCode.length() <= 17) {
-                        getDate(barCode);
+                    //判断条码是否为空
+                    if (!StringUtil.isEmpty(barCode)) {
+                        //判断单据类型
+                        if (barCode.substring(0, 1).equals("D") || barCode.substring(0, 1).equals("M")) {
+                            getDate(barCode);
+                        }
                     } else {
-                        Toast.makeText(SAPReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TLReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -207,7 +191,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 
     @Override
     protected int getContentResId() {
-        return R.layout.activity_sapreceipt;
+        return R.layout.activity_tlreceipt;
     }
 
     //获取收货单编码查询收货单数据添加列表内容
@@ -223,7 +207,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             public void onErrorResponse(VolleyError error) {
                 //加载动画关闭
                 LoadingUtil.hideLoading();
-                ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
+                ToastUtil.show(TLReceiptActivity.this, "网络连接失败");
             }
 
             @Override
@@ -249,7 +233,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
 
                         //添加数据到列表中
-                        mAdapter = new SAPReceiptAdapter(SAPReceiptActivity.this, mPageDaoImpl.currentList(), SAPReceiptActivity.this);
+                        mAdapter = new TLReceiptAdapter(TLReceiptActivity.this, mPageDaoImpl.currentList(), TLReceiptActivity.this);
                         mAdapter.notifyDataSetChanged();
                         mListView.setAdapter(mAdapter);
                         //获取焦点
@@ -259,22 +243,16 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         //设置送货单编号
                         tvshdbm.setText(dataList.get(0).getPshwln());
 
-                        //判断用户描述是否为空
-//                        if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
-//                            ll_fangshi.setVisibility(View.GONE);
-//                            shType = "收货";
-//                        }
-
                         //前往第二页
                         llscan.setVisibility(View.GONE);
                         rlsap.setVisibility(View.VISIBLE);
                         pageSize = 2;
                     } else {
-                        Toast.makeText(SAPReceiptActivity.this, "数据为空！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TLReceiptActivity.this, "数据为空！", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(SAPReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TLReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -355,21 +333,13 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         //返回第一页
         rlsap.setVisibility(View.GONE);
         llscan.setVisibility(View.VISIBLE);
-//        ll_fangshi.setVisibility(View.VISIBLE);
         cbAll.setChecked(false);
-//        radio1.setChecked(false);
-//        radio2.setChecked(false);
-//        shType = "";
         pageSize = 1;
     }
 
     //确定按钮 展示勾选的数据
     @OnClick(R.id.btn_OK)
     public void onOKClicked() {
-        //判断收货方式是否为空
-//        if (StringUtil.isEmpty(shType)) {
-//            SyDialogHelper.showWarningDlg(this, "", "请选择方式", "确定", null);
-//        } else {
 
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final List<RkWmsShdbEntity> list = new ArrayList<>();
@@ -398,68 +368,33 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             //判断有没有选择行项目
             if (list.size() > 0 && list != null) {
 
-                //发送入库表
-//                    if (shType.equals("收货")) {
-
                 //类型转换
-                String jsonString = com.alibaba.fastjson.JSONObject.toJSONString(list);
+                String jsonString = JSONObject.toJSONString(list);
                 Map<String, String> params = new HashMap<>();
                 params.put("str", jsonString);//上传实体json
-                String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcMigoPost;
+                String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcShwMgtl;
 
                 HTTPUtils.post(this, url, params, new VolleyListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
+                        ToastUtil.show(TLReceiptActivity.this, "网络连接失败");
                     }
 
                     @Override
                     public void onResponse(String response) {
                         ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                         if (res.isOk()) {
-                            SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
+                            SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                 @Override
                                 public void onClick(SyMessageDialog dialog) {
                                     finish();
                                 }
                             });
                         } else {
-                            SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                            SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
                         }
                     }
                 });
-
-                //发送投料表
-//                    } else if (shType.equals("投料")) {
-//
-//                        //类型转换
-//                        String jsonString = com.alibaba.fastjson.JSONObject.toJSONString(list);
-//                        Map<String, String> params = new HashMap<>();
-//                        params.put("str", jsonString);//上传实体json
-//                        String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcShwMgtl;
-//
-//                        HTTPUtils.post(this, url, params, new VolleyListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                ToastUtil.show(SAPReceiptActivity.this, "网络连接失败");
-//                            }
-//
-//                            @Override
-//                            public void onResponse(String response) {
-//                                ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
-//                                if (res.isOk()) {
-//                                    SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(SyMessageDialog dialog) {
-//                                            finish();
-//                                        }
-//                                    });
-//                                } else {
-//                                    SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
-//                                }
-//                            }
-//                        });
-//                    }
 
             } else {
                 SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定", null);
@@ -469,12 +404,11 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         }
 
 
-//        }
     }
 
     //修改数据
     @Override
-    public void setData(final SAPReceiptAdapter.ViewHolder viewHolder, final int position) {
+    public void setData(final TLReceiptAdapter.ViewHolder viewHolder, final int position) {
         //获取修改的子列对象
         final RkWmsShdbEntity bean = dataList.get(position);
         //勾选按钮 设置数据
@@ -494,11 +428,11 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
             public void onClick(View v) {
                 Double number = 0.0;
                 if (StringUtil.isEmpty(viewHolder.number.getText().toString().trim())) {
-                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "数量不能为空", "确定", null);
+                    SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "数量不能为空", "确定", null);
                     return;
                 } else {
                     if (Double.valueOf(viewHolder.number.getText().toString().trim()) <= 0.0) {
-                        SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "数量不能为负", "确定", null);
+                        SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "数量不能为负", "确定", null);
                         viewHolder.number.setText(0.0 + "");
                         return;
                     } else {
@@ -507,7 +441,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
                 Double old = viewHolder.old;
                 if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
+                    SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sub(number, 1) + "");
@@ -527,7 +461,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
                 Double old = viewHolder.old;
                 if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
-                    SyDialogHelper.showWarningDlg(SAPReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
+                    SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sum(number, 1) + "");

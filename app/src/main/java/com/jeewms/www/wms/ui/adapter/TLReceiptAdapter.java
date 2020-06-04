@@ -2,18 +2,15 @@ package com.jeewms.www.wms.ui.adapter;
 
 import android.content.Context;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.*;
-import android.view.inputmethod.InputMethodManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.jeewms.www.wms.R;
-import com.jeewms.www.wms.bean.bean.RkWmsSctlEntity;
 import com.jeewms.www.wms.bean.bean.RkWmsShdbEntity;
-import com.jeewms.www.wms.ui.acitivity.SAPReceiptActivity;
 import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
 import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
-import com.jeewms.www.wms.util.DoubleUtil;
 import com.jeewms.www.wms.util.StringUtil;
 
 import java.lang.reflect.Method;
@@ -23,7 +20,7 @@ import java.util.List;
  * Created by 13799 on 2018/6/7.
  */
 
-public class SAPReceiptAdapter extends BaseAdapter {
+public class TLReceiptAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<RkWmsShdbEntity> mList;
@@ -31,7 +28,7 @@ public class SAPReceiptAdapter extends BaseAdapter {
     // 点击过的item，用于焦点获取
     private int touchItemPosition = -1;
 
-    public SAPReceiptAdapter(Context context, List<RkWmsShdbEntity> list, DetailViewHolderListener mListener) {
+    public TLReceiptAdapter(Context context, List<RkWmsShdbEntity> list, DetailViewHolderListener mListener) {
         this.mContext = context;
         this.mList = list;
         this.mListener = mListener;
@@ -99,13 +96,13 @@ public class SAPReceiptAdapter extends BaseAdapter {
                             SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
                                 @Override
                                 public void onClick(SyMessageDialog dialog) {
-                                    finalHolder1.number.setText("" + finalHolder1.old);
+                                    finalHolder1.number.setText("");
                                 }
                             });
                         } else {
                             mList.get(position).setMenge(Double.valueOf(str));
                         }
-                    } else {
+                    }else{
                         finalHolder1.number.setText("" + finalHolder1.old);
                     }
                 } else {

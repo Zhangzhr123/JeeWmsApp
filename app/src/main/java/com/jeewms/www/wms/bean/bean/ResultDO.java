@@ -15,10 +15,18 @@ package com.jeewms.www.wms.bean.bean;
 import java.io.Serializable;
 
 public class ResultDO<T>  implements Serializable {
-    private boolean isOK;
+    private boolean ok;
     private T obj;
     private String errorMsg;
     private String errorCode;
+
+    public boolean isOk() {
+        return ok;
+    }
+
+    public void setOk(boolean ok) {
+        this.ok = ok;
+    }
 
     public ResultDO() {
     }
@@ -28,14 +36,6 @@ public class ResultDO<T>  implements Serializable {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
-    }
-
-    public boolean isOK() {
-        return this.isOK;
-    }
-
-    public void setOK(boolean isOK) {
-        this.isOK = isOK;
     }
 
     public T getObj() {
