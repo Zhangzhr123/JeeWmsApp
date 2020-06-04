@@ -96,13 +96,13 @@ public class TLReceiptAdapter extends BaseAdapter {
                             SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
                                 @Override
                                 public void onClick(SyMessageDialog dialog) {
-                                    finalHolder1.number.setText("");
+                                    finalHolder1.number.setText("" + finalHolder1.old);
                                 }
                             });
                         } else {
                             mList.get(position).setMenge(Double.valueOf(str));
                         }
-                    }else{
+                    } else {
                         finalHolder1.number.setText("" + finalHolder1.old);
                     }
                 } else {
