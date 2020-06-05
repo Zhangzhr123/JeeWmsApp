@@ -60,16 +60,16 @@ public class HomeGridItemView {
         else if(Constance.btnNameList[1].equals(btnName)){
             TLReceiptActivity.show(mActivity);
         }
-//        else if(Constance.btnNameList[2].equals(btnName)){
-//            //按货捡单
-//            PickingDetailActivity.show(mActivity);
-//        }else if(Constance.btnNameList[3].equals(btnName)){
-//            RecheckLoadingActivity.show(mActivity);
-//        }else if(Constance.btnNameList[4].equals(btnName)){
-//            StorageMoveActivity.show(mActivity);
-//        }else if(Constance.btnNameList[5].equals(btnName)){
-//            InventoryActivity.show(mActivity);
-//        }
+        else if(Constance.btnNameList[2].equals(btnName)){
+            //按货捡单
+            PickingDetailActivity.show(mActivity);
+        }else if(Constance.btnNameList[3].equals(btnName)){
+            RecheckLoadingActivity.show(mActivity);
+        }else if(Constance.btnNameList[4].equals(btnName)){
+            StorageMoveActivity.show(mActivity);
+        }else if(Constance.btnNameList[5].equals(btnName)){
+            InventoryActivity.show(mActivity);
+        }
 //        else if(Constance.btnNameList[6].equals(btnName)){
 //            GoodsInfoActivity.show(mActivity);
 //        }else if(Constance.btnNameList[7].equals(btnName)){
