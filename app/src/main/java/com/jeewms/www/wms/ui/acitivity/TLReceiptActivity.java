@@ -511,7 +511,9 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 break;
             case 22://右方向键
                 if (pageSize == 1) {
-                    getDate(etSearch.getText().toString());
+                    if ((etSearch.getText().toString().trim()).substring(0, 1).equals("D") || (etSearch.getText().toString().trim()).substring(0, 1).equals("M")) {
+                        getDate(etSearch.getText().toString().trim());
+                    }
                 }
                 break;
             case 0://扫描

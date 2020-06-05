@@ -91,7 +91,7 @@ public class TLReceiptAdapter extends BaseAdapter {
             public void afterTextChanged(Editable s) {
                 String str = String.valueOf(s);
                 if (!(str).matches(".*[a-zA-z].*")) {
-                    if (!StringUtil.isEmpty(str) && Double.valueOf(str) > 0.0) {
+                    if (!StringUtil.isEmpty(str) && Double.valueOf(str) >= 0.0) {
                         if (Double.doubleToLongBits(Double.valueOf(str)) > Double.doubleToLongBits(finalHolder3.old)) {
                             SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
                                 @Override

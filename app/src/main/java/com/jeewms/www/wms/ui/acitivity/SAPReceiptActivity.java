@@ -127,6 +127,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
 //                shType = rb.getText().toString();
 //            }
 //        });
+
         //初始化
         select_item = -1;
         //获取所选子列位置
@@ -183,9 +184,12 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 try {
                     String barCode = "";
                     barCode = intent.getStringExtra(SCN_CUST_EX_SCODE);
-                    //判断条码是否为空 是否为12位 是否纯数字组成
-                    if (!StringUtil.isEmpty(barCode) && barCode.length() >= 14 || barCode.length() <= 17) {
-                        getDate(barCode);
+                    //判断条码是否为空
+                    if (!StringUtil.isEmpty(barCode)) {
+                        //判断单据类型
+                        if (barCode.substring(0, 1).equals("D") || barCode.substring(0, 1).equals("M")) {
+                            getDate(barCode);
+                        }
                     } else {
                         Toast.makeText(SAPReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
                         return;
@@ -577,7 +581,9 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 break;
             case 22://右方向键
                 if (pageSize == 1) {
-                    getDate(etSearch.getText().toString());
+                    if ((etSearch.getText().toString().trim()).substring(0, 1).equals("D") || (etSearch.getText().toString().trim()).substring(0, 1).equals("M")) {
+                        getDate(etSearch.getText().toString().trim());
+                    }
                 }
                 break;
             case 0://扫描
