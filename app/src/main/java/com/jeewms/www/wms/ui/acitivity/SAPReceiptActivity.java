@@ -264,13 +264,13 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         //设置送货单编号
                         tvshdbm.setText(dataList.get(0).getPshwln());
 
-                        //判断用户描述是否为空
-                        if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
-//                            ll_fangshi.setVisibility(View.GONE);
-//                            shType = "收货";
-                            SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "该单据不能投料，请联系保管员处理", "确定");
-                            return;
-                        }
+//                        //判断用户描述是否为空
+//                        if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
+////                            ll_fangshi.setVisibility(View.GONE);
+////                            shType = "收货";
+//                            SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "该单据不能投料，请联系保管员处理", "确定");
+//                            return;
+//                        }
 
                         //前往第二页
                         llscan.setVisibility(View.GONE);

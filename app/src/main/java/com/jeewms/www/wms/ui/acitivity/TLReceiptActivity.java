@@ -220,6 +220,11 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 if (res.getOk()) {
                     if (res.getObj() != null && res.getObj().size() > 0) {
                         dataList = res.getObj();
+                        //判断用户描述是否为空
+                        if (StringUtil.isEmpty(dataList.get(0).getPtype())) {
+                            SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "该单据不能投料，请联系保管员处理", "确定");
+                            return;
+                        }
                         //全部选中
                         cbAll.setChecked(true);
                         //设置展示数据设置未选中
