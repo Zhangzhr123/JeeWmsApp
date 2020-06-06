@@ -72,13 +72,8 @@ public class SAPReceiptAdapter extends BaseAdapter {
         final RkWmsShdbEntity rw = mList.get(position);
         holder.sapHxm.setText(rw.getInd() + "/" + rw.getMaktx());
         holder.number.setText("" + rw.getMenge());
-        holder.old = rw.getMenge();
+        holder.old = rw.getJhsl();
 
-        final ViewHolder finalHolder = holder;
-
-        final ViewHolder finalHolder1 = holder;
-        final ViewHolder finalHolder2 = holder;
-        final ViewHolder finalHolder3 = holder;
         holder.number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,23 +88,27 @@ public class SAPReceiptAdapter extends BaseAdapter {
             @Override
             public void afterTextChanged(Editable s) {
                 String str = String.valueOf(s);
-                if (!(str).matches(".*[a-zA-z].*")) {
-                    if (!StringUtil.isEmpty(str) && Double.valueOf(str) > 0.0) {
-                        if (Double.doubleToLongBits(Double.valueOf(str)) > Double.doubleToLongBits(finalHolder3.old)) {
-                            SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
-                                @Override
-                                public void onClick(SyMessageDialog dialog) {
-                                    finalHolder1.number.setText("" + finalHolder1.old);
-                                }
-                            });
-                        } else {
-                            mList.get(position).setMenge(Double.valueOf(str));
-                        }
-                    } else {
-                        finalHolder1.number.setText("" + finalHolder1.old);
-                    }
+                if (!(str).matches(".*[a-zA-Z].*") && !str.contains("-") && !StringUtil.isEmpty(str)) {
+                    mList.get(position).setMenge(Double.valueOf(str));
+//                    if (!StringUtil.isEmpty(str) && Double.valueOf(str) > 0.0) {
+//                        if (Double.doubleToLongBits(Double.valueOf(str)) > Double.doubleToLongBits(finalHolder3.old)) {
+//                            SyDialogHelper.showWarningDlg(mContext, "", "收货数量不能大于交货数量", "确定", new SyMessageDialog.OnClickListener() {
+//                                @Override
+//                                public void onClick(SyMessageDialog dialog) {
+////                                    finalHolder1.number.setText("" + finalHolder1.old);
+//                                    mList.get(position).setMenge(finalHolder1.old);
+//                                }
+//                            });
+//                        } else {
+//
+//                        }
+//                    } else {
+////                        finalHolder1.number.setText("" + finalHolder1.old);
+//                        mList.get(position).setMenge(finalHolder1.old);
+//                    }
                 } else {
-                    SyDialogHelper.showWarningDlg(mContext, "", "请输入数字", "确定", null);
+                    mList.get(position).setMenge(null);
+//                    SyDialogHelper.showWarningDlg(mContext, "", "请输入数字或正值", "确定", null);
                 }
             }
         });

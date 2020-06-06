@@ -225,6 +225,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         //设置展示数据设置未选中
                         for (int i = 0; i < dataList.size(); i++) {
                             dataList.get(i).setChecked(true);
+                            dataList.get(i).setJhsl(dataList.get(i).getMenge());
                         }
 
                         //每次读4条数据
@@ -347,8 +348,8 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
         for (int i = 0; i < dataList.size(); i++) {
             //判断是否勾选
             if (dataList.get(i).getChecked()) {
-                if (dataList.get(i).getMenge() <= 0.0 || StringUtil.isEmpty(dataList.get(i).getMenge().toString())) {
-                    SyDialogHelper.showWarningDlg(this, "", "行项目为" + dataList.get(i).getInd() + ",收货数量不能小于等于零", "确定", null);
+                if (dataList.get(i).getMenge() == null || dataList.get(i).getMenge() <= 0.0 || StringUtil.isEmpty(dataList.get(i).getMenge().toString()) || dataList.get(i).getMenge() > dataList.get(i).getJhsl()) {
+                    SyDialogHelper.showWarningDlg(this, "", "行项目为" + dataList.get(i).getInd() + ",收货数量不能为空或小于等于零,且收货数量不能大于交货数量！", "确定", null);
                     isNull = true;
                     break;
                 }
@@ -439,7 +440,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         number = Double.valueOf(viewHolder.number.getText().toString().trim());
                     }
                 }
-                Double old = viewHolder.old;
+                Double old = bean.getJhsl();
                 if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {
@@ -459,7 +460,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 } else {
                     number = Double.valueOf(viewHolder.number.getText().toString().trim());
                 }
-                Double old = viewHolder.old;
+                Double old = bean.getJhsl();
                 if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {

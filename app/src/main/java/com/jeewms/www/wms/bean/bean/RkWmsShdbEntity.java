@@ -98,6 +98,16 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	private String pvornr;
 	/**行项目号*/
 	private String ind;
+	/**交货数量*/
+	private Double jhsl;
+
+	public Double getJhsl() {
+		return jhsl;
+	}
+
+	public void setJhsl(Double jhsl) {
+		this.jhsl = jhsl;
+	}
 
 	public String getInd() {
 		return ind;
