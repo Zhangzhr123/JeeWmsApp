@@ -2,18 +2,13 @@ package com.jeewms.www.wms.ui.adapter;
 
 import android.content.Context;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.*;
-import android.view.inputmethod.InputMethodManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.jeewms.www.wms.R;
-import com.jeewms.www.wms.bean.bean.RkWmsSctlEntity;
-import com.jeewms.www.wms.bean.bean.RkWmsShdbEntity;
-import com.jeewms.www.wms.ui.acitivity.SAPReceiptActivity;
-import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
-import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
-import com.jeewms.www.wms.util.DoubleUtil;
+import com.jeewms.www.wms.bean.bean.RkWmsCkdbEntity;
 import com.jeewms.www.wms.util.StringUtil;
 
 import java.lang.reflect.Method;
@@ -23,15 +18,15 @@ import java.util.List;
  * Created by 13799 on 2018/6/7.
  */
 
-public class SAPReceiptAdapter extends BaseAdapter {
+public class CKAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<RkWmsShdbEntity> mList;
+    private List<RkWmsCkdbEntity> mList;
     private DetailViewHolderListener mListener;
     // 点击过的item，用于焦点获取
     private int touchItemPosition = -1;
 
-    public SAPReceiptAdapter(Context context, List<RkWmsShdbEntity> list, DetailViewHolderListener mListener) {
+    public CKAdapter(Context context, List<RkWmsCkdbEntity> list, DetailViewHolderListener mListener) {
         this.mContext = context;
         this.mList = list;
         this.mListener = mListener;
@@ -69,9 +64,9 @@ public class SAPReceiptAdapter extends BaseAdapter {
 
         convertView.setTag(holder);
         //添加行数据
-        final RkWmsShdbEntity rw = mList.get(position);
-        holder.sapHxm.setText(rw.getInd() + "/" + rw.getMaktx());
-        holder.number.setText("" + rw.getMenge());
+        final RkWmsCkdbEntity rw = mList.get(position);
+        holder.sapHxm.setText(rw.getInd() + "/" + rw.getMatnr());
+        holder.number.setText("" + rw.getPpmen());
         holder.old = rw.getJhsl();
 
         holder.number.addTextChangedListener(new TextWatcher() {
@@ -89,17 +84,17 @@ public class SAPReceiptAdapter extends BaseAdapter {
             public void afterTextChanged(Editable s) {
                 String str = String.valueOf(s);
                 if (!(str).matches(".*[a-zA-Z].*") && !str.contains("-") && !StringUtil.isEmpty(str)) {
-                    mList.get(position).setMenge(Double.valueOf(str));
+                    mList.get(position).setPpmen(Double.valueOf(str));
                 } else {
-                    mList.get(position).setMenge(null);
+                    mList.get(position).setPpmen(null);
                 }
             }
         });
 
-        //设置质检标识
-        if (!StringUtil.isEmpty(rw.getInflg())) {
-            holder.ll_zhijian.setVisibility(View.VISIBLE);
-        }
+//        //设置质检标识
+//        if (!StringUtil.isEmpty(rw.getInflg())) {
+//            holder.ll_zhijian.setVisibility(View.VISIBLE);
+//        }
         //设置勾选状态
         if (rw.getChecked()) {
             holder.checkbox.setChecked(true);
@@ -107,7 +102,7 @@ public class SAPReceiptAdapter extends BaseAdapter {
             holder.checkbox.setChecked(false);
         }
 
-        mListener.setData(holder, position);
+        mListener.setCKData(holder, position);
         return convertView;
     }
 
@@ -125,10 +120,10 @@ public class SAPReceiptAdapter extends BaseAdapter {
      * 展示不同数据的接口
      */
     public interface DetailViewHolderListener {
-        void setData(ViewHolder viewHolder, int position);
+        void setCKData(ViewHolder viewHolder, int position);
     }
 
-    public void setList(List<RkWmsShdbEntity> datas) {
+    public void setList(List<RkWmsCkdbEntity> datas) {
         mList = datas;
         notifyDataSetChanged();
     }
