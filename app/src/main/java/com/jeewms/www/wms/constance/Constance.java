@@ -43,6 +43,10 @@ public class Constance {
     public static final String saveCKDshrk = "/rest/sAPAppService/saveCKDshrk";
     //发送出库投料单
     public static final String saveCKDshtl = "/rest/sAPAppService/saveCKDshtl";
+    //获取领料单单
+    public static final String getLLD = "/rest/sAPAppService/getLLD";
+    //发送领料投料单
+    public static final String saveLLDTL = "/rest/sAPAppService/saveLLDTL";
 
     //原生接口
     //按货捡单

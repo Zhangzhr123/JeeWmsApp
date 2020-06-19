@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @Title: Entity
  * @Description: 出库单
  * @author onlineGenerator
- * @date 2020-06-18 09:29:51
+ * @date 2020-06-19 14:02:33
  * @version V1.0   
  *
  */
@@ -67,6 +67,8 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	private String pici;
 	/**物料号*/
 	private String matnr;
+	/**物料描述*/
+	private String maktx;
 	/**工厂*/
 	private String werks;
 	/**特殊库存标识*/
@@ -111,7 +113,8 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
-	
+
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -486,6 +489,21 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	 */
 	public void setMatnr(String matnr){
 		this.matnr = matnr;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  物料描述
+	 */
+	public String getMaktx(){
+		return this.maktx;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  物料描述
+	 */
+	public void setMaktx(String maktx){
+		this.maktx = maktx;
 	}
 	/**
 	 *方法: 取得java.lang.String

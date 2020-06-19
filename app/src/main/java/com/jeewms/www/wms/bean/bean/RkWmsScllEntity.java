@@ -3,13 +3,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.lang.String;
 import java.lang.Double;
+import java.lang.Integer;
+import java.math.BigDecimal;
 
 
 /**   
  * @Title: Entity
  * @Description: 物料信息
  * @author onlineGenerator
- * @date 2020-06-17 15:18:02
+ * @date 2020-06-19 14:41:21
  * @version V1.0   
  *
  */
@@ -61,6 +63,14 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	private Date updateDate;
 	/**生产领料主表主键*/
 	private String parentid;
+	/**SAP状态*/
+	private String sapzt;
+	/**SAP异常信息*/
+	private String sapycxx;
+	/**投料数量*/
+	private Double rkTlsl;
+	/**扫描类型*/
+	private String smtype;
 	/**是否选中*/
 	private Boolean checked;
 	/**交货数量*/
@@ -470,6 +480,74 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	 */
 	public void setParentid(String parentid){
 		this.parentid = parentid;
+	}
+	
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  SAP状态
+	 */
+	
+	public String getSapzt(){
+		return this.sapzt;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  SAP状态
+	 */
+	public void setSapzt(String sapzt){
+		this.sapzt = sapzt;
+	}
+	
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  SAP异常信息
+	 */
+	
+	public String getSapycxx(){
+		return this.sapycxx;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  SAP异常信息
+	 */
+	public void setSapycxx(String sapycxx){
+		this.sapycxx = sapycxx;
+	}
+	
+	/**
+	 *方法: 取得java.lang.Double
+	 *@return: java.lang.Double  投料数量
+	 */
+	
+	public Double getRkTlsl(){
+		return this.rkTlsl;
+	}
+
+	/**
+	 *方法: 设置java.lang.Double
+	 *@param: java.lang.Double  投料数量
+	 */
+	public void setRkTlsl(Double rkTlsl){
+		this.rkTlsl = rkTlsl;
+	}
+	
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  扫描类型
+	 */
+	
+	public String getSmtype(){
+		return this.smtype;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  扫描类型
+	 */
+	public void setSmtype(String smtype){
+		this.smtype = smtype;
 	}
 	
 }
