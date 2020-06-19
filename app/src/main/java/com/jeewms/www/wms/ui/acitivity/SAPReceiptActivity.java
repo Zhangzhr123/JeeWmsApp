@@ -507,7 +507,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     //添加数据操作人和时间
                     ckList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     ckList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    ckList.get(i).setUpdateBy(sdf.format(new Date()));
+                    ckList.get(i).setUpdateDate(new Date());
+                    ckList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     list.add(ckList.get(i));
                 }

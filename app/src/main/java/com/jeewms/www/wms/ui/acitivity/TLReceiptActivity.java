@@ -384,7 +384,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         //设置展示数据设置未选中
                         for (int i = 0; i < llList.size(); i++) {
                             llList.get(i).setChecked(true);
-                            llList.get(i).setJhsl(llList.get(i).getRkTlsl());
+                            llList.get(i).setJhsl(llList.get(i).getRkSl());
                         }
 
                         //每次读4条数据
@@ -591,7 +591,8 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //添加数据操作人和时间
                     ckList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     ckList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    ckList.get(i).setUpdateBy(sdf.format(new Date()));
+                    ckList.get(i).setUpdateDate(new Date());
+                    ckList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     list.add(ckList.get(i));
                 }
@@ -643,7 +644,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
             for (int i = 0; i < llList.size(); i++) {
                 //判断是否勾选
                 if (llList.get(i).getChecked()) {
-                    if (llList.get(i).getRkTlsl() == null || llList.get(i).getRkTlsl() <= 0.0 || StringUtil.isEmpty(llList.get(i).getRkTlsl().toString()) || llList.get(i).getRkTlsl() > llList.get(i).getJhsl()) {
+                    if (llList.get(i).getRkSl() == null || llList.get(i).getRkSl() <= 0.0 || StringUtil.isEmpty(llList.get(i).getRkSl().toString()) || llList.get(i).getRkSl() > llList.get(i).getJhsl()) {
                         SyDialogHelper.showWarningDlg(this, "", "行项目为" + llList.get(i).getRkLldhxm() + ",收货数量不能为空或小于等于零,且收货数量不能大于交货数量！", "确定", null);
                         isNull = true;
                         break;
@@ -651,7 +652,9 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //添加数据操作人和时间
                     llList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     llList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    llList.get(i).setUpdateBy(sdf.format(new Date()));
+                    llList.get(i).setCreateDate(null);
+                    llList.get(i).setUpdateDate(null);
+                    llList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     llList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     list.add(llList.get(i));
                 }
@@ -995,7 +998,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sub(number, 1) + "");
-                    llList.get(position).setRkTlsl(DoubleUtil.sub(number, 1));
+                    llList.get(position).setRkSl(DoubleUtil.sub(number, 1));
                 }
             }
         });
@@ -1015,7 +1018,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 } else {
                     viewHolder.number.setText("");
                     viewHolder.number.setText(DoubleUtil.sum(number, 1) + "");
-                    llList.get(position).setRkTlsl(DoubleUtil.sum(number, 1));
+                    llList.get(position).setRkSl(DoubleUtil.sum(number, 1));
                 }
             }
         });

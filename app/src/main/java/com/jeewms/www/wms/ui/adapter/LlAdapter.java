@@ -67,7 +67,7 @@ public class LlAdapter extends BaseAdapter {
         //添加行数据
         final RkWmsScllEntity rw = mList.get(position);
         holder.sapHxm.setText(rw.getRkLldhxm() + "/" + rw.getRkWlms());
-        holder.number.setText("" + rw.getRkTlsl());
+        holder.number.setText("" + rw.getRkSl());
         holder.old = rw.getJhsl();
 
         holder.number.addTextChangedListener(new TextWatcher() {
@@ -85,9 +85,9 @@ public class LlAdapter extends BaseAdapter {
             public void afterTextChanged(Editable s) {
                 String str = String.valueOf(s);
                 if (!(str).matches(".*[a-zA-Z].*") && !str.contains("-") && !StringUtil.isEmpty(str)) {
-                    mList.get(position).setRkTlsl(Double.valueOf(str));
+                    mList.get(position).setRkSl(Double.valueOf(str));
                 } else {
-                    mList.get(position).setRkTlsl(null);
+                    mList.get(position).setRkSl(null);
                 }
             }
         });
