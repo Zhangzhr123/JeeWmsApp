@@ -18,13 +18,11 @@ import com.zhy.android.percent.support.PercentLinearLayout;
 
 public class HomeGridItemView {
 
-
     protected Activity mActivity;
     CircleImageView imgHomeitem;
     TextView tvHomename;
     PercentLinearLayout ll_root;
     private View mView;
-
 
     public HomeGridItemView(Activity act) {
         this.mActivity = act;
@@ -52,24 +50,27 @@ public class HomeGridItemView {
             }
         });
     }
+
     //菜单点击跳转
     private void Jump(String btnName){
+        //入库收货
         if(Constance.btnNameList[0].equals(btnName)){
             SAPReceiptActivity.show(mActivity);
         }
+        //投料收货
         else if(Constance.btnNameList[1].equals(btnName)){
             TLReceiptActivity.show(mActivity);
         }
-        else if(Constance.btnNameList[2].equals(btnName)){
-            //按货捡单
-            PickingDetailActivity.show(mActivity);
-        }else if(Constance.btnNameList[3].equals(btnName)){
-            RecheckLoadingActivity.show(mActivity);
-        }else if(Constance.btnNameList[4].equals(btnName)){
-            StorageMoveActivity.show(mActivity);
-        }else if(Constance.btnNameList[5].equals(btnName)){
-            InventoryActivity.show(mActivity);
-        }
+//        else if(Constance.btnNameList[2].equals(btnName)){
+//            //按货捡单
+//            PickingDetailActivity.show(mActivity);
+//        }else if(Constance.btnNameList[3].equals(btnName)){
+//            RecheckLoadingActivity.show(mActivity);
+//        }else if(Constance.btnNameList[4].equals(btnName)){
+//            StorageMoveActivity.show(mActivity);
+//        }else if(Constance.btnNameList[5].equals(btnName)){
+//            InventoryActivity.show(mActivity);
+//        }
 //        else if(Constance.btnNameList[6].equals(btnName)){
 //            GoodsInfoActivity.show(mActivity);
 //        }else if(Constance.btnNameList[7].equals(btnName)){
@@ -84,4 +85,5 @@ public class HomeGridItemView {
 //
 //        }
     }
+
 }

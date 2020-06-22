@@ -181,6 +181,9 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                             //出库单
                         } else if (barCode.substring(0, 1).equals("S")) {
                             getCKDate(barCode);
+                        } else if (barCode.substring(0, 1).equals("L")) {
+                            Toast.makeText(SAPReceiptActivity.this, "领料单不能入库收货", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     } else {
                         Toast.makeText(SAPReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
@@ -679,7 +682,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 }
                 break;
             case 20://下方向键
-                if(!StringUtil.isEmpty(scanBarcode)){
+                if (!StringUtil.isEmpty(scanBarcode)) {
                     if (scanBarcode.substring(0, 1).equals("D") || scanBarcode.substring(0, 1).equals("M")) {
                         if (select_item < dataList.size() - 1 && action == 0) {
                             mListView.setSelection(select_item + 1);

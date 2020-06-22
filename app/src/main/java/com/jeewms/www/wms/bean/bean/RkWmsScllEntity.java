@@ -75,6 +75,16 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	private Boolean checked;
 	/**交货数量*/
 	private Double jhsl;
+	/**特殊库存标识*/
+	private String tskcbs;
+
+	public String getTskcbs() {
+		return tskcbs;
+	}
+
+	public void setTskcbs(String tskcbs) {
+		this.tskcbs = tskcbs;
+	}
 
 	public Double getJhsl() {
 		return jhsl;

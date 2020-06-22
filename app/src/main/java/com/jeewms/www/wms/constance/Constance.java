@@ -10,15 +10,15 @@ import com.jeewms.www.wms.util.StringUtil;
 public class Constance {
 
     //测试站http://119.23.251.167/wms/
-    //public static String COMMON_URL = "http://172.16.77.184:8080";
-    public static String COMMON_URL = "http://192.168.0.226:8060/rkwms";
+    public static String COMMON_URL = "http://172.16.77.184:8080";
+//    public static String COMMON_URL = "http://192.168.0.226:8060/rkwms";
 
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
 
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"入库收货","投料收货", "按单拣货", "装车复核", "储位转移", "盘点"};
+    public static final String[] btnNameList = {"入库收货","投料收货"};
 
 
     public static void setBaseUrl(String baseUrl) {

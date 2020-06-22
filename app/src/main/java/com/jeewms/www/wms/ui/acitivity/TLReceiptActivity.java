@@ -183,7 +183,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         } else if (barCode.substring(0, 1).equals("S")) {
                             getCKDate(barCode);
                             //领料单
-                        } else if (barCode.substring(0, 1).equals("R")) {
+                        } else if (barCode.substring(0, 1).equals("L")) {
                             getLLDate(barCode);
                         }
                     } else {
