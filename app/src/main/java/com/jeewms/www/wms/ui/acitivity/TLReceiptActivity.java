@@ -435,7 +435,19 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
     //搜索按钮
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
-        getDate(etSearch.getText().toString());
+        if ((etSearch.getText().toString()).substring(0, 1).equals("D") || (etSearch.getText().toString()).substring(0, 1).equals("M")) {
+            getDate(etSearch.getText().toString());
+            //出库单
+        } else if ((etSearch.getText().toString()).substring(0, 1).equals("S")) {
+            getCKDate(etSearch.getText().toString());
+            //领料单
+        } else if ((etSearch.getText().toString()).substring(0, 1).equals("L")) {
+            getLLDate(etSearch.getText().toString());
+        }else {
+            Toast.makeText(this, "请重新扫描", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //getDate(etSearch.getText().toString());
     }
 
     //全选按钮
