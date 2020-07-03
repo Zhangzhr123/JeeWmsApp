@@ -65,7 +65,7 @@ public class CKAdapter extends BaseAdapter {
         convertView.setTag(holder);
         //添加行数据
         final RkWmsCkdbEntity rw = mList.get(position);
-        holder.sapHxm.setText(rw.getInd() + "/" + rw.getMaktx());
+        holder.sapHxm.setText(rw.getVbeln() + "/" + rw.getMaktx());
         holder.number.setText("" + rw.getPpmen());
         holder.old = rw.getJhsl();
 
