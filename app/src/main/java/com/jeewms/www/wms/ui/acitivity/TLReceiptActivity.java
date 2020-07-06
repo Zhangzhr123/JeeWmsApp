@@ -412,7 +412,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     }
 
                 } else {
-                    Toast.makeText(TLReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TLReceiptActivity.this, "未查询到领料单，请重新扫描！", Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -97,7 +97,7 @@ public class SAPReceiptAdapter extends BaseAdapter {
         });
 
         //设置质检标识
-        if (!StringUtil.isEmpty(rw.getInflg())) {
+        if (rw.getInflg().equals("X")) {
             holder.ll_zhijian.setVisibility(View.VISIBLE);
         }
         //设置勾选状态
