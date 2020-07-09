@@ -96,7 +96,8 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
     private Boolean isNull = false;
     //条码
     private String scanBarcode;
-
+    //扫描过的条码
+    private List<String> codeList = new ArrayList<String>();
 
     public static void show(Context context) {
         Intent intent = new Intent(context, TLReceiptActivity.class);
@@ -175,6 +176,10 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //判断条码是否为空
                     if (!StringUtil.isEmpty(barCode)) {
                         scanBarcode = barCode;
+                        if(codeList.contains(scanBarcode)){
+                            Toast.makeText(TLReceiptActivity.this, "此条码已经扫描", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         //判断单据类型
                         //送货单
                         if (barCode.substring(0, 1).equals("D") || barCode.substring(0, 1).equals("M")) {
@@ -569,6 +574,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if (res.isOk()) {
+                                codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
@@ -630,6 +636,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if (res.isOk()) {
+                                codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
@@ -692,6 +699,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if (res.isOk()) {
+                                codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {

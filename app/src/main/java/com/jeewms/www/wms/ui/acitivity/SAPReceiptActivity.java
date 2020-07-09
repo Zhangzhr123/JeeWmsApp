@@ -95,7 +95,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     private Boolean isNull = false;
     //条码
     private String scanBarcode;
-
+    //扫描过的条码
+    private List<String> codeList = new ArrayList<String>();
 
     public static void show(Context context) {
         Intent intent = new Intent(context, SAPReceiptActivity.class);
@@ -174,6 +175,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     //判断条码是否为空
                     if (!StringUtil.isEmpty(barCode)) {
                         scanBarcode = barCode;
+                        if(codeList.contains(scanBarcode)){
+                            Toast.makeText(SAPReceiptActivity.this, "此条码已经扫描", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         //判断单据类型
                         //送货单
                         if (barCode.substring(0, 1).equals("D") || barCode.substring(0, 1).equals("M")) {
@@ -484,6 +489,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if (res.isOk()) {
+                                codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
@@ -545,6 +551,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if (res.isOk()) {
+                                codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
