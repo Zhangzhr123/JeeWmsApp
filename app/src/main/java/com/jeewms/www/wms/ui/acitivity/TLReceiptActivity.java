@@ -578,7 +578,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
-                                        finish();
+                                        onOutClicked();
                                     }
                                 });
                             } else {
@@ -640,7 +640,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
-                                        finish();
+                                        onOutClicked();
                                     }
                                 });
                             } else {
@@ -703,7 +703,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
-                                        finish();
+                                        onOutClicked();
                                     }
                                 });
                             } else {

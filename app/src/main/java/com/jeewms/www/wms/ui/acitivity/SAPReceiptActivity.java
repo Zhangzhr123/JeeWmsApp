@@ -493,7 +493,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
-                                        finish();
+                                        onOutClicked();
                                     }
                                 });
                             } else {
@@ -555,7 +555,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
-                                        finish();
+                                        onOutClicked();
                                     }
                                 });
                             } else {
