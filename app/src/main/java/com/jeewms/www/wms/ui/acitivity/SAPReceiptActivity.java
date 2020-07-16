@@ -465,6 +465,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     dataList.get(i).setPname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     dataList.get(i).setUpdateBy(sdf.format(new Date()));
                     dataList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
+                    dataList.get(i).setSapzt("9");
+                    dataList.get(i).setSmtype("收货入库");
                     list.add(dataList.get(i));
                 }
             }
@@ -527,6 +529,8 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     ckList.get(i).setUpdateDate(new Date());
                     ckList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
+                    ckList.get(i).setSapzt("9");
+                    ckList.get(i).setSmtype("收货入库");
                     list.add(ckList.get(i));
                 }
             }

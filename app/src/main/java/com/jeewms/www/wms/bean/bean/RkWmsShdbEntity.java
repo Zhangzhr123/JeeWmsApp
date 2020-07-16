@@ -100,6 +100,26 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	private String ind;
 	/**交货数量*/
 	private Double jhsl;
+	/**SAP状态*/
+	private String sapzt;
+	/**接受类型*/
+	private String smtype;
+
+	public String getSapzt() {
+		return sapzt;
+	}
+
+	public void setSapzt(String sapzt) {
+		this.sapzt = sapzt;
+	}
+
+	public String getSmtype() {
+		return smtype;
+	}
+
+	public void setSmtype(String smtype) {
+		this.smtype = smtype;
+	}
 
 	public Double getJhsl() {
 		return jhsl;
