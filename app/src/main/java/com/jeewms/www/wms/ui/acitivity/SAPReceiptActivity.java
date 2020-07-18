@@ -238,6 +238,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //将json对象转换为java对象
                 SAPRkWmsListVm res = GsonUtils.parseJSON(response, SAPRkWmsListVm.class);
                 //判断是否为空
+                if(res == null){
+                    SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "查询失败", "确定");
+                    return;
+                }
                 if (res.getOk()) {
                     if (res.getObj() != null && res.getObj().size() > 0) {
                         dataList = res.getObj();
@@ -306,6 +310,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //将json对象转换为java对象
                 SAPRkCkListVm res = GsonUtils.parseJSON(response, SAPRkCkListVm.class);
                 //判断是否为空
+                if(res == null){
+                    SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "查询失败", "确定");
+                    return;
+                }
                 if (res.getOk()) {
                     if (res.getObj() != null && res.getObj().size() > 0) {
                         ckList = res.getObj();
@@ -500,6 +508,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         @Override
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
+                            if(res == null){
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                                return;
+                            }
                             if (res.isOk()) {
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
@@ -568,6 +580,10 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         @Override
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
+                            if(res == null){
+                                SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
+                                return;
+                            }
                             if (res.isOk()) {
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
