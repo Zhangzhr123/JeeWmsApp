@@ -103,7 +103,15 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	/**SAP状态*/
 	private String sapzt;
 	/**接受类型*/
-	private String smtype;
+	private String shdtype;
+
+	public String getShdtype() {
+		return shdtype;
+	}
+
+	public void setShdtype(String shdtype) {
+		this.shdtype = shdtype;
+	}
 
 	public String getSapzt() {
 		return sapzt;
@@ -111,14 +119,6 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 
 	public void setSapzt(String sapzt) {
 		this.sapzt = sapzt;
-	}
-
-	public String getSmtype() {
-		return smtype;
-	}
-
-	public void setSmtype(String smtype) {
-		this.smtype = smtype;
 	}
 
 	public Double getJhsl() {

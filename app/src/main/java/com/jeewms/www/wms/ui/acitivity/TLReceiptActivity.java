@@ -176,7 +176,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //判断条码是否为空
                     if (!StringUtil.isEmpty(barCode)) {
                         scanBarcode = barCode;
-                        if(codeList.contains(scanBarcode)){
+                        if (codeList.contains(scanBarcode)) {
                             Toast.makeText(TLReceiptActivity.this, "此条码已经扫描", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -207,7 +207,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(MessageEvent msg) {
         //查询收货单数据
-        getDate(etSearch.getText().toString());
+        //getDate(etSearch.getText().toString());
     }
 
     @Override
@@ -233,6 +233,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
 
             @Override
             public void onResponse(String response) {
+                dataList = new ArrayList<RkWmsShdbEntity>();
                 //加载动画关闭
                 LoadingUtil.hideLoading();
                 //将json对象转换为java对象
@@ -305,6 +306,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
 
             @Override
             public void onResponse(String response) {
+                ckList = new ArrayList<RkWmsCkdbEntity>();
                 //加载动画关闭
                 LoadingUtil.hideLoading();
                 //将json对象转换为java对象
@@ -376,6 +378,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
 
             @Override
             public void onResponse(String response) {
+                llList = new ArrayList<RkWmsScllEntity>();
                 //加载动画关闭
                 LoadingUtil.hideLoading();
                 //将json对象转换为java对象
@@ -440,6 +443,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
     //搜索按钮
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
+        scanBarcode = etSearch.getText().toString();
         if ((etSearch.getText().toString()).substring(0, 1).equals("D") || (etSearch.getText().toString()).substring(0, 1).equals("M")) {
             getDate(etSearch.getText().toString());
             //出库单
@@ -448,7 +452,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
             //领料单
         } else if ((etSearch.getText().toString()).substring(0, 1).equals("L")) {
             getLLDate(etSearch.getText().toString());
-        }else {
+        } else {
             Toast.makeText(this, "请重新扫描", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -523,6 +527,9 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
         llscan.setVisibility(View.VISIBLE);
         cbAll.setChecked(false);
         pageSize = 1;
+        etSearch.setText("");
+        //finish();
+        //TLReceiptActivity.show(TLReceiptActivity.this);
     }
 
     //确定按钮 展示勾选的数据
@@ -548,10 +555,14 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     dataList.get(i).setMname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     dataList.get(i).setMdate((new Date()).getTime());
                     dataList.get(i).setPname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    dataList.get(i).setUpdateBy(sdf.format(new Date()));
+                    dataList.get(i).setCreateDate(new Date().getTime());
+                    dataList.get(i).setCreateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
+                    dataList.get(i).setCreateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
+                    dataList.get(i).setUpdateDate(new Date().getTime());
+                    dataList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     dataList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     dataList.get(i).setSapzt("9");
-                    dataList.get(i).setSmtype("收货投料");
+                    dataList.get(i).setShdtype("收货投料");
                     list.add(dataList.get(i));
                 }
             }
@@ -580,6 +591,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
+                                        dataList = null;
                                         onOutClicked();
                                     }
                                 });
@@ -611,6 +623,9 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //添加数据操作人和时间
                     ckList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     ckList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
+                    ckList.get(i).setCreateDate(new Date());
+                    ckList.get(i).setCreateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
+                    ckList.get(i).setCreateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     ckList.get(i).setUpdateDate(new Date());
                     ckList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
@@ -644,6 +659,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
+                                        ckList = null;
                                         onOutClicked();
                                     }
                                 });
@@ -709,6 +725,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
                                     public void onClick(SyMessageDialog dialog) {
+                                        llList = null;
                                         onOutClicked();
                                     }
                                 });
