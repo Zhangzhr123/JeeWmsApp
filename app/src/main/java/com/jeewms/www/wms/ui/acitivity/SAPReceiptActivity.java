@@ -278,7 +278,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     }
 
                 } else {
-                    Toast.makeText(SAPReceiptActivity.this, "未查询到送货单，请重新扫描！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SAPReceiptActivity.this, res.getErrorMsg().toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -350,7 +350,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     }
 
                 } else {
-                    Toast.makeText(SAPReceiptActivity.this, "未查询到出库单，请重新扫描！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SAPReceiptActivity.this, res.getErrorMsg().toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
