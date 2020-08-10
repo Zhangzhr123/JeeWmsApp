@@ -175,7 +175,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                     //判断条码是否为空
                     if (!StringUtil.isEmpty(barCode)) {
                         scanBarcode = barCode;
-                        if(codeList.contains(scanBarcode)){
+                        if (codeList.contains(scanBarcode)) {
                             Toast.makeText(SAPReceiptActivity.this, "此条码已经扫描", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -238,7 +238,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //将json对象转换为java对象
                 SAPRkWmsListVm res = GsonUtils.parseJSON(response, SAPRkWmsListVm.class);
                 //判断是否为空
-                if(res == null){
+                if (res == null) {
                     SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "查询失败", "确定");
                     return;
                 }
@@ -310,7 +310,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                 //将json对象转换为java对象
                 SAPRkCkListVm res = GsonUtils.parseJSON(response, SAPRkCkListVm.class);
                 //判断是否为空
-                if(res == null){
+                if (res == null) {
                     SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "查询失败", "确定");
                     return;
                 }
@@ -457,6 +457,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     //确定按钮 展示勾选的数据
     @OnClick(R.id.btn_OK)
     public void onOKClicked() {
+        SyDialogHelper.showAlertDlg(SAPReceiptActivity.this, "", "正在处理，请等候");
         //判断单据类型
         //送货单
         if (scanBarcode.substring(0, 1).equals("D") || scanBarcode.substring(0, 1).equals("M")) {
@@ -508,7 +509,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         @Override
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
-                            if(res == null){
+                            if (res == null) {
                                 SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
                                 return;
                             }
@@ -580,7 +581,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                         @Override
                         public void onResponse(String response) {
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
-                            if(res == null){
+                            if (res == null) {
                                 SyDialogHelper.showErrorDlg(SAPReceiptActivity.this, "", "收货失败", "确定");
                                 return;
                             }

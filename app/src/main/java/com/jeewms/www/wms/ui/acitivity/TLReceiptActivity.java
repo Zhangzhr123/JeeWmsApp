@@ -547,6 +547,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
     //确定按钮 展示勾选的数据
     @OnClick(R.id.btn_OK)
     public void onOKClicked() {
+        SyDialogHelper.showAlertDlg(TLReceiptActivity.this, "", "正在处理，请等候");
         //判断单据类型
         //送货单
         if (scanBarcode.substring(0, 1).equals("D") || scanBarcode.substring(0, 1).equals("M")) {
