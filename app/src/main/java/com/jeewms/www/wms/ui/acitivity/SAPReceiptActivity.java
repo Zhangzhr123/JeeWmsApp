@@ -457,7 +457,14 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
     //确定按钮 展示勾选的数据
     @OnClick(R.id.btn_OK)
     public void onOKClicked() {
-        SyDialogHelper.showAlertDlg(SAPReceiptActivity.this, "", "正在处理，请等候");
+        final SyMessageDialog dlg = new SyMessageDialog(SAPReceiptActivity.this,  SyMessageDialog.TYPE_WARNING)
+                .setTitleText("提示")
+                .setMessageText("正在处理，请等候");
+        dlg.show();
+        //设置按钮不可点击
+        btnOK.setClickable(false);
+        btnOK.setEnabled(false);
+//        SyDialogHelper.showAlertDlg(SAPReceiptActivity.this, "", "正在处理，请等候");
         //判断单据类型
         //送货单
         if (scanBarcode.substring(0, 1).equals("D") || scanBarcode.substring(0, 1).equals("M")) {
@@ -514,6 +521,9 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                 return;
                             }
                             if (res.isOk()) {
+                                dlg.dismiss();
+                                btnOK.setClickable(true);
+                                btnOK.setEnabled(true);
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
@@ -586,6 +596,9 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
                                 return;
                             }
                             if (res.isOk()) {
+                                dlg.dismiss();
+                                btnOK.setClickable(true);
+                                btnOK.setEnabled(true);
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(SAPReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
