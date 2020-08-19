@@ -25,13 +25,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	/**创建人登录名称*/
 	private String createBy;
 	/**创建日期*/
-	private Long createDate;
+//	private Long createDate;
 	/**更新人名称*/
 	private String updateName;
 	/**更新人登录名称*/
 	private String updateBy;
 	/**更新日期*/
-	private Long updateDate;
+//	private Long updateDate;
 	/**所属部门*/
 	private String sysOrgCode;
 	/**所属公司*/
@@ -79,17 +79,17 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 	/**单位*/
 	private String meins;
 	/**计划提交日期*/
-	private Long fxdate;
+//	private Long fxdate;
 	/**质检标识*/
 	private String inflg;
 	/**创建人*/
 	private String pname;
 	/**创建时间*/
-	private Long pdate;
+//	private Long pdate;
 	/**修改人*/
 	private String mname;
 	/**修改时间*/
-	private Long mdate;
+//	private Long mdate;
 	/**行项目条码*/
 	private String tm;
 	/**是否选中*/
@@ -177,13 +177,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 		this.createBy = createBy;
 	}
 
-	public Long getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Long createDate) {
-		this.createDate = createDate;
-	}
+//	public Long getCreateDate() {
+//		return createDate;
+//	}
+//
+//	public void setCreateDate(Long createDate) {
+//		this.createDate = createDate;
+//	}
 
 	public String getUpdateName() {
 		return updateName;
@@ -201,13 +201,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 		this.updateBy = updateBy;
 	}
 
-	public Long getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Long updateDate) {
-		this.updateDate = updateDate;
-	}
+//	public Long getUpdateDate() {
+//		return updateDate;
+//	}
+//
+//	public void setUpdateDate(Long updateDate) {
+//		this.updateDate = updateDate;
+//	}
 
 	public String getSysOrgCode() {
 		return sysOrgCode;
@@ -393,13 +393,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 		this.meins = meins;
 	}
 
-	public Long getFxdate() {
-		return fxdate;
-	}
-
-	public void setFxdate(Long fxdate) {
-		this.fxdate = fxdate;
-	}
+//	public Long getFxdate() {
+//		return fxdate;
+//	}
+//
+//	public void setFxdate(Long fxdate) {
+//		this.fxdate = fxdate;
+//	}
 
 	public String getInflg() {
 		return inflg;
@@ -417,13 +417,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 		this.pname = pname;
 	}
 
-	public Long getPdate() {
-		return pdate;
-	}
-
-	public void setPdate(Long pdate) {
-		this.pdate = pdate;
-	}
+//	public Long getPdate() {
+//		return pdate;
+//	}
+//
+//	public void setPdate(Long pdate) {
+//		this.pdate = pdate;
+//	}
 
 	public String getMname() {
 		return mname;
@@ -433,13 +433,13 @@ public class RkWmsShdbEntity implements java.io.Serializable {
 		this.mname = mname;
 	}
 
-	public Long getMdate() {
-		return mdate;
-	}
-
-	public void setMdate(Long mdate) {
-		this.mdate = mdate;
-	}
+//	public Long getMdate() {
+//		return mdate;
+//	}
+//
+//	public void setMdate(Long mdate) {
+//		this.mdate = mdate;
+//	}
 
 	public String getTm() {
 		return tm;

@@ -56,11 +56,11 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	/**创建人*/
 	private String createName;
 	/**创建日期*/
-	private Long createDate;
+//	private Long createDate;
 	/**修改人*/
 	private String updateName;
 	/**修改时间*/
-	private Long updateDate;
+//	private Long updateDate;
 	/**生产领料主表主键*/
 	private String parentid;
 	/**SAP状态*/
@@ -429,17 +429,17 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	 *@return: java.util.Date  创建日期
 	 */
 	
-	public Long getCreateDate(){
-		return this.createDate;
-	}
+//	public Long getCreateDate(){
+//		return this.createDate;
+//	}
 
 	/**
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  创建日期
 	 */
-	public void setCreateDate(Long createDate){
-		this.createDate = createDate;
-	}
+//	public void setCreateDate(Long createDate){
+//		this.createDate = createDate;
+//	}
 	
 	/**
 	 *方法: 取得java.lang.String
@@ -463,17 +463,17 @@ public class RkWmsScllEntity implements java.io.Serializable {
 	 *@return: java.util.Date  修改时间
 	 */
 	
-	public Long getUpdateDate(){
-		return this.updateDate;
-	}
+//	public Long getUpdateDate(){
+//		return this.updateDate;
+//	}
 
 	/**
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  修改时间
 	 */
-	public void setUpdateDate(Long updateDate){
-		this.updateDate = updateDate;
-	}
+//	public void setUpdateDate(Long updateDate){
+//		this.updateDate = updateDate;
+//	}
 	
 	/**
 	 *方法: 取得java.lang.String

@@ -552,7 +552,6 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                 .setMessageText("正在处理，请等候");
         dlg.show();
         //设置按钮不可点击
-        btnOK.setClickable(false);
         btnOK.setEnabled(false);
 //        SyDialogHelper.showAlertDlg(TLReceiptActivity.this, "", "正在处理，请等候");
         //判断单据类型
@@ -573,12 +572,12 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     dataList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     dataList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     dataList.get(i).setMname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    dataList.get(i).setMdate((new Date()).getTime());
+//                    dataList.get(i).setMdate((new Date()).getTime());
                     dataList.get(i).setPname(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    dataList.get(i).setCreateDate(new Date().getTime());
+//                    dataList.get(i).setCreateDate(new Date().getTime());
                     dataList.get(i).setCreateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     dataList.get(i).setCreateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    dataList.get(i).setUpdateDate(new Date().getTime());
+//                    dataList.get(i).setUpdateDate(new Date().getTime());
                     dataList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     dataList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     dataList.get(i).setSapzt("9");
@@ -600,20 +599,21 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     HTTPUtils.post(this, url, params, new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ToastUtil.show(TLReceiptActivity.this, "网络连接失败");
                         }
 
                         @Override
                         public void onResponse(String response) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if(res == null){
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                                 return;
                             }
                             if (res.isOk()) {
-                                dlg.dismiss();
-                                btnOK.setClickable(true);
-                                btnOK.setEnabled(true);
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
@@ -623,15 +623,19 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                     }
                                 });
                             } else {
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                             }
                         }
                     });
 
                 } else {
+                    dlg.dismiss();
+                    btnOK.setEnabled(true);
                     SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定", null);
                 }
             } else {
+                dlg.dismiss();
+                btnOK.setEnabled(true);
                 isNull = false;
             }
             //出库单
@@ -650,10 +654,10 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //添加数据操作人和时间
                     ckList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     ckList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    ckList.get(i).setCreateDate(new Date());
+//                    ckList.get(i).setCreateDate(new Date());
                     ckList.get(i).setCreateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setCreateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
-                    ckList.get(i).setUpdateDate(new Date());
+//                    ckList.get(i).setUpdateDate(new Date());
                     ckList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     ckList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     ckList.get(i).setSapzt("9");
@@ -675,20 +679,21 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     HTTPUtils.post(this, url, params, new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ToastUtil.show(TLReceiptActivity.this, "网络连接失败");
                         }
 
                         @Override
                         public void onResponse(String response) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if(res == null){
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                                 return;
                             }
                             if (res.isOk()) {
-                                dlg.dismiss();
-                                btnOK.setClickable(true);
-                                btnOK.setEnabled(true);
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
@@ -698,15 +703,19 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                     }
                                 });
                             } else {
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                             }
                         }
                     });
 
                 } else {
+                    dlg.dismiss();
+                    btnOK.setEnabled(true);
                     SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定", null);
                 }
             } else {
+                dlg.dismiss();
+                btnOK.setEnabled(true);
                 isNull = false;
             }
             //领料单
@@ -725,8 +734,8 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     //添加数据操作人和时间
                     llList.get(i).setSysOrgCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
                     llList.get(i).setSysCompanyCode(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.DEPT));
-                    llList.get(i).setCreateDate(null);
-                    llList.get(i).setUpdateDate(null);
+//                    llList.get(i).setCreateDate(null);
+//                    llList.get(i).setUpdateDate(null);
                     llList.get(i).setUpdateBy(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.LOGINNAME));
                     llList.get(i).setUpdateName(SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.USERNAME));
                     llList.get(i).setSapzt("9");
@@ -748,20 +757,21 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                     HTTPUtils.post(this, url, params, new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ToastUtil.show(TLReceiptActivity.this, "网络连接失败");
                         }
 
                         @Override
                         public void onResponse(String response) {
+                            dlg.dismiss();
+                            btnOK.setEnabled(true);
                             ResultDO res = GsonUtils.parseJSON(response, ResultDO.class);
                             if(res == null){
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                                 return;
                             }
                             if (res.isOk()) {
-                                dlg.dismiss();
-                                btnOK.setClickable(true);
-                                btnOK.setEnabled(true);
                                 codeList.add(scanBarcode);
                                 SyDialogHelper.showSuccessDlg(TLReceiptActivity.this, "", "收货成功", "确定", new SyMessageDialog.OnClickListener() {
                                     @Override
@@ -771,18 +781,24 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
                                     }
                                 });
                             } else {
-                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", "收货失败", "确定");
+                                SyDialogHelper.showErrorDlg(TLReceiptActivity.this, "", res.getErrorMsg().toString(), "确定");
                             }
                         }
                     });
 
                 } else {
+                    dlg.dismiss();
+                    btnOK.setEnabled(true);
                     SyDialogHelper.showWarningDlg(this, "", "请选择数据", "确定", null);
                 }
             } else {
+                dlg.dismiss();
+                btnOK.setEnabled(true);
                 isNull = false;
             }
         } else {
+            dlg.dismiss();
+            btnOK.setEnabled(true);
             SyDialogHelper.showWarningDlg(TLReceiptActivity.this, "", "单据不正确", "确定", null);
             return;
         }

@@ -24,13 +24,13 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	/**创建人登录名称*/
 	private String createBy;
 	/**创建日期*/
-	private Date createDate;
+//	private Date createDate;
 	/**更新人名称*/
 	private String updateName;
 	/**更新人登录名称*/
 	private String updateBy;
 	/**更新日期*/
-	private Date updateDate;
+//	private Date updateDate;
 	/**所属部门*/
 	private String sysOrgCode;
 	/**所属公司*/
@@ -164,17 +164,17 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  创建日期
 	 */
-	public Date getCreateDate(){
-		return this.createDate;
-	}
+//	public Date getCreateDate(){
+//		return this.createDate;
+//	}
 
 	/**
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  创建日期
 	 */
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
+//	public void setCreateDate(Date createDate){
+//		this.createDate = createDate;
+//	}
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  更新人名称
@@ -209,17 +209,17 @@ public class RkWmsCkdbEntity implements java.io.Serializable {
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  更新日期
 	 */
-	public Date getUpdateDate(){
-		return this.updateDate;
-	}
+//	public Date getUpdateDate(){
+//		return this.updateDate;
+//	}
 
 	/**
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  更新日期
 	 */
-	public void setUpdateDate(Date updateDate){
-		this.updateDate = updateDate;
-	}
+//	public void setUpdateDate(Date updateDate){
+//		this.updateDate = updateDate;
+//	}
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  所属部门
