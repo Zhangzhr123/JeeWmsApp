@@ -29,9 +29,9 @@ public class HomeGridItemView {
 
         LayoutInflater inflater = LayoutInflater.from(act);
         mView = inflater.inflate(R.layout.itemhome, null);
-        imgHomeitem=mView.findViewById(R.id.img_homeitem);
-        tvHomename=mView.findViewById(R.id.tv_homename);
-        ll_root=mView.findViewById(R.id.ll_root);
+        imgHomeitem = mView.findViewById(R.id.img_homeitem);
+        tvHomename = mView.findViewById(R.id.tv_homename);
+        ll_root = mView.findViewById(R.id.ll_root);
     }
 
 
@@ -52,19 +52,20 @@ public class HomeGridItemView {
     }
 
     //菜单点击跳转
-    private void Jump(String btnName){
+    private void Jump(String btnName) {
         //入库收货
-        if(Constance.btnNameList[0].equals(btnName)){
+        if (Constance.btnNameList[0].equals(btnName)) {
             SAPReceiptActivity.show(mActivity);
         }
         //投料收货
-        else if(Constance.btnNameList[1].equals(btnName)){
+        else if (Constance.btnNameList[1].equals(btnName)) {
             TLReceiptActivity.show(mActivity);
         }
-//        else if(Constance.btnNameList[2].equals(btnName)){
-//            //按货捡单
-//            PickingDetailActivity.show(mActivity);
-//        }else if(Constance.btnNameList[3].equals(btnName)){
+        //制造中心入库收货
+        else if (Constance.btnNameList[2].equals(btnName)) {
+            ZZZXReceiptActivity.show(mActivity);
+        }
+//        else if(Constance.btnNameList[3].equals(btnName)){
 //            RecheckLoadingActivity.show(mActivity);
 //        }else if(Constance.btnNameList[4].equals(btnName)){
 //            StorageMoveActivity.show(mActivity);

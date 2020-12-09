@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ItemPickCardViewStyle"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp"
+    android:id="@+id/item_root"
+    >
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/listview_click"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        >
+
+        <CheckBox
+                android:id="@+id/ch_onclick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:gravity="center"
+                android:clickable="false"
+                android:focusable="false" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout style="@style/ItemPickdetailStyle">
+
+                <TextView
+                        android:id="@+id/tv_huowubianhao"
+                        style="@style/ItemPickdetailRightStyle"
+                        />
+                <LinearLayout
+                        android:id="@+id/ll_zhijian"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                >
+                    <ImageView
+                            android:id="@+id/zhijian"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/zhijian"
+                            android:visibility="visible"
+                    />
+                    <TextView
+                            android:id="@+id/tv_zhijian"
+                            android:layout_height="18dp"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/item_text_size"
+                            android:textColor="@color/black666666"
+                            android:gravity="center"
+                            android:text="质检"
+                            android:visibility="visible"
+                    />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/ItemPickdetailStyle">
+
+                <TextView
+                        style="@style/ItemPickdetailLeftStyle"
+                        android:text="@string/shouhuoshuliang" />
+
+                <ImageButton
+                        android:id="@+id/btn_jian"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:src="@drawable/jianhao" />
+
+                <EditText
+                        android:id="@+id/tv_number"
+                        android:layout_width="70dp"
+                        android:layout_height="25dp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/edit_corner_frame" />
+
+                <ImageButton
+                        android:id="@+id/btn_jia"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:src="@drawable/jiahao" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/ItemPickdetailStyle">
+
+                <TextView
+                        style="@style/ItemPickdetailLeftStyle"
+                        android:text="@string/shouhuodidian" />
+
+                <EditText
+                        android:id="@+id/ed_lgort"
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/edit_corner_frame" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</android.support.v7.widget.CardView>

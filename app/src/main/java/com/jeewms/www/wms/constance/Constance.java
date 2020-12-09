@@ -9,18 +9,16 @@ import com.jeewms.www.wms.util.StringUtil;
 
 public class Constance {
 
-    //测试站http://119.23.251.167/wms/
-//    public static String COMMON_URL = "http://172.16.77.184:8080";
+    //    public static String COMMON_URL = "http://172.16.77.184:8080";
+    //正式
     public static String COMMON_URL = "http://172.16.77.185";
-//    public static String COMMON_URL = "http://221.0.185.194:8080";
-
+    //测试
+//    public static String COMMON_URL = "http://192.168.0.123:8060/rkwms";
     //主界面按钮图片
     public static final int[] btnImgList = {R.drawable.home1, R.drawable.home2, R.drawable.home3, R.drawable.home4, R.drawable.home5, R.drawable.home6, R.drawable.home7, R.drawable.home8, R.drawable.home9, R.drawable.home10, R.drawable.home11, R.drawable.home12};
-
     //主界面按钮名字
 //    public static final String[] btnNameList = {"收货", "上架", "按单拣货", "装车复核", "储位转移", "盘点", "商品资料", "库存查询", "波次拣货", "波次下架复核", "波次分拣", "波次装车复核"};
-    public static final String[] btnNameList = {"入库收货","投料收货"};
-
+    public static final String[] btnNameList = {"入库收货", "投料收货", "制造中心收货"};
 
     public static void setBaseUrl(String baseUrl) {
         if (!StringUtil.isEmpty(baseUrl)) {
@@ -28,6 +26,7 @@ public class Constance {
         }
     }
 
+    //生产运营平台接口
     //登录
     public static final String LOGIN = "/rest/tokens/login";
     //获取SAP送货单数据
@@ -48,6 +47,11 @@ public class Constance {
     public static final String getLLD = "/rest/sAPAppService/getLLD";
     //发送领料投料单
     public static final String saveLLDTL = "/rest/sAPAppService/saveLLDTL";
+    //制造中心查询
+    public static final String getzzzxcx = "/rest/sAPAppService/getZZZXLLDCX";
+
+
+
 
     //原生接口
     //按货捡单
@@ -83,88 +87,69 @@ public class Constance {
     public static final String tSapStockController = "/rest/tSapStockController";
     //库存清单
     public static final String tSapLtttController = "/rest/tSapLtttController";
-
     //登录
     public static String getLoginURL() {
         return COMMON_URL + LOGIN;
     }
-
     //获取简单详情
     public static String getGiNoticeURL() {
         return COMMON_URL + GINOTICE;
     } //登录
-
     public static String getSaveginoticeURL() {
         return COMMON_URL + SAVEGINOTICE;
     }
-
     public static String getNoticeControllerURL() {
         return COMMON_URL + NoticeController;
     }
-
     public static String getInQmIControllerURL() {
         return COMMON_URL + InQmIController;
     }
-
     public static String getToMoveGoodsControllerURL() {
         return COMMON_URL + ToMoveGoodsController;
     }
-
     public static String getSttInGoodsControllerURL() {
         return COMMON_URL + SttInGoodsController;
     }
-
     public static String getGoodsControllerURL() {
         return COMMON_URL + GoodsController;
     }
-
     public static String getStockControllerURL() {
         return COMMON_URL + StockController;
     }
-
     public static String getWmToUpGoodsControllerURL() {
         return COMMON_URL + wmToUpGoodsController;
     }
-
     public static String getWmInQmIControllerURL() {
         return COMMON_URL + wmInQmIController;
     }
-
     public static String getwvGiControllerURL() {
         return COMMON_URL + wvGiController;
     }
-
     public static String getwmToDownGoodsControllercURL() {
         return COMMON_URL + wmToDownGoodsControllerc;
     }
-
     public static String getwmSttInGoodsControllercURL() {
         return COMMON_URL + wmSttInGoodsControllerc;
     }
-
     public static String getmdGoodsControllercURL() {
         return COMMON_URL + mdGoodsControllerc;
     }
-
     public static String getmdGoodsControllerorderURL() {
         return COMMON_URL + mdGoodsControllercorder;
     }
-
     public static String getwmToMoveGoodsControllercURL() {
         return COMMON_URL + wmToMoveGoodsControllerc;
     }
-
     public static String gettSapLsqdControllerURL() {
         return COMMON_URL + tSapLsqdController;
     }
-
     public static String gettSapStockControllerURL() {
         return COMMON_URL + tSapStockController;
     }
-
     public static String gettSapLtttControllerURL() {
         return COMMON_URL + tSapLtttController;
     }
+
 
     public static class SHAREP {
         /**
@@ -173,7 +158,6 @@ public class Constance {
         public static final String SHAREDSAVE = "save";
         //版本
         public static final String VERSION = "version";
-
         //登录名
         public static final String LOGINNAME = "userName";
         //登录密码

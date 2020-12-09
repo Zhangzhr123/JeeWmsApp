@@ -149,18 +149,22 @@ public class HomeActivity extends BaseActivity {
                     System.out.println(jsonobj.getJSONObject("obj").getString("appPermission"));
                     //获取用户权限
                     String s = jsonobj.getJSONObject("obj").getString("appPermission");
-                    String[] split = s.split(",");
-                    if (split.length > 0 && split != null) {
-                        for (int i = 0; i < split.length; i++) {
-                            nameList.add(split[i]);
+                    if (s != null && !StringUtil.isEmpty(s)) {
+                        String[] split = s.split(",");
+                        if (split.length > 0 && split != null) {
+                            for (int i = 0; i < split.length; i++) {
+                                nameList.add(split[i]);
+                            }
+                            //权限控制
+                            adapter = new HomeGridAdapter();
+                            gvHome = findViewById(R.id.gv_home);
+                            gvHome.setAdapter(adapter);
+                            addBtn2(nameList);
+                        } else {
+                            ToastUtil.show(HomeActivity.this, "用户没有操作PDA权限");
                         }
-                        //权限控制
-                        adapter = new HomeGridAdapter();
-                        gvHome = findViewById(R.id.gv_home);
-                        gvHome.setAdapter(adapter);
-                        addBtn2(nameList);
-                    }else{
-                        ToastUtil.show(HomeActivity.this,"用户没有操作PDA权限");
+                    } else {
+                        ToastUtil.show(HomeActivity.this, "用户没有操作PDA权限");
                     }
 
                 } else {
