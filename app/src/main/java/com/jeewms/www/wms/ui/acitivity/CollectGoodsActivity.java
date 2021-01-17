@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.jeewms.www.wms.bean.bean.MessageEvent;
-import com.jeewms.www.wms.ui.adapter.SAPReceiptAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.base.BaseActivity;

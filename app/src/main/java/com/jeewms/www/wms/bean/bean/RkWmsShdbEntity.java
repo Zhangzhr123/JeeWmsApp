@@ -183,6 +183,16 @@ public class RkWmsShdbEntity implements java.io.Serializable {
      * 收货库存地点
      */
     private String lgort;
+    //页码
+    private int pageSize;
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getLgort() {
         return lgort;

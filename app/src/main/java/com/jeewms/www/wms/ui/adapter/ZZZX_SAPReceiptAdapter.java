@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.bean.bean.RkWmsShdbEntity;
+import com.jeewms.www.wms.util.PageHelper;
 import com.jeewms.www.wms.util.StringUtil;
 
 import java.lang.reflect.Method;
@@ -126,7 +127,7 @@ public class ZZZX_SAPReceiptAdapter extends BaseAdapter {
             holder.ll_zhijian.setVisibility(View.VISIBLE);
         }
         //设置勾选状态
-        if (rw.getChecked()) {
+        if (mList.get(position).getChecked()) {
             holder.checkbox.setChecked(true);
         } else {
             holder.checkbox.setChecked(false);

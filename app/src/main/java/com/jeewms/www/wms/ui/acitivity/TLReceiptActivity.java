@@ -299,6 +299,7 @@ public class TLReceiptActivity extends BaseActivity implements OnDismissCallback
         //SAP送货单接口
         Map<String, String> params = new HashMap<>();
         params.put("djbh", searchKey);
+        params.put("sysOrgCode", SharedPreferencesUtil.getInstance(TLReceiptActivity.this).getKeyValue(Constance.SHAREP.DEPT));
         String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getCKD;
         HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override

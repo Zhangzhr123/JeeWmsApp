@@ -20,9 +20,6 @@ import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.base.BaseActivity;
 import com.jeewms.www.wms.bean.bean.*;
 import com.jeewms.www.wms.constance.Constance;
-import com.jeewms.www.wms.ui.adapter.CKAdapter;
-import com.jeewms.www.wms.ui.adapter.SAPReceiptAdapter;
-import com.jeewms.www.wms.ui.adapter.ZZZX_CKAdapter;
 import com.jeewms.www.wms.ui.adapter.ZZZX_SAPReceiptAdapter;
 import com.jeewms.www.wms.ui.view.dialog.SyDialogHelper;
 import com.jeewms.www.wms.ui.view.dialog.SyMessageDialog;
@@ -173,12 +170,12 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                     barCode = intent.getStringExtra(SCN_CUST_EX_SCODE);
                     //判断条码是否为空
                     if (!StringUtil.isEmpty(barCode)) {
-                        scanBarcode = barCode;
+                        scanBarcode = barCode.trim();
 //                        if (codeList.contains(scanBarcode)) {
 //                            Toast.makeText(ZZZXReceiptActivity.this, "此条码已经扫描", Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
-                        getDate(barCode);
+                        getDate(barCode.trim());
                     } else {
                         Toast.makeText(ZZZXReceiptActivity.this, "请重新扫描", Toast.LENGTH_SHORT).show();
                         return;
@@ -244,6 +241,28 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
 
                         //每次读4条数据
                         mPageDaoImpl = new PageHelper<RkWmsShdbEntity>(dataList, 4);
+                        //设置页码
+                        int lastNum = (dataList.size() % 4);
+                        int startNum = 0;
+                        int endNum = 4;
+                        for (int i = 0; i < mPageDaoImpl.getPageNum(); i++) {
+                            for (int j = startNum; j < endNum; j++) {
+                                dataList.get(j).setPageSize(i + 1);
+                            }
+                            if (lastNum == 0) {
+                                startNum += endNum;
+                                endNum += endNum;
+                            } else {
+                                if (i == (mPageDaoImpl.getPageNum() - 1)) {
+                                    startNum += endNum;
+                                    endNum += lastNum;
+                                } else {
+                                    startNum += endNum;
+                                    endNum += endNum;
+                                }
+                            }
+                        }
+
                         //设置当前页码与总页码
                         mTvPageNo.setText(mPageDaoImpl.getCurrentPage() + " / " + mPageDaoImpl.getPageNum());
 
@@ -291,7 +310,7 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
     @OnClick(R.id.btn_search)
     public void onViewClicked() {
         scanBarcode = etSearch.getText().toString();
-        getDate(etSearch.getText().toString());
+        getDate(etSearch.getText().toString().trim());
     }
 
     //全选按钮
@@ -322,8 +341,7 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
     private void prePage() {
         if (selectIndex == 0) {
             if (mPageDaoImpl.getCurrentPage() >= 1) {
-                mPageDaoImpl.prePage()
-                ;
+                mPageDaoImpl.prePage();
             }
             mAdapter.setList(mPageDaoImpl.currentList());
             mListView.setSelection(0);
@@ -464,16 +482,26 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
     @Override
     public void setData(final ZZZX_SAPReceiptAdapter.ViewHolder viewHolder, final int position) {
         //获取修改的子列对象
-        final RkWmsShdbEntity bean = dataList.get(position);
+//        final RkWmsShdbEntity bean = dataList.get(position);
         //勾选按钮 设置数据
         viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.checkbox.isChecked()) {
-                    bean.setChecked(true);
+                int pt = (position + ((mPageDaoImpl.getCurrentPage() - 1) * 4));
+                if (mPageDaoImpl.getCurrentPage() == 1) {
+                    if (dataList.get(pt).getChecked() && mPageDaoImpl.getCurrentPage() == dataList.get(pt).getPageSize()) {
+                        dataList.get(pt).setChecked(false);
+                    } else {
+                        dataList.get(pt).setChecked(true);
+                    }
                 } else {
-                    bean.setChecked(false);
+                    if (dataList.get(pt).getChecked() && mPageDaoImpl.getCurrentPage() == dataList.get(pt).getPageSize()) {
+                        dataList.get(pt).setChecked(false);
+                    } else {
+                        dataList.get(pt).setChecked(true);
+                    }
                 }
+
             }
         });
         //减号
@@ -493,7 +521,7 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                         number = Double.valueOf(viewHolder.number.getText().toString().trim());
                     }
                 }
-                Double old = bean.getJhsl();
+                Double old = dataList.get(position).getJhsl();
                 if (Double.doubleToLongBits(DoubleUtil.sub(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(ZZZXReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {
@@ -513,7 +541,7 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                 } else {
                     number = Double.valueOf(viewHolder.number.getText().toString().trim());
                 }
-                Double old = bean.getJhsl();
+                Double old = dataList.get(position).getJhsl();
                 if (Double.doubleToLongBits(DoubleUtil.sum(number, 1)) > Double.doubleToLongBits(old)) {
                     SyDialogHelper.showWarningDlg(ZZZXReceiptActivity.this, "", "收货数量不能大于交货数量", "确定", null);
                 } else {

@@ -17,6 +17,7 @@ import butterknife.OnClick;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.VolleyError;
+import com.jeewms.www.wms.HomeActivity;
 import com.jeewms.www.wms.R;
 import com.jeewms.www.wms.base.BaseActivity;
 import com.jeewms.www.wms.bean.bean.*;
@@ -221,6 +222,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         //SAP送货单接口
         Map<String, String> params = new HashMap<>();
         params.put("shdbh", searchKey);
+//        params.put("sysOrgCode", SharedPreferencesUtil.getInstance(SAPReceiptActivity.this).getKeyValue(Constance.SHAREP.DEPT));
         String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getZrfcGetShw;
         HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override
@@ -293,6 +295,7 @@ public class SAPReceiptActivity extends BaseActivity implements OnDismissCallbac
         //SAP送货单接口
         Map<String, String> params = new HashMap<>();
         params.put("djbh", searchKey);
+        params.put("sysOrgCode", SharedPreferencesUtil.getInstance(SAPReceiptActivity.this).getKeyValue(Constance.SHAREP.DEPT));
         String url = SharedPreferencesUtil.getInstance(this).getKeyValue(Constance.SHAREP.HTTPADDRESS) + Constance.getCKD;
         HTTPUtils.post(this, url, params, new VolleyListener() {
             @Override
