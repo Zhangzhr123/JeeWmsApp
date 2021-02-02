@@ -241,6 +241,7 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
 
                         //每次读4条数据
                         mPageDaoImpl = new PageHelper<RkWmsShdbEntity>(dataList, 4);
+
                         //设置页码
                         int lastNum = (dataList.size() % 4);
                         int startNum = 0;
@@ -253,12 +254,18 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                                 startNum += endNum;
                                 endNum += endNum;
                             } else {
-                                if (i == (mPageDaoImpl.getPageNum() - 1)) {
-                                    startNum += endNum;
-                                    endNum += lastNum;
+                                if (mPageDaoImpl.getPageNum() > 1) {
+                                    if (i == (mPageDaoImpl.getPageNum() - 2)) {
+                                        startNum += endNum;
+                                        endNum += lastNum;
+                                    } else {
+                                        startNum += endNum;
+                                        endNum += endNum;
+                                    }
                                 } else {
                                     startNum += endNum;
-                                    endNum += endNum;
+                                    endNum += lastNum;
+
                                 }
                             }
                         }
