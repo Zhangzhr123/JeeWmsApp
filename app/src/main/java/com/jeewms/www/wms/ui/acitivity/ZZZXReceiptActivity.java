@@ -245,7 +245,12 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                         //设置页码
                         int lastNum = (dataList.size() % 4);
                         int startNum = 0;
-                        int endNum = 4;
+                        int endNum = 0;
+                        if(dataList.size()<4){
+                            endNum = dataList.size();
+                        }else{
+                            endNum = 4;
+                        }
                         for (int i = 0; i < mPageDaoImpl.getPageNum(); i++) {
                             for (int j = startNum; j < endNum; j++) {
                                 dataList.get(j).setPageSize(i + 1);
@@ -256,16 +261,12 @@ public class ZZZXReceiptActivity extends BaseActivity implements OnDismissCallba
                             } else {
                                 if (mPageDaoImpl.getPageNum() > 1) {
                                     if (i == (mPageDaoImpl.getPageNum() - 2)) {
-                                        startNum += endNum;
+                                        startNum += 4;
                                         endNum += lastNum;
                                     } else {
-                                        startNum += endNum;
-                                        endNum += endNum;
+                                        startNum += 4;
+                                        endNum += 4;
                                     }
-                                } else {
-                                    startNum += endNum;
-                                    endNum += lastNum;
-
                                 }
                             }
                         }
